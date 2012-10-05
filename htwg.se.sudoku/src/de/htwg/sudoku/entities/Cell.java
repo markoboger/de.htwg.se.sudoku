@@ -6,7 +6,8 @@ public class Cell {
 	private int column;
 	
 	public Cell(int row, int column) {
-		// TODO Auto-generated constructor stub
+		this.row=row;
+		this.column=column;
 	}
 
 	public int getValue() {
@@ -15,6 +16,18 @@ public class Cell {
 
 	public void setValue(int value) {
 		this.value = value;
+	}
+	
+	public int getRow() {
+		return row;
+	}
+
+	public int getColumn() {
+		return column;
+	}
+	
+	public boolean isSet() {
+		return value == 0 ? false : true;
 	}
 
 }
