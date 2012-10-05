@@ -15,8 +15,11 @@ public class CellTest {
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testGetValue() {
+		cell.setValue(0);
+		assertEquals(0, cell.getValue());
+		cell.setValue(1);
+		assertEquals(1, cell.getValue());
 	}
 
 }
