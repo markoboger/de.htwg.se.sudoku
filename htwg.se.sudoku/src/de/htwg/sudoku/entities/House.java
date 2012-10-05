@@ -1,9 +1,18 @@
 package de.htwg.sudoku.entities;
 
+import java.util.List;
+
 public class House {
 	
-	public House(int size) {
-		// TODO Auto-generated constructor stub
+	List<Cell> cells;
+	
+	public House(List<Cell> cells) {
+		this.cells=cells;	
 	}
+	
+	public int getSize() {
+		return cells.size();
+	}
+
 
 }
