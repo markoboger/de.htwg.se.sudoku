@@ -13,6 +13,9 @@ public class House {
 	public int getSize() {
 		return cells.size();
 	}
-
+	
+	public Cell getCell(int index) {
+		return cells.get(index);
+	}
 
 }

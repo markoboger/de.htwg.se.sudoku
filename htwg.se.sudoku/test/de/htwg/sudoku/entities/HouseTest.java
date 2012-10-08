@@ -37,6 +37,15 @@ public class HouseTest {
 		assertEquals(0,emptyHouse.getSize());
 		assertEquals(1,smallHouse.getSize());
 	}
+	
+	@Test
+	public void testGetCell() {
+		Cell cell = new Cell(0,0);
+		List<Cell> cells1 = new Vector<Cell>();
+		cells1.add(cell);
+		smallHouse = new House(cells1);
+		assertEquals(cell, smallHouse.getCell(0));
+	}
 
 
 }
