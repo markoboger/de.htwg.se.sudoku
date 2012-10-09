@@ -1,14 +1,21 @@
 package de.htwg.sudoku;
 
-public class Sudoku {
+import de.htwg.sudoku.entities.Grid;
 
-public Sudoku(int blocks){
-	// TODO Auto-generated method stub
-}
+public class Sudoku {
+	Grid grid;
+
+	public Sudoku(int blocks){
+		grid = new Grid(blocks);
+	}
+
+	public String toString() {
+		return grid.toString();
+	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		Sudoku sudoku = new Sudoku(3);
+		System.out.println(sudoku.toString());
 	}
 
 }

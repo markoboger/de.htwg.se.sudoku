@@ -6,9 +6,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class GridTest {
+	String newLine = System.getProperty("line.separator");
+	private Grid grid1, grid2, grid3;
+
 
 	@Before
 	public void setUp()  {
+		grid1 = new Grid(1);
+		grid2 = new Grid(2);
+		grid3 = new Grid(3);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -45,20 +51,15 @@ public class GridTest {
 	
 	@Test
 	public void testRows() {
-		Grid grid1 = new Grid(1);
-		assertEquals(grid1.getCell(0, 0), grid1.rows[0].getCell(0));
-		
-		Grid grid2 = new Grid(2);
+		assertEquals(grid1.getCell(0, 0), grid1.rows[0].getCell(0));		
 		assertEquals(grid2.getCell(0, 0), grid2.rows[0].getCell(0));
 		
 	}
 	
 	@Test
 	public void testBlockAt() {
-		Grid grid1 = new Grid(1);
 		assertEquals(0, grid1.blockAt(0, 0));
 		
-		Grid grid2 = new Grid(2);
 		assertEquals(0, grid2.blockAt(0, 0));
 		assertEquals(0, grid2.blockAt(0, 1));
 		assertEquals(1, grid2.blockAt(0, 2));
@@ -75,8 +76,21 @@ public class GridTest {
 		assertEquals(2, grid2.blockAt(3, 1));
 		assertEquals(3, grid2.blockAt(3, 2));
 		assertEquals(3, grid2.blockAt(3, 3));
-		
-		
+	}
+	
+	@Test
+	public void testBlockSeparator() {
+		assertEquals("+---+", grid1.blockSeparator(1));
+		assertEquals("+-----+-----+", grid1.blockSeparator(2));
+		assertEquals("+-------+-------+-------+", grid1.blockSeparator(3));
+	}
+	
+	@Test
+	public void testToString() {
+		assertEquals("+---+"+newLine+"| 0 |"+newLine+"+---+"+newLine, grid1.toString());
+		grid1.setCell(0,0,1);
+		assertEquals("+---+"+newLine+"| 1 |"+newLine+"+---+"+newLine, grid1.toString());
+
 	}
 
 	private boolean assertReachAllCells(Grid grid) {

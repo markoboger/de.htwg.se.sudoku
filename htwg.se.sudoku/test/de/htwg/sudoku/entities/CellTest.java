@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CellTest {
-	
+
 	Cell cell;
 
 	@Before
@@ -21,18 +21,18 @@ public class CellTest {
 		cell.setValue(1);
 		assertEquals(1, cell.getValue());
 	}
-	
+
 	@Test
 	public void testGetRow() {
 		assertEquals(1, cell.getRow());
 	}
-	
+
 	@Test
 	public void testGetColumn() {
 		assertEquals(2,cell.getColumn());
 
 	}
-	
+
 	@Test
 	public void testIsSet() {
 		assertEquals(false, cell.isSet());
