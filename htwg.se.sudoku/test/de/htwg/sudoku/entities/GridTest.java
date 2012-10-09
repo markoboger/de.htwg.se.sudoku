@@ -42,11 +42,47 @@ public class GridTest {
 			assertReachAllCells(grid);
 		}
 	}
+	
+	@Test
+	public void testRows() {
+		Grid grid1 = new Grid(1);
+		assertEquals(grid1.getCell(0, 0), grid1.rows[0].getCell(0));
+		
+		Grid grid2 = new Grid(2);
+		assertEquals(grid2.getCell(0, 0), grid2.rows[0].getCell(0));
+		
+	}
+	
+	@Test
+	public void testBlockAt() {
+		Grid grid1 = new Grid(1);
+		assertEquals(0, grid1.blockAt(0, 0));
+		
+		Grid grid2 = new Grid(2);
+		assertEquals(0, grid2.blockAt(0, 0));
+		assertEquals(0, grid2.blockAt(0, 1));
+		assertEquals(1, grid2.blockAt(0, 2));
+		assertEquals(1, grid2.blockAt(0, 3));
+		assertEquals(0, grid2.blockAt(1, 0));
+		assertEquals(0, grid2.blockAt(1, 1));
+		assertEquals(1, grid2.blockAt(1, 2));
+		assertEquals(1, grid2.blockAt(1, 3));
+		assertEquals(2, grid2.blockAt(2, 0));
+		assertEquals(2, grid2.blockAt(2, 1));
+		assertEquals(3, grid2.blockAt(2, 2));
+		assertEquals(3, grid2.blockAt(2, 3));
+		assertEquals(2, grid2.blockAt(3, 0));
+		assertEquals(2, grid2.blockAt(3, 1));
+		assertEquals(3, grid2.blockAt(3, 2));
+		assertEquals(3, grid2.blockAt(3, 3));
+		
+		
+	}
 
 	private boolean assertReachAllCells(Grid grid) {
-		int gridSize=grid.getGridSize();
-		for (int row = 0; row < gridSize; row++) {
-			for (int column = 0; column < gridSize; column++) {
+		int cellsPerEdge=grid.getCellsPerEdge();
+		for (int row = 0; row < cellsPerEdge; row++) {
+			for (int column = 0; column < cellsPerEdge; column++) {
 				assertCellIsAt(row,column,grid);
 			}
 		}
@@ -57,7 +93,7 @@ public class GridTest {
 	public boolean assertCellIsAt( int row, int column, Grid grid){
 		assertEquals(row,grid.getCell(row, column).getRow());
 		assertEquals(column,grid.getCell(row, column).getColumn());
-		return true;
-		
+		return true;	
 	}
+	
 }

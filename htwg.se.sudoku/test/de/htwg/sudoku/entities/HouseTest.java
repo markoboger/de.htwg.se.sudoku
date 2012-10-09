@@ -2,9 +2,6 @@ package de.htwg.sudoku.entities;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-import java.util.Vector;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,35 +13,37 @@ public class HouseTest {
 
 	@Before
 	public void setUp() {
-		List<Cell> cells0 = new Vector<Cell>();
-		emptyHouse = new House(cells0);
+		emptyHouse = new House(1);
+		emptyHouse.setCell(0, new Cell(0,0));
 		
-		List<Cell> cells1 = new Vector<Cell>();
-		cells1.add(new Cell(0,0));
-		smallHouse = new House(cells1);
+		smallHouse = new House(2);
+		smallHouse.setCell(0, new Cell(0,0));
+		smallHouse.setCell(1, new Cell(0,1));
 		
-		List<Cell> cells2 = new Vector<Cell>();
-		Cell cell=new Cell(0,0);
-		cells2.add(cell);
-		fullHouse = new House(cells2);
-		cell.setValue(1);
-		
-		
+		fullHouse = new House(2);
+		fullHouse.setCell(0, new Cell(0,0));
+		fullHouse.setCell(1, new Cell(0,1));
+		fullHouse.getCell(0).setValue(1);
+		fullHouse.getCell(1).setValue(2);
 	}
 	
 	@Test
 	public void testGetSize() {
-		assertEquals(0,emptyHouse.getSize());
-		assertEquals(1,smallHouse.getSize());
+		assertEquals(1,emptyHouse.getSize());
+		assertEquals(2,smallHouse.getSize());
+	}
+	
+	@Test
+	public void testadd() {
+		assertEquals(1,emptyHouse.getSize());
+		emptyHouse.setCell(0,new Cell(0,0));
+		assertEquals(1,emptyHouse.getSize());
 	}
 	
 	@Test
 	public void testGetCell() {
-		Cell cell = new Cell(0,0);
-		List<Cell> cells1 = new Vector<Cell>();
-		cells1.add(cell);
-		smallHouse = new House(cells1);
-		assertEquals(cell, smallHouse.getCell(0));
+		assertEquals(1, fullHouse.getCell(0).getValue());
+		assertEquals(2, fullHouse.getCell(1).getValue());
 	}
 
 

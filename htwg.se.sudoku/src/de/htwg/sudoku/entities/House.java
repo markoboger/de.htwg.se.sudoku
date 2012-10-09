@@ -1,21 +1,28 @@
 package de.htwg.sudoku.entities;
 
-import java.util.List;
-
 public class House {
 	
-	List<Cell> cells;
-	
-	public House(List<Cell> cells) {
-		this.cells=cells;	
+	int size;
+	int blockSize;
+	Cell[] cells;
+
+	public House(int size) {
+		this.size = size;
+		blockSize = (int) Math.sqrt(size);
+		cells = new Cell[size];
 	}
 	
 	public int getSize() {
-		return cells.size();
+		return size;
 	}
 	
 	public Cell getCell(int index) {
-		return cells.get(index);
+		return cells[index];
 	}
+	
+	public void setCell(int index, Cell cell){
+		cells[index]=cell;
+	}
+		
 
 }
