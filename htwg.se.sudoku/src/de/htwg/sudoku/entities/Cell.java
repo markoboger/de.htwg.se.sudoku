@@ -29,5 +29,12 @@ public class Cell {
 	public boolean isSet() {
 		return value == 0 ? false : true;
 	}
+	
+	/**
+	 * returns a String of the form "(0,0) = 1"
+	 */
+	public String mkString() {
+		return "(" + row + "," + column + ") = " + value;
+	}
 
 }

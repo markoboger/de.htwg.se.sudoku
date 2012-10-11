@@ -1,21 +1,14 @@
 package de.htwg.sudoku;
 
+import de.htwg.sudoku.controller.SudokuController;
 import de.htwg.sudoku.entities.Grid;
+import de.htwg.sudoku.tui.TextUI;
 
 public class Sudoku {
-	Grid grid;
-
-	public Sudoku(int blocks){
-		grid = new Grid(blocks);
-	}
-
-	public String toString() {
-		return grid.toString();
-	}
 
 	public static void main(String[] args) {
-		Sudoku sudoku = new Sudoku(3);
-		System.out.println(sudoku.toString());
+		TextUI tui = new TextUI(new SudokuController(new Grid(3)));
+		tui.controlLoop();
 	}
 
 }
