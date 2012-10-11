@@ -10,28 +10,22 @@ import de.htwg.util.observer.IObserver;
 public class TextUI implements IObserver {
 	
 	private SudokuController controller;
+	Scanner scanner;
+	String line = "";
 
 	public TextUI(SudokuController controller){
 		this.controller = controller;
+		controller.addObserver(this);
+		scanner = new Scanner (System.in);	
 	}
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-
+		printTUI();
 	}
-	
-	public void controlLoop() {
-		Scanner scanner = new Scanner (System.in);
-		String line = "";
 
-		// continue until the user decides to quit
-		boolean cont = true;
-		while (cont) {
-			printTUI();
-		    line = scanner.next();
-			cont = handleInput(line);		
-		}
+	public boolean iterate() {
+		return handleInputOrQuit(scanner.next());
 	}
 
 	public void printTUI() {
@@ -40,9 +34,10 @@ public class TextUI implements IObserver {
 		System.out.println("Please enter a command( q - quit, u - update, s - solve, r - reset, n - new, 1,4,9 - set size, xy - show candidates at (x,y), xyz - set cell(x,y) to z):");
 	}
 	
-	public boolean handleInput(String line) {	
+	public boolean handleInputOrQuit(String line) {	
+		boolean quit=false;
 		if (line.equalsIgnoreCase("q")) {
-			return false;
+			quit=true;
 		}
 		if (line.equalsIgnoreCase("u")) {
 			//Do nothing, just redraw the updated grid
@@ -60,7 +55,7 @@ public class TextUI implements IObserver {
 			controller.setValue(arg[0], arg[1], arg[2]);   
 		}
 		
-		return true;
+		return quit;
 	}
 
 

@@ -29,16 +29,16 @@ public class GridTest {
 	
 	@Test
 	public void testCellsPerEdge()  {
-		assertEquals(1, new Grid(1).getCellsPerEdge());
-		assertEquals(4, new Grid(2).getCellsPerEdge());
-		assertEquals(9, new Grid(3).getCellsPerEdge());	
+		assertEquals(1, grid1.getCellsPerEdge());
+		assertEquals(4, grid2.getCellsPerEdge());
+		assertEquals(9, grid3.getCellsPerEdge());	
 	}
 	
 	@Test
 	public void testGridSize()  {
-		assertEquals(1, new Grid(1).getGridSize());
-		assertEquals(16, new Grid(2).getGridSize());
-		assertEquals(81, new Grid(3).getGridSize());
+		assertEquals(1, grid1.getGridSize());
+		assertEquals(16, grid2.getGridSize());
+		assertEquals(81, grid3.getGridSize());
 	}
 	
 	@Test

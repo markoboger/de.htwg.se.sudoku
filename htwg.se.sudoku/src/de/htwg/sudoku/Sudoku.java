@@ -8,7 +8,12 @@ public class Sudoku {
 
 	public static void main(String[] args) {
 		TextUI tui = new TextUI(new SudokuController(new Grid(3)));
-		tui.controlLoop();
+		tui.printTUI();
+		// continue until the user decides to quit
+		boolean quit = false;
+		while (!quit) {
+		    quit = tui.iterate();		
+		}
 	}
 
 }

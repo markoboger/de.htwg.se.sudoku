@@ -23,10 +23,10 @@ public class TextUITest {
 
 	@Test
 	public void testHandleInput() {
-		tui1.handleInput("001");
+		tui1.handleInputOrQuit("001");
 		assertEquals(1,grid1.getCell(0, 0).getValue());
 		
-		assertFalse(tui1.handleInput("q"));
+		assertTrue(tui1.handleInputOrQuit("q"));
 	}
 
 }

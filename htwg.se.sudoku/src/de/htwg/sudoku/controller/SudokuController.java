@@ -1,7 +1,5 @@
 package de.htwg.sudoku.controller;
 
-import javax.swing.undo.UndoManager;
-
 import de.htwg.sudoku.entities.Cell;
 import de.htwg.sudoku.entities.Grid;
 import de.htwg.util.observer.Observable;
