@@ -37,4 +37,8 @@ public class Cell {
 		return "(" + row + "," + column + ") = " + value;
 	}
 
+	public boolean isUnSet() {
+		return !isSet();
+	}
+
 }

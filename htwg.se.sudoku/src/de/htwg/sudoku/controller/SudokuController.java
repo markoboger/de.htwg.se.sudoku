@@ -16,7 +16,7 @@ public class SudokuController extends Observable {
 	
 	public void setValue(int row, int column, int value) {
 		Cell cell = grid.getCell(row, column);
-		if (!cell.isSet()) {
+		if (cell.isUnSet()) {
 			cell.setValue(value);
 			setStatusMessage("The cell " + cell.mkString() + " was successfully set");
 		} else setStatusMessage("The cell " + cell.mkString() + " is already set");

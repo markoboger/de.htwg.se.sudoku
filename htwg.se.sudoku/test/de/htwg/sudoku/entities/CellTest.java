@@ -34,12 +34,15 @@ public class CellTest {
 	}
 
 	@Test
-	public void testIsSet() {
-		assertEquals(false, cell.isSet());
+	public void testIsSetOrUnSet() {
+		assertFalse(cell.isSet());
+		assertTrue(cell.isUnSet());
 		cell.setValue(1);
-		assertEquals(true, cell.isSet());
+		assertTrue(cell.isSet());
+		assertFalse(cell.isUnSet());
 		cell.setValue(0);
-		assertEquals(false, cell.isSet());
+		assertFalse(cell.isSet());
+		assertTrue(cell.isUnSet());
 	}
 
 }
