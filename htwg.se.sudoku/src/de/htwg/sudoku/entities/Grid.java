@@ -1,5 +1,7 @@
 package de.htwg.sudoku.entities;
 
+import java.util.BitSet;
+
 public class Grid {
 
 	private int cellsPerEdge;
@@ -9,12 +11,16 @@ public class Grid {
 	House[] blocks;
 	private int gridSize;
 	private int blockSize;
+	private int solutionCounter;
+	private int steps;
 
 	public Grid(int blocksPerEdge) throws IllegalArgumentException {
-		if ( blocksPerEdge <= 0 || 4 <= blocksPerEdge ) throw new IllegalArgumentException("blocksPerEdge must be 1, 2 or 3");
-		this.blockSize=blocksPerEdge;
-		this.cellsPerEdge=blocksPerEdge*blockSize;
-		this.gridSize=cellsPerEdge*cellsPerEdge;
+		if (blocksPerEdge <= 0 || 4 <= blocksPerEdge)
+			throw new IllegalArgumentException(
+					"blocksPerEdge must be 1, 2 or 3");
+		this.blockSize = blocksPerEdge;
+		this.cellsPerEdge = blocksPerEdge * blockSize;
+		this.gridSize = cellsPerEdge * cellsPerEdge;
 
 		// create Cell and Houses
 		cells = new Cell[cellsPerEdge][cellsPerEdge];
@@ -36,7 +42,6 @@ public class Grid {
 				blocks[blockAt(row, column)].cells[cellInBlockAt(row, column)] = cells[row][column];
 			}
 		}
-
 	}
 
 	/**
@@ -90,6 +95,7 @@ public class Grid {
 		}
 		return result.toString();
 	}
+
 	/**
 	 * returns a string of the form +---+ (i.e. in the case of blockSize = 1)
 	 */
@@ -104,5 +110,105 @@ public class Grid {
 		return result.toString();
 	}
 
+	/**
+	 * solves the Sudoku with a brute force backtracking strategy.
+	 * 
+	 * @return true if the sudoku was solved
+	 * @throws SolutionStepException
+	 */
+	public boolean solve() {
+		solutionCounter = 0;
+		steps = 0;
+		boolean result = solve(0, 0, 1);
+		return result;
+	}
+
+	/**
+	 * does not only look for one solution but for numSolution solutions.
+	 * Meaningfull arguments are 1 and 2.
+	 * 
+	 * @param numSolutions
+	 *            the number of solutions to look for.
+	 * @return true if successfull.
+	 * @throws SolutionStepException
+	 */
+	public boolean solve(int numSolutions) {
+		solutionCounter = 0;
+		return solve(0, 0, numSolutions);
+	}
+
+	/**
+	 * the recursive algorith for solving itself. Do not call this method, use
+	 * solve() to start the algorithm.
+	 * 
+	 * @throws SolutionStepException
+	 */
+	boolean solve(int row, int column, int numSolutions) {
+		steps = steps + 1;
+		if (steps % 1000 == 0) {
+			System.out.print(".");
+		}
+		if (steps > 1000000)
+			System.out.println("");
+		if (column == cellsPerEdge) {
+			column = 0;
+			row++;
+			if (row == cellsPerEdge) {
+				solutionCounter++;
+				if (numSolutions == solutionCounter)
+					return true;
+				else
+					return false;
+			}
+		}
+		if (getCell(row, column).isSet()) // skip filled cells
+			return solve(row, column + 1, numSolutions);
+
+		for (int val = 1; val <= cellsPerEdge; ++val) {
+			if (candidates(row, column).get(val)) {
+				getCell(row, column).setValue(val);
+				if (solve(row, column + 1, numSolutions))
+					return true;
+			}
+		}
+		getCell(row, column).setValue(0); // reset on backtrack
+		return false;
+	}
+
+	/**
+	 * calculates all values that are still valid candidates at the coordinate
+	 * (row, column).
+	 * 
+	 * @param row
+	 * @param column
+	 * @return is encoded in a BitSet: if BitSet at index 1 is true, the value 1
+	 *         is a valid candidate.
+	 */
+	public BitSet candidates(int row, int column) {
+		BitSet candidates = new BitSet(cellsPerEdge + 1);
+		candidates.set(1, cellsPerEdge + 1, true);
+		candidates.and(rows[row].candidates());
+		candidates.and(columns[column].candidates());
+		candidates.and(blocks[blockAt(row, column)].candidates());
+		return candidates;
+	}
+
+	public int getSteps() {
+		return steps;
+	}
+	
+	/**
+	 * sets all values for the grid and its cells back to default, i.e. to start
+	 * a new game.
+	 */
+	public void reset() {
+		for (int row = 0; row < cellsPerEdge; row++) {
+			for (int column = 0; column < cellsPerEdge; column++) {
+				cells[row][column].setValue(0);
+				cells[row][column].setGiven(false);
+				cells[row][column].setShowCandidates(false);
+			}
+		}
+	}
 
 }

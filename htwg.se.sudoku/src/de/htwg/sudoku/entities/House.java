@@ -1,5 +1,7 @@
 package de.htwg.sudoku.entities;
 
+import java.util.BitSet;
+
 public class House {
 
 	int size;
@@ -42,6 +44,18 @@ public class House {
 			}
 		}
 		return result.toString();
+	}
+	
+	/**
+	 * returns the values that are not yet used in this house as set.
+	 */
+	public BitSet candidates() {
+		BitSet candidates = new BitSet(size + 1);
+		candidates.set(1, size + 1, true);
+		for (int index = 0; index < size; index++) {
+			candidates.set(cells[index].getValue(), false);
+		}
+		return candidates;
 	}
 
 

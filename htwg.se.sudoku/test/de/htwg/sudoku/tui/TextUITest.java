@@ -22,11 +22,11 @@ public class TextUITest {
 	}
 
 	@Test
-	public void testHandleInput() {
-		tui1.handleInputOrQuit("001");
+	public void testprocessInputLine() {
+		tui1.processInputLine("001");
 		assertEquals(1,grid1.getCell(0, 0).getValue());
 		
-		assertTrue(tui1.handleInputOrQuit("q"));
+		assertFalse(tui1.processInputLine("q"));
 	}
 
 }

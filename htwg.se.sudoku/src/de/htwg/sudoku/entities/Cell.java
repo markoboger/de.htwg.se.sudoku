@@ -4,6 +4,8 @@ public class Cell {
 	private int value;
 	private int row;
 	private int column;
+	private boolean given;
+	private boolean showCandidates;
 
 	public Cell(int row, int column) {
 		this.row=row;
@@ -39,6 +41,24 @@ public class Cell {
 
 	public boolean isUnSet() {
 		return !isSet();
+	}
+	void setGiven(boolean b) {
+		given = b;
+	}
+	public boolean isGiven() {
+		return given;
+	}
+	/**
+	 * switch to make the possible candidate values of a cell visible in a GUI
+	 * per cell
+	 * 
+	 * @param showCandidates
+	 */
+	public void setShowCandidates(boolean showCandidates) {
+		this.showCandidates = showCandidates;
+	}
+	public boolean isShowCandidates() {
+		return showCandidates;
 	}
 
 }
