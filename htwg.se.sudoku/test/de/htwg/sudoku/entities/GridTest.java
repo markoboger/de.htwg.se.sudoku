@@ -92,6 +92,30 @@ public class GridTest {
 		assertEquals("+---+"+newLine+"| 1 |"+newLine+"+---+"+newLine, grid1.toString());
 
 	}
+	
+	@Test
+	public void testSolve() {
+		grid1.solve();
+		assertEquals("+---+"+newLine+"| 1 |"+newLine+"+---+"+newLine, grid1.toString());
+		grid2.solve();
+		StringBuffer solution = new StringBuffer("");
+		solution.append("+-----+-----+"+newLine);
+		solution.append("| 1 2 | 3 4 |"+newLine);
+		solution.append("| 3 4 | 1 2 |"+newLine);
+		solution.append("+-----+-----+"+newLine);
+		solution.append("| 2 1 | 4 3 |"+newLine);
+		solution.append("| 4 3 | 2 1 |"+newLine);
+		solution.append("+-----+-----+"+newLine);
+		assertEquals(solution.toString(), grid2.toString());
+	}
+	
+	@Test
+	public void testReset() {
+		grid2.setCell(1, 1, 1);
+		assertEquals(1, grid2.getCell(1, 1).getValue());
+		grid2.reset();
+		assertEquals(0, grid2.getCell(1, 1).getValue());
+	}
 
 	private boolean assertReachAllCells(Grid grid) {
 		int cellsPerEdge=grid.getCellsPerEdge();
