@@ -38,7 +38,7 @@ public class House {
 	public String toString() {
 		StringBuffer result = new StringBuffer("|");
 		for (int index = 0; index < size; index++) {
-			result.append(" " + cells[index].getValue());
+			result.append(" " + cells[index].toString());
 			if (((index + 1) % blockSize) == 0) {
 				result.append(" |");
 			}
@@ -56,6 +56,16 @@ public class House {
 			candidates.set(cells[index].getValue(), false);
 		}
 		return candidates;
+	}
+	
+	public int countSetCells() {
+		int count = 0;
+		for (int index = 0; index < size; index++) {
+			if (cells[index].getValue() > 0) {
+				count++;
+			}
+		}
+		return count;
 	}
 
 

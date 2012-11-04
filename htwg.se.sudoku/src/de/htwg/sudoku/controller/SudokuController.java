@@ -8,10 +8,10 @@ import de.htwg.util.observer.Observable;
 
 public class SudokuController extends Observable {
 	
-	private String statusMessage = "Welcome to HTWG Sudoku!";
+	private String statusLine = "Welcome to HTWG Sudoku!";
 	private Grid grid;
 	private UndoManager undoManager;
-	String statusLine;
+
 
 	
 	public SudokuController(Grid grid) {
@@ -23,8 +23,8 @@ public class SudokuController extends Observable {
 		Cell cell = grid.getCell(row, column);
 		if (cell.isUnSet()) {
 			cell.setValue(value);
-			setStatusMessage("The cell " + cell.mkString() + " was successfully set");
-		} else setStatusMessage("The cell " + cell.mkString() + " is already set");
+			statusLine = "The cell " + cell.mkString() + " was successfully set";
+		} else statusLine="The cell " + cell.mkString() + " is already set";
 		notifyObservers();
 	}
 	
@@ -43,13 +43,15 @@ public class SudokuController extends Observable {
 		statusLine = "Sudoku was reset";
 		notifyObservers();
 	}
-
-	public String getStatus() {
-		return statusMessage;
+	
+	public void create() {
+		grid.create();
+		statusLine= "New Sudoku Puzzle created";
+		notifyObservers();
 	}
 
-	private void setStatusMessage(String statusMessage) {
-		this.statusMessage = statusMessage;
+	public String getStatus() {
+		return statusLine;
 	}
 
 	public String getGridString() {

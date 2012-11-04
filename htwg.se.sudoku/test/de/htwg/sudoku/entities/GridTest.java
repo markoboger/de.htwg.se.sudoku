@@ -87,7 +87,7 @@ public class GridTest {
 	
 	@Test
 	public void testToString() {
-		assertEquals("+---+"+newLine+"| 0 |"+newLine+"+---+"+newLine, grid1.toString());
+		assertEquals("+---+"+newLine+"|   |"+newLine+"+---+"+newLine, grid1.toString());
 		grid1.setCell(0,0,1);
 		assertEquals("+---+"+newLine+"| 1 |"+newLine+"+---+"+newLine, grid1.toString());
 

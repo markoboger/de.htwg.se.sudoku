@@ -32,7 +32,7 @@ public class ControllerTest {
 	
 	@Test
 	public void testGetGridString() {
-		assertEquals("+---+"+newLine+"| 0 |"+newLine+"+---+"+newLine,controller1.getGridString());
+		assertEquals("+---+"+newLine+"|   |"+newLine+"+---+"+newLine,controller1.getGridString());
 	}
 
 }

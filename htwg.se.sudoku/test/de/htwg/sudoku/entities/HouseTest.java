@@ -54,15 +54,15 @@ public class HouseTest {
 
 	@Test
 	public void testToString() {
-		assertEquals("| 0 |",house1.toString());
+		assertEquals("|   |",house1.toString());
 		house1.cells[0].setValue(1);
 		assertEquals("| 1 |",house1.toString());
 
-		assertEquals("| 0 0 | 0 0 |",house4.toString());
+		assertEquals("|     |     |",house4.toString());
 		house4.cells[0].setValue(1);
 		house4.cells[1].setValue(2);
 		house4.cells[2].setValue(3);
-		assertEquals("| 1 2 | 3 0 |",house4.toString());
+		assertEquals("| 1 2 | 3   |",house4.toString());
 
 		//		assertEquals("| 0 0 0 | 0 0 0 | 0 0 0 |",house9.toString());
 	}

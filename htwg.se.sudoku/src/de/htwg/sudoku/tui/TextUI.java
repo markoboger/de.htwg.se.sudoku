@@ -31,10 +31,14 @@ public class TextUI implements IObserver {
 		}
 		if (line.equalsIgnoreCase("u")) {
 			// Do nothing, just redraw the updated grid
+			continu = true;
 		}
 
 		if (line.equalsIgnoreCase("r")) {
 			controller.reset();
+		}
+		if (line.equalsIgnoreCase("n")) {
+			controller.create();
 		}
 		if (line.equalsIgnoreCase("s")) {
 			controller.solve();

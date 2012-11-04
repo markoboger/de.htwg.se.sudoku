@@ -13,6 +13,8 @@ public class Grid {
 	private int blockSize;
 	private int solutionCounter;
 	private int steps;
+	GridCreateStrategy creator = new GridCreateFactory(this).getInstance();
+
 
 	public Grid(int blocksPerEdge) throws IllegalArgumentException {
 		if (blocksPerEdge <= 0 || 4 <= blocksPerEdge)
@@ -77,6 +79,10 @@ public class Grid {
 
 	protected int getGridSize() {
 		return gridSize;
+	}
+	
+	int getBlockSize() {
+		return blockSize;
 	}
 
 	/**
@@ -209,6 +215,10 @@ public class Grid {
 				cells[row][column].setShowCandidates(false);
 			}
 		}
+	}
+	
+	public void create() {
+		creator .createNewGrid(this);
 	}
 
 }

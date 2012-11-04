@@ -38,6 +38,12 @@ public class Cell {
 	public String mkString() {
 		return "(" + row + "," + column + ") = " + value;
 	}
+	
+	public String toString() {
+		if (value ==0) return " "; 
+				else
+		return ""+value;
+	}
 
 	public boolean isUnSet() {
 		return !isSet();
@@ -59,6 +65,12 @@ public class Cell {
 	}
 	public boolean isShowCandidates() {
 		return showCandidates;
+	}
+	
+	public void reset() {
+		setValue(0);
+		setGiven(false);
+		setShowCandidates(false);
 	}
 
 }

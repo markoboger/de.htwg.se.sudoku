@@ -28,5 +28,14 @@ public class TextUITest {
 		
 		assertFalse(tui1.processInputLine("q"));
 	}
+	
+	@Test
+	public void testStatus() {
+		assertEquals("Welcome to HTWG Sudoku!",controller1.getStatus());
+		tui1.processInputLine("001");
+		assertEquals("The cell (0,0) = 1 was successfully set",controller1.getStatus());
+		tui1.processInputLine("r");
+		assertEquals("Sudoku was reset",controller1.getStatus());
+	}
 
 }
