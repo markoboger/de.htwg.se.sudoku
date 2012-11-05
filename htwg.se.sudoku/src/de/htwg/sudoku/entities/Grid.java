@@ -177,7 +177,7 @@ public class Grid {
 		for (int val = 1 ; val <= cellsPerEdge; val++) {
 			int index = val -1;
 			if (candidates(row, column).get(permutation.get(index)+1)) {
-				getCell(row, column).setValue(val);
+				getCell(row, column).setValue(permutation.get(index)+1);
 				if (solve(row, column + 1, numSolutions))
 					return true;
 			}
