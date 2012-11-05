@@ -174,10 +174,10 @@ public class Grid {
 		if (getCell(row, column).isSet()) // skip filled cells
 			return solve(row, column + 1, numSolutions);
 		
-		for (int val = 1 ; val <= cellsPerEdge; val++) {
-			int index = val -1;
-			if (candidates(row, column).get(permutation.get(index)+1)) {
-				getCell(row, column).setValue(permutation.get(index)+1);
+		for (int index = 0 ; index < cellsPerEdge; index++) {
+			int value = permutation.get(index)+1;
+			if (candidates(row, column).get(value)) {
+				getCell(row, column).setValue(value);
 				if (solve(row, column + 1, numSolutions))
 					return true;
 			}
