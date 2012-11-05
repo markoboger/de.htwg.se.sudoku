@@ -2,6 +2,8 @@ package de.htwg.sudoku.entities;
 
 import java.util.BitSet;
 
+import de.htwg.util.shuffle.ShuffleList;
+
 public class Grid {
 
 	private int cellsPerEdge;
@@ -122,9 +124,11 @@ public class Grid {
 	 * @return true if the sudoku was solved
 	 * @throws SolutionStepException
 	 */
+	ShuffleList permutation;
 	public boolean solve() {
 		solutionCounter = 0;
 		steps = 0;
+		permutation = new ShuffleList(cellsPerEdge);
 		boolean result = solve(0, 0, 1);
 		return result;
 	}
@@ -169,9 +173,10 @@ public class Grid {
 		}
 		if (getCell(row, column).isSet()) // skip filled cells
 			return solve(row, column + 1, numSolutions);
-
-		for (int val = 1; val <= cellsPerEdge; ++val) {
-			if (candidates(row, column).get(val)) {
+		
+		for (int val = 1 ; val <= cellsPerEdge; val++) {
+			int index = val -1;
+			if (candidates(row, column).get(permutation.get(index)+1)) {
 				getCell(row, column).setValue(val);
 				if (solve(row, column + 1, numSolutions))
 					return true;
@@ -180,6 +185,8 @@ public class Grid {
 		getCell(row, column).setValue(0); // reset on backtrack
 		return false;
 	}
+
+	
 
 	/**
 	 * calculates all values that are still valid candidates at the coordinate
