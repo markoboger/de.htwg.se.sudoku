@@ -14,7 +14,6 @@ public class GridCreateSymmetricStrategy implements GridCreateStrategy {
 	public void createNewGrid(Grid grid) {
 		this.grid = grid;
 		grid.reset();
-//		createSeedGrid();
 		grid.solve();
 		removePairsUntilMinimalUniquelySolvable();
 		for (int row = 0; row < grid.getCellsPerEdge(); row++) {
@@ -24,52 +23,23 @@ public class GridCreateSymmetricStrategy implements GridCreateStrategy {
 		}
 	}
 
-	/**
-	 * fills a grid with some initial random values. This is used to create
-	 * different Sudoku games. This method is called to seed the creation of a
-	 * symmetric Sudoku.
-	 */
-	public void createSeedGrid() {
-		int numberOfRandomCells = grid.getCellsPerEdge() * grid.getCellsPerEdge() / 4; // fill
-																				// a
-																				// quarter
-																				// of
-		// the cells by
-		// random
-		Random random = new Random();
-		int[] seedValues = new int[numberOfRandomCells];
-		for (int k = 0; k < numberOfRandomCells; k++) {
-			seedValues[k] = random.nextInt(grid.getCellsPerEdge()) + 1;
-		}
-		int l = 0;
-		while (l < numberOfRandomCells) {
-			int value = seedValues[l];
-			int row = random.nextInt(grid.getCellsPerEdge());
-			int column = random.nextInt(grid.getCellsPerEdge());
-			if (grid.candidates(row, column).get(value)) {
-				grid.getCell(row, column).setValue(value);
-				grid.getCell(row, column).setGiven(true);
-
-				l++;
-			}
-		}
-	}
-
 	private void removePairsUntilMinimalUniquelySolvable() {
-		Cell cell1, cell2;
-		int value1, value2;
-		do {
-			cell1 = getRandomCell();
-			value1 = cell1.getValue();
-			cell2 = getSymmetricCell(cell1);
-			value2 = cell2.getValue();
-			if (cell1.isSet() && cell2.isSet()) {
-				cell1.reset();
-				cell2.reset();
-			}
-		} while (hasUniqueSolution(copyGridStructure()));
-		cell1.setValue(value1);
-		cell2.setValue(value2);
+		if (getSetCells().length > 1) {
+			Cell cell1, cell2;
+			int value1, value2;
+			do {
+				cell1 = getRandomCell();
+				value1 = cell1.getValue();
+				cell2 = getSymmetricCell(cell1);
+				value2 = cell2.getValue();
+				if (cell1.isSet() && cell2.isSet()) {
+					cell1.reset();
+					cell2.reset();
+				}
+			} while (hasUniqueSolution(copyGridStructure()));
+			cell1.setValue(value1);
+			cell2.setValue(value2);
+		}
 	}
 
 	private Grid copyGridStructure() {
@@ -119,27 +89,8 @@ public class GridCreateSymmetricStrategy implements GridCreateStrategy {
 		return count;
 	}
 
-	public void removeRndCellPair() {
-		Cell cell1 = getRandomCell();
-		Cell cell2 = getSymmetricCell(cell1);
-		if (cell1.isSet() && cell2.isSet()) {
-			cell1.reset();
-			cell2.reset();
-		}
-	}
-
 	public boolean hasUniqueSolution(Grid grid) {
 		return !grid.solve(2);
-	}
-
-	public boolean isSymmetric() {
-		for (int column = 0; column < grid.getCellsPerEdge(); column++)
-			for (int row = 0; row < grid.getCellsPerEdge(); row++)
-				if (grid.getCell(row, column).isSet()
-						&& !grid.getCell((grid.getCellsPerEdge() - 1) - row,
-								(grid.getGridSize() - 1) - column).isSet())
-					return false;
-		return true;
 	}
 
 }

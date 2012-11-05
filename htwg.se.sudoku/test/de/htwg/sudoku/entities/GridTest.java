@@ -95,18 +95,61 @@ public class GridTest {
 	
 	@Test
 	public void testSolve() {
-		grid1.solve();
+		assertTrue(grid1.solve());
+		assertEquals(2,grid1.getSteps());
 		assertEquals("+---+"+newLine+"| 1 |"+newLine+"+---+"+newLine, grid1.toString());
-		grid2.solve();
-		StringBuffer solution = new StringBuffer("");
-		solution.append("+-----+-----+"+newLine);
-		solution.append("| 1 2 | 3 4 |"+newLine);
-		solution.append("| 3 4 | 1 2 |"+newLine);
-		solution.append("+-----+-----+"+newLine);
-		solution.append("| 2 1 | 4 3 |"+newLine);
-		solution.append("| 4 3 | 2 1 |"+newLine);
-		solution.append("+-----+-----+"+newLine);
-		assertEquals(solution.toString(), grid2.toString());
+		assertFalse(grid2.isSolved());
+		assertTrue(grid2.solve());
+		assertTrue(grid2.isSolved());
+		assertTrue(grid3.solve());	
+		assertTrue(grid3.isSolved());
+	}
+	@Test
+	public void testSolveFilled() {
+		grid1.setCell(0, 0, 1);
+		assertTrue(grid1.solve());
+		assertEquals(2,grid1.getSteps());
+		grid2.setCell(0, 0, 1);
+		assertFalse(grid2.isSolved());
+		assertTrue(grid2.solve());
+		assertTrue(grid2.isSolved());
+		grid2.setCell(0, 0, 1);
+		assertTrue(grid3.solve());
+		assertTrue(grid3.isSolved());
+	}
+	
+	@Test
+	public void testSolve2() {
+		assertFalse(grid1.solve(2));
+		assertTrue(grid2.solve(2));
+	}
+	
+	@Test
+	public void testCreate() {
+		grid1.create();
+		assertTrue(grid1.isSolved());
+		assertTrue(grid1.isSymmetric());
+		grid2.create();
+		assertTrue(grid2.solve());
+		assertTrue(grid2.isSymmetric());
+		grid3.create();
+		assertTrue(grid3.solve());
+		assertTrue(grid3.isSymmetric());
+	}
+	
+	@Test
+	public void testIsSymmetric(){
+		assertTrue(grid1.isSymmetric());
+		grid1.setCell(0, 0,1);
+		assertTrue(grid1.isSymmetric());
+		assertTrue(grid2.isSymmetric());
+		grid2.setCell(0, 0, 1);
+		assertFalse(grid2.isSymmetric());
+		grid2.setCell(3, 3, 3);
+		assertTrue(grid2.isSymmetric());
+		assertTrue(grid3.isSymmetric());
+		grid3.setCell(4, 4, 4);
+		assertTrue(grid3.isSymmetric());
 	}
 	
 	@Test
@@ -116,6 +159,13 @@ public class GridTest {
 		grid2.reset();
 		assertEquals(0, grid2.getCell(1, 1).getValue());
 	}
+	@Test
+	public void testGetBlockSize() {
+		assertEquals(1, grid1.getBlockSize());
+		assertEquals(2, grid2.getBlockSize());
+		assertEquals(3, grid3.getBlockSize());
+	}
+	
 
 	private boolean assertReachAllCells(Grid grid) {
 		int cellsPerEdge=grid.getCellsPerEdge();

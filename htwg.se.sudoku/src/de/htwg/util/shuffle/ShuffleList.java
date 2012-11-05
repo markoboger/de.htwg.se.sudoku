@@ -34,7 +34,4 @@ public class ShuffleList {
 		a.set(change, helper);
 	}
 	
-	public String toString() {
-		return list.toString();
-	}
 }

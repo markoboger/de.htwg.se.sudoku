@@ -44,5 +44,23 @@ public class CellTest {
 		assertFalse(cell.isSet());
 		assertTrue(cell.isUnSet());
 	}
+	
+	@Test
+	public void testReset() {
+		cell.setValue(1);
+		cell.reset();
+		assertEquals(0, cell.getValue());
+	}
+	
+	@Test
+	public void testIsGiven() {
+		assertFalse( cell.isGiven());
+	}
+	
+	@Test
+	public void testIsShowCandidates() {
+		assertFalse( cell.isShowCandidates());
+	}
+	
 
 }

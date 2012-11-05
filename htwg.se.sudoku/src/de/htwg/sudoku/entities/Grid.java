@@ -157,11 +157,6 @@ public class Grid {
 	 */
 	boolean solve(int row, int column, int numSolutions) {
 		steps = steps + 1;
-		if (steps % 1000 == 0) {
-			System.out.print(".");
-		}
-		if (steps > 1000000)
-			System.out.println("");
 		if (column == cellsPerEdge) {
 			column = 0;
 			row++;
@@ -228,6 +223,25 @@ public class Grid {
 	
 	public void create() {
 		creator .createNewGrid(this);
+	}
+
+	public boolean isSolved() {
+		for (int row = 0; row < cellsPerEdge; row++) {
+			for (int column = 0; column < cellsPerEdge; column++) {
+				if (cells[row][column].isUnSet()) return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean isSymmetric() {
+		for (int column = 0; column < getCellsPerEdge(); column++)
+			for (int row = 0; row < getCellsPerEdge(); row++)
+				if (getCell(row, column).isSet()
+						&& !getCell((getCellsPerEdge() - 1) - row,
+								(getCellsPerEdge() - 1) - column).isSet())
+					return false;
+		return true;
 	}
 
 }
