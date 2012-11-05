@@ -144,6 +144,8 @@ public class Grid {
 	 */
 	public boolean solve(int numSolutions) {
 		solutionCounter = 0;
+		steps = 0;
+		permutation = new ShuffleList(cellsPerEdge);
 		return solve(0, 0, numSolutions);
 	}
 
