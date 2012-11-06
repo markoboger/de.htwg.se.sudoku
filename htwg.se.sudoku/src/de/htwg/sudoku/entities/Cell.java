@@ -39,8 +39,8 @@ public class Cell {
 		return "(" + row + "," + column + ") = " + value;
 	}
 	
-	public String toString() {
-		if (value ==0) return " "; 
+	public String toString(String zero) {
+		if (value ==0) return zero; 
 				else
 		return ""+value;
 	}

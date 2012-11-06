@@ -1,8 +1,9 @@
 package de.htwg.sudoku.entities;
 
+import java.util.ArrayList;
 import java.util.BitSet;
-
-import de.htwg.util.shuffle.ShuffleList;
+import java.util.Collections;
+import java.util.List;
 
 public class Grid {
 
@@ -15,7 +16,8 @@ public class Grid {
 	private int blockSize;
 	private int solutionCounter;
 	private int steps;
-	GridCreateStrategy creator = new GridCreateFactory(this).getInstance();
+	private List<Integer> permutation;
+	GridCreateStrategyTemplate createStrategy = AbstractGridCreateStrategyFactory.getFactory().getInstance();
 
 
 	public Grid(int blocksPerEdge) throws IllegalArgumentException {
@@ -87,22 +89,7 @@ public class Grid {
 		return blockSize;
 	}
 
-	/**
-	 * returns a String of the form (i.e for size = 1) +---+ | 0 | +---+
-	 */
-	public String toString() {
-		String newLine = System.getProperty("line.separator");
-		StringBuffer result = new StringBuffer(blockSeparator(blockSize)
-				+ newLine);
-		for (int row = 0; row < cellsPerEdge; row++) {
-			result.append(rows[row].toString() + newLine);
-			if ((row + 1) % blockSize == 0) {
-				result.append(blockSeparator(blockSize) + newLine);
-			}
 
-		}
-		return result.toString();
-	}
 
 	/**
 	 * returns a string of the form +---+ (i.e. in the case of blockSize = 1)
@@ -124,13 +111,20 @@ public class Grid {
 	 * @return true if the sudoku was solved
 	 * @throws SolutionStepException
 	 */
-	ShuffleList permutation;
 	public boolean solve() {
-		solutionCounter = 0;
-		steps = 0;
-		permutation = new ShuffleList(cellsPerEdge);
+		initSolve();
 		boolean result = solve(0, 0, 1);
 		return result;
+	}
+
+	private void initSolve() {
+		solutionCounter = 0;
+		steps = 0;
+		permutation = new ArrayList<Integer>();
+		for (int i = 0; i < cellsPerEdge; i++) {
+			permutation.add(i);
+		}
+		Collections.shuffle(permutation);
 	}
 
 	/**
@@ -143,9 +137,7 @@ public class Grid {
 	 * @throws SolutionStepException
 	 */
 	public boolean solve(int numSolutions) {
-		solutionCounter = 0;
-		steps = 0;
-		permutation = new ShuffleList(cellsPerEdge);
+		initSolve();
 		return solve(0, 0, numSolutions);
 	}
 
@@ -222,7 +214,7 @@ public class Grid {
 	}
 	
 	public void create() {
-		creator .createNewGrid(this);
+		createStrategy.createNewGrid(this);
 	}
 
 	public boolean isSolved() {
@@ -243,5 +235,64 @@ public class Grid {
 					return false;
 		return true;
 	}
+	
+	/**
+	 * takes a String and parses numbers out of it and fills the grid with these
+	 * numbers. The String should contain size*size numbers. All other
+	 * characters are ignored.
+	 * 
+	 * @param input
+	 *            must contain size*size digits.
+	 * @return true if the parsing was successful, i.e. it found size*size
+	 *         digits.
+	 */
+	public boolean parseStringToGrid(String input) {
+		int row = 0;
+		int column = 0;
+		String letter;
+		for (int i = 0; i < input.length(); i++) {
+			letter = input.substring(i, i + 1);
+			if (letter.matches("[0-9]")) {
+				Cell cell = getCell(row, column);
+				cell.setValue(Integer.parseInt(letter));
+				if (letter.matches("[1-9]")) {
+					cell.setGiven(true);
+				} else {
+					cell.setGiven(false);
+				}
+				column++;
+				if (column == cellsPerEdge) {
+					column = 0;
+					row++;
+				}
+			}
+		}
+		if (row == cellsPerEdge) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * returns a String of the form (i.e for size = 1) +---+ |   | +---+
+	 */
+	public String toString() {
+		return toString(" ");
+	}
+	public String toString(String zero) {
+		String newLine = System.getProperty("line.separator");
+		StringBuffer result = new StringBuffer(blockSeparator(blockSize)
+				+ newLine);
+		for (int row = 0; row < cellsPerEdge; row++) {
+			result.append(rows[row].toString(zero) + newLine);
+			if ((row + 1) % blockSize == 0) {
+				result.append(blockSeparator(blockSize) + newLine);
+			}
+
+		}
+		return result.toString();
+	}
+
 
 }

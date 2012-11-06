@@ -36,6 +36,10 @@ public class TextUITest {
 		assertEquals("The cell (0,0) = 1 was successfully set",controller1.getStatus());
 		tui1.processInputLine("r");
 		assertEquals("Sudoku was reset",controller1.getStatus());
+		tui1.processInputLine("n");
+		assertEquals("New Sudoku Puzzle created",controller1.getStatus());
+		tui1.processInputLine("n");
+		assertEquals("New Sudoku Puzzle created",controller1.getStatus());
 	}
 
 }

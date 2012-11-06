@@ -36,9 +36,12 @@ public class House {
 	 * returns a String of the form | 1 2 3 | 4 5 6 | 7 8 9 |
 	 */
 	public String toString() {
+		return toString(" ");
+	}
+	public String toString(String zero) {
 		StringBuffer result = new StringBuffer("|");
 		for (int index = 0; index < size; index++) {
-			result.append(" " + cells[index].toString());
+			result.append(" " + cells[index].toString(zero));
 			if (((index + 1) % blockSize) == 0) {
 				result.append(" |");
 			}
@@ -62,6 +65,16 @@ public class House {
 		int count = 0;
 		for (int index = 0; index < size; index++) {
 			if (cells[index].getValue() > 0) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	public int countUnsetCells() {
+		int count = 0;
+		for (int index = 0; index < size; index++) {
+			if (cells[index].getValue() == 0) {
 				count++;
 			}
 		}

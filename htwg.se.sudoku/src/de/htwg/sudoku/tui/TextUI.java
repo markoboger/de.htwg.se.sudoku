@@ -43,6 +43,18 @@ public class TextUI implements IObserver {
 		if (line.equalsIgnoreCase("s")) {
 			controller.solve();
 		}
+		if (line.equalsIgnoreCase("z")) {
+			controller.undo();
+		}
+		if (line.equalsIgnoreCase("y")) {
+			controller.redo();
+		}
+		if (line.equalsIgnoreCase("c")) {
+			controller.copy();
+		}
+		if (line.equalsIgnoreCase("p")) {
+			controller.paste();
+		}
 		if (line.equalsIgnoreCase("1")) {
 			grid = new Grid(1);
 			controller = new SudokuController(grid);
@@ -79,6 +91,6 @@ public class TextUI implements IObserver {
 		System.out.println(controller.getGridString());
 		System.out.println(controller.getStatus());
 		System.out
-				.println("Please enter a command( q - quit, u - update, s - solve, r - reset, n - new, 1,4,9 - set size, xy - show candidates at (x,y), xyz - set cell(x,y) to z):");
+				.println("Please enter a command( q-quit, n-new, s-solve, r-reset, z-undo, y-redo, c-copy, p-paste, 1,4,9-size, xy-show (x,y), xyz-set (x,y) to z):");
 	}
 }
