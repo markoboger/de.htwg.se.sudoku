@@ -3,23 +3,27 @@ package de.htwg.sudoku.entities;
 import java.util.Random;
 
 /**
- * Patterns: Abstract Factory, TemplateMethod
- * This class is a concrete strategy.
+ * Patterns: Abstract Factory, TemplateMethod This class is a concrete strategy.
  * It follows the template for strategies
  */
 public class RandomGridCreateStrategy extends GridCreateStrategyTemplate {
 
 	@Override
 	public void fillSymmetrically() {
-		
-		
+		for (int i = 0; i < grid.getCellsPerEdge(); i++) {
+			Cell cell1 = getRandomCell();
+			Cell cell2 = getSymmetricCell(cell1);
+			cell1.setValue(grid.getCandidate(cell1.getRow(),cell1.getColumn()));
+			cell2.setValue(grid.getCandidate(cell2.getRow(),cell2.getColumn()));
+		}
+
 	}
-	
+
 	public Cell getRandomCell() {
 		Random random = new Random();
-		Cell[] setCells = getUnsetCells();
+		Cell[] unsetCells = getUnsetCells();
 
-		return setCells[random.nextInt(setCells.length)];
+		return unsetCells[random.nextInt(unsetCells.length)];
 	}
 
 	Cell getSymmetricCell(Cell cell) {
@@ -42,7 +46,7 @@ public class RandomGridCreateStrategy extends GridCreateStrategyTemplate {
 				}
 		return setCells;
 	}
-	
+
 	public int countUnsetCells() {
 		int count = 0;
 		for (int r = 0; r < grid.getCellsPerEdge(); r++) {
@@ -50,6 +54,5 @@ public class RandomGridCreateStrategy extends GridCreateStrategyTemplate {
 		}
 		return count;
 	}
-
 
 }

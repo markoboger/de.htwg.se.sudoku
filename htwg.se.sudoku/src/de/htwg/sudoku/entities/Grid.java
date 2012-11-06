@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class Grid {
 
@@ -193,6 +194,12 @@ public class Grid {
 		candidates.and(columns[column].candidates());
 		candidates.and(blocks[blockAt(row, column)].candidates());
 		return candidates;
+	}
+	
+	public int getCandidate(int row, int column) {
+		Random random = new Random();
+		int maxindex = this.candidates(row, column).cardinality();
+		return candidates(row, column).nextSetBit(random.nextInt(maxindex));
 	}
 
 	public int getSteps() {

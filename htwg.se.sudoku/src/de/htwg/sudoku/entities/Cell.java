@@ -63,6 +63,7 @@ public class Cell {
 	public void setShowCandidates(boolean showCandidates) {
 		this.showCandidates = showCandidates;
 	}
+	
 	public boolean isShowCandidates() {
 		return showCandidates;
 	}

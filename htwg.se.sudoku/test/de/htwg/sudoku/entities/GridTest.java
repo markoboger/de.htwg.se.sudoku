@@ -1,6 +1,8 @@
 package de.htwg.sudoku.entities;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -165,7 +167,32 @@ public class GridTest {
 		assertEquals(2, grid2.getBlockSize());
 		assertEquals(3, grid3.getBlockSize());
 	}
+	@Test
+	public void testRandomStrategy(){
+		AbstractGridCreateStrategyFactory.setFactory(new RandomGridCreateStrategyFactory());
+		grid1.create();
+		grid2.create();
+		grid3.create();
+	}
+	@Test
+	public void testRemovePairStrategy(){
+		AbstractGridCreateStrategyFactory.setFactory(new RemovePairsGridCreateStrategyFactory());
+//		grid1.create();
+		grid2.create();
+		grid3.create();
+	}
 	
+	@Test
+	public void testParseStringToGrid() {
+		grid1.parseStringToGrid("1");
+		assertEquals(1, grid1.getCell(0, 0).getValue());
+		grid2.parseStringToGrid("12342");
+		assertEquals(1, grid2.getCell(0, 0).getValue());
+		assertEquals(2, grid2.getCell(0, 1).getValue());
+		assertEquals(3, grid2.getCell(0, 2).getValue());
+		assertEquals(4, grid2.getCell(0, 3).getValue());
+		assertEquals(2, grid2.getCell(1, 0).getValue());
+	}
 
 	private boolean assertReachAllCells(Grid grid) {
 		int cellsPerEdge=grid.getCellsPerEdge();
