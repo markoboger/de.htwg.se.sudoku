@@ -1,6 +1,6 @@
 package de.htwg.sudoku.entities;
 
-public class Cell {
+public class Cell implements ICell{
 	private int value;
 	private int row;
 	private int column;

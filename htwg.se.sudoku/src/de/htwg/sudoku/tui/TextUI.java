@@ -4,14 +4,15 @@ package de.htwg.sudoku.tui;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import de.htwg.sudoku.controller.IGrid;
 import de.htwg.sudoku.controller.SudokuController;
 import de.htwg.sudoku.entities.Grid;
 import de.htwg.util.observer.IObserver;
 
 public class TextUI implements IObserver {
 
-	private SudokuController controller;
-	Grid grid;
+	private ISudokuController controller;
+	IGrid grid;
 
 
 	public TextUI(SudokuController controller) {
@@ -57,21 +58,15 @@ public class TextUI implements IObserver {
 		}
 		if (line.equalsIgnoreCase("1")) {
 			grid = new Grid(1);
-			controller = new SudokuController(grid);
-			controller.addObserver(this);
-			controller.reset();
+			controller.reset(grid);
 		}
 		if (line.equalsIgnoreCase("4")){
 			grid = new Grid(2);
-			controller = new SudokuController(grid);
-			controller.addObserver(this);
-			controller.reset();
+			controller.reset(grid);
 		}
 		if (line.equalsIgnoreCase("9")){
 			grid = new Grid(3);
-			controller = new SudokuController(grid);
-			controller.addObserver(this);
-			controller.reset();
+			controller.reset(grid);
 		}
 		// if the command line has the form 123, set the cell (1,2) to value 3
 		if (line.matches("[0-9][0-9][0-9]")) {

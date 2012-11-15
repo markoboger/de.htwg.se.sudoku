@@ -38,8 +38,20 @@ public class TextUITest {
 		assertEquals("Sudoku was reset",controller1.getStatus());
 		tui1.processInputLine("n");
 		assertEquals("New Sudoku Puzzle created",controller1.getStatus());
-		tui1.processInputLine("n");
-		assertEquals("New Sudoku Puzzle created",controller1.getStatus());
+		tui1.processInputLine("c");
+		assertEquals("Copied Sudoku", controller1.getStatus());
+		tui1.processInputLine("p");
+		assertEquals("Pasted Sudoku", controller1.getStatus());
+		tui1.processInputLine("z");
+		assertEquals("Undo", controller1.getStatus());
+		tui1.processInputLine("y");
+		assertEquals("Redo", controller1.getStatus());
+		tui1.processInputLine("1");
+		assertEquals("Sudoku was reset", controller1.getStatus());
+		tui1.processInputLine("4");
+		assertEquals("Sudoku was reset", controller1.getStatus());
+		tui1.processInputLine("9");
+		assertEquals("Sudoku was reset", controller1.getStatus());
 	}
 
 }

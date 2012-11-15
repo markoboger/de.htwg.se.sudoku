@@ -3,7 +3,7 @@ package de.htwg.util.observer;
 import java.util.Iterator;
 import java.util.Vector;
 
-public class Observable  {
+public class Observable implements IObservable {
 
 	protected Vector<IObserver> subscribers = new Vector<IObserver>(2);
 

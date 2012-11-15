@@ -3,15 +3,13 @@ package de.htwg.sudoku.controller;
 
 import javax.swing.undo.AbstractUndoableEdit;
 
-import de.htwg.sudoku.entities.Cell;
-
 public class SetValueCommand extends AbstractUndoableEdit {
 
-	private Cell cell;
+	private ICell cell;
 	private int redoBuffer;
 	private static final long serialVersionUID = 1L;
 
-	public SetValueCommand(Cell cell) {
+	public SetValueCommand(ICell cell) {
 		this.cell = cell;
 	}
 

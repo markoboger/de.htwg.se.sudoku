@@ -9,25 +9,21 @@ import java.io.IOException;
 
 import javax.swing.undo.UndoManager;
 
-import de.htwg.sudoku.entities.Cell;
-import de.htwg.sudoku.entities.Grid;
 import de.htwg.util.observer.Observable;
 
-public class SudokuController extends Observable {
+public class SudokuController extends Observable implements ISudokuController {
 	
 	private String statusLine = "Welcome to HTWG Sudoku!";
-	private Grid grid;
+	private IGrid grid;
 	private UndoManager undoManager;
-
-
 	
-	public SudokuController(Grid grid) {
+	public SudokuController(IGrid grid) {
 		this.grid = grid;
 		this.undoManager = new UndoManager();
 	}
 	
 	public void setValue(int row, int column, int value) {
-		Cell cell = grid.getCell(row, column);
+		ICell cell = grid.getICell(row, column);
 		if (cell.isUnSet()) {
 			cell.setValue(value);
 			undoManager.addEdit(new SetValueCommand(cell));
@@ -108,6 +104,17 @@ public class SudokuController extends Observable {
 		}
 		statusLine= "Pasted Sudoku";
 		notifyObservers();
+	}
+
+	public Object getValue(int i, int j) {
+		return grid.getICell(0, 0).getValue();
+	}
+
+	@Override
+	public void reset(IGrid grid) {
+		this.grid = grid;
+		reset();
+		
 	}
 
 }

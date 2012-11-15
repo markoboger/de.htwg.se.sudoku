@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class Grid {
+public class Grid implements IGrid{
 
 	private int cellsPerEdge;
 	private Cell[][] cells;
@@ -69,6 +69,9 @@ public class Grid {
 
 	public Cell getCell(int row, int column) {
 		return cells[row][column];
+	}
+	public ICell getICell(int row, int column) {
+		return (ICell) getCell(row, column);
 	}
 
 	protected int getCellsPerEdge() {
