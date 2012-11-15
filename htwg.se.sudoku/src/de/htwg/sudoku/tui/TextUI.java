@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import de.htwg.sudoku.controller.IGrid;
-import de.htwg.sudoku.controller.SudokuController;
+import de.htwg.sudoku.controller.ISudokuController;
 import de.htwg.sudoku.entities.Grid;
 import de.htwg.util.observer.IObserver;
 
@@ -15,7 +15,7 @@ public class TextUI implements IObserver {
 	IGrid grid;
 
 
-	public TextUI(SudokuController controller) {
+	public TextUI(ISudokuController controller) {
 		this.controller = controller;
 		controller.addObserver(this);
 	}
