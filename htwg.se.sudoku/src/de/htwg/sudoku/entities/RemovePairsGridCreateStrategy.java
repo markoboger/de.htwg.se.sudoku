@@ -41,11 +41,12 @@ public class RemovePairsGridCreateStrategy extends GridCreateStrategyTemplate {
 	private Grid copyGridStructure() {
 		Grid copy = new Grid(grid.getBlockSize());
 		int copiedValue;
-		for (int row = 0; row < grid.getCellsPerEdge(); row++)
+		for (int row = 0; row < grid.getCellsPerEdge(); row++){
 			for (int column = 0; column < grid.getCellsPerEdge(); column++) {
 				copiedValue = grid.getCell(row, column).getValue();
 				copy.setCell(row, column, copiedValue);
 			}
+		}
 		return copy;
 	}
 
@@ -68,12 +69,14 @@ public class RemovePairsGridCreateStrategy extends GridCreateStrategyTemplate {
 	public Cell[] getSetCells() {
 		int i = 0;
 		Cell[] setCells = new Cell[countSetCells()];
-		for (int row = 0; row < grid.getCellsPerEdge(); row++)
-			for (int column = 0; column < grid.getCellsPerEdge(); column++)
+		for (int row = 0; row < grid.getCellsPerEdge(); row++){
+			for (int column = 0; column < grid.getCellsPerEdge(); column++){
 				if (grid.getCell(row, column).isSet()) {
 					setCells[i] = grid.getCell(row, column);
 					i++;
 				}
+			}
+		}
 		return setCells;
 	}
 

@@ -28,18 +28,21 @@ public class SudokuController extends Observable implements ISudokuController {
 			cell.setValue(value);
 			undoManager.addEdit(new SetValueCommand(cell));
 			statusLine = "The cell " + cell.mkString() + " was successfully set";
-		} else statusLine="The cell " + cell.mkString() + " is already set";
+		} else {
+			statusLine="The cell " + cell.mkString() + " is already set";
+		}
 		notifyObservers();
 	}
 	
 	public void solve() {
 		boolean result;
 		result = grid.solve();		
-		if (result) 
+		if (result) {
 			statusLine="The Sudoku was solved successfully";
-		else 
+		} else {
 			statusLine="Can not solve this Sudoku within "
 					+ grid.getSteps() + " steps";
+		}
 		notifyObservers();
 	}
 	public void reset() {
@@ -63,15 +66,17 @@ public class SudokuController extends Observable implements ISudokuController {
 	}
 	
 	public void undo() {
-		if (undoManager.canUndo())
+		if (undoManager.canUndo()){
 			undoManager.undo();
+		}
 		statusLine = "Undo";
 		notifyObservers();
 	}
 
 	public void redo() {
-		if (undoManager.canRedo())
+		if (undoManager.canRedo()){
 			undoManager.redo();
+		}
 		statusLine= "Redo";
 		notifyObservers();
 	}

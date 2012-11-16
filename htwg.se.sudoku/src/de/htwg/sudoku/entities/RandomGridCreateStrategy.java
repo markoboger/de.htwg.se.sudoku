@@ -38,12 +38,14 @@ public class RandomGridCreateStrategy extends GridCreateStrategyTemplate {
 	public Cell[] getUnsetCells() {
 		int i = 0;
 		Cell[] setCells = new Cell[countUnsetCells()];
-		for (int row = 0; row < grid.getCellsPerEdge(); row++)
-			for (int column = 0; column < grid.getCellsPerEdge(); column++)
+		for (int row = 0; row < grid.getCellsPerEdge(); row++){
+			for (int column = 0; column < grid.getCellsPerEdge(); column++){
 				if (grid.getCell(row, column).isUnSet()) {
 					setCells[i] = grid.getCell(row, column);
 					i++;
 				}
+			}
+		}
 		return setCells;
 	}
 

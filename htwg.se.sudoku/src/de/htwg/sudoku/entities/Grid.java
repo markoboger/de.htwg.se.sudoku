@@ -22,9 +22,10 @@ public class Grid implements IGrid{
 
 
 	public Grid(int blocksPerEdge) throws IllegalArgumentException {
-		if (blocksPerEdge <= 0 || 4 <= blocksPerEdge)
+		if (blocksPerEdge <= 0 || 4 <= blocksPerEdge){
 			throw new IllegalArgumentException(
 					"blocksPerEdge must be 1, 2 or 3");
+		}
 		this.blockSize = blocksPerEdge;
 		this.cellsPerEdge = blocksPerEdge * blockSize;
 		this.gridSize = cellsPerEdge * cellsPerEdge;
@@ -55,7 +56,7 @@ public class Grid implements IGrid{
 	 * calculates the index that should be used to identify the block in the
 	 * blocks array at coordinate (row, column).
 	 */
-	public int blockAt(int row, int column) {
+	public final int blockAt(int row, int column) {
 		return column / blockSize + (blockSize * (row / blockSize));
 	}
 
@@ -117,8 +118,7 @@ public class Grid implements IGrid{
 	 */
 	public boolean solve() {
 		initSolve();
-		boolean result = solve(0, 0, 1);
-		return result;
+		return solve(0, 0, 1);
 	}
 
 	private void initSolve() {
@@ -151,31 +151,31 @@ public class Grid implements IGrid{
 	 * 
 	 * @throws SolutionStepException
 	 */
-	boolean solve(int row, int column, int numSolutions) {
+	boolean solve(int row_, int column, int numSolutions) {
 		steps = steps + 1;
-		if (column == cellsPerEdge) {
-			column = 0;
+		int col=column;
+		int row = row_;
+		if (col == cellsPerEdge) {
+			col = 0;
 			row++;
 			if (row == cellsPerEdge) {
 				solutionCounter++;
-				if (numSolutions == solutionCounter)
-					return true;
-				else
-					return false;
+				return (numSolutions == solutionCounter);
 			}
 		}
-		if (getCell(row, column).isSet()) // skip filled cells
-			return solve(row, column + 1, numSolutions);
-		
+		if (getCell(row, col).isSet()){ // skip filled cells
+			return solve(row, col + 1, numSolutions);
+		}
 		for (int index = 0 ; index < cellsPerEdge; index++) {
 			int value = permutation.get(index)+1;
-			if (candidates(row, column).get(value)) {
-				getCell(row, column).setValue(value);
-				if (solve(row, column + 1, numSolutions))
+			if (candidates(row, col).get(value)) {
+				getCell(row, col).setValue(value);
+				if (solve(row, col + 1, numSolutions)){
 					return true;
+				}
 			}
 		}
-		getCell(row, column).setValue(0); // reset on backtrack
+		getCell(row, col).setValue(0); // reset on backtrack
 		return false;
 	}
 
@@ -230,19 +230,24 @@ public class Grid implements IGrid{
 	public boolean isSolved() {
 		for (int row = 0; row < cellsPerEdge; row++) {
 			for (int column = 0; column < cellsPerEdge; column++) {
-				if (cells[row][column].isUnSet()) return false;
+				if (cells[row][column].isUnSet()) {
+					return false;
+				}
 			}
 		}
 		return true;
 	}
 	
 	public boolean isSymmetric() {
-		for (int column = 0; column < getCellsPerEdge(); column++)
-			for (int row = 0; row < getCellsPerEdge(); row++)
+		for (int column = 0; column < getCellsPerEdge(); column++){
+			for (int row = 0; row < getCellsPerEdge(); row++){
 				if (getCell(row, column).isSet()
 						&& !getCell((getCellsPerEdge() - 1) - row,
-								(getCellsPerEdge() - 1) - column).isSet())
+								(getCellsPerEdge() - 1) - column).isSet()){
 					return false;
+				}
+			}
+		}
 		return true;
 	}
 	
@@ -277,11 +282,7 @@ public class Grid implements IGrid{
 				}
 			}
 		}
-		if (row == cellsPerEdge) {
-			return true;
-		} else {
-			return false;
-		}
+		return (row == cellsPerEdge); 
 	}
 	
 	/**
@@ -292,12 +293,11 @@ public class Grid implements IGrid{
 	}
 	public String toString(String zero) {
 		String newLine = System.getProperty("line.separator");
-		StringBuffer result = new StringBuffer(blockSeparator(blockSize)
-				+ newLine);
+		String result = blockSeparator(blockSize) + newLine;
 		for (int row = 0; row < cellsPerEdge; row++) {
-			result.append(rows[row].toString(zero) + newLine);
+			result= result + rows[row].toString(zero) + newLine;
 			if ((row + 1) % blockSize == 0) {
-				result.append(blockSeparator(blockSize) + newLine);
+				result= result + blockSeparator(blockSize) + newLine;
 			}
 
 		}

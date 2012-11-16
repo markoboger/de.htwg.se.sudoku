@@ -40,9 +40,11 @@ public class Cell implements ICell{
 	}
 	
 	public String toString(String zero) {
-		if (value ==0) return zero; 
-				else
-		return ""+value;
+		if (value ==0) {
+			return zero; 
+		} else {
+			return ""+value;
+		}
 	}
 
 	public boolean isUnSet() {

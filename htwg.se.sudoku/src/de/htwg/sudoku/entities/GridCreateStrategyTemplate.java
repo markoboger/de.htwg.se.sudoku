@@ -24,9 +24,11 @@ public abstract class GridCreateStrategyTemplate {
 
 	private void postProcessGrid() {
 		for (int row = 0; row < grid.getCellsPerEdge(); row++) {
-			for (int column = 0; column < grid.getCellsPerEdge(); column++)
-				if (grid.getCell(row, column).isSet())
+			for (int column = 0; column < grid.getCellsPerEdge(); column++){
+				if (grid.getCell(row, column).isSet()){
 					grid.getCell(row, column).setGiven(true);
+				}
+			}
 		}
 		
 	}
