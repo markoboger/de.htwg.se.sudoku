@@ -204,7 +204,7 @@ public class Grid implements IGrid{
 		int maxindex = this.candidates(row, column).cardinality();
 		return candidates(row, column).nextSetBit(random.nextInt(maxindex));
 	}
-
+	
 	public int getSteps() {
 		return steps;
 	}

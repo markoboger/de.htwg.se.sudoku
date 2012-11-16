@@ -79,6 +79,17 @@ public class TextUI implements IObserver {
 			}
 			controller.setValue(arg[0], arg[1], arg[2]);
 		}
+		// if the command line has the form 12, get the candidates of cell (1,2) 
+		if (line.matches("[0-9][0-9]")) {
+			Pattern p = Pattern.compile("[0-9]");
+			Matcher m = p.matcher(line);
+			int[] arg = new int[2];
+			for (int i = 0; i < arg.length; i++) {
+				m.find();
+				arg[i] = Integer.parseInt(m.group());
+			}
+			controller.getCandidates(arg[0], arg[1]).toString();
+		}
 		return continu;
 	}
 

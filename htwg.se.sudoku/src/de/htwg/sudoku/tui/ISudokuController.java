@@ -1,5 +1,7 @@
 package de.htwg.sudoku.tui;
 
+import java.util.BitSet;
+
 import de.htwg.sudoku.controller.IGrid;
 import de.htwg.util.observer.IObservable;
 
@@ -20,6 +22,8 @@ public interface ISudokuController extends IObservable {
 	void paste();
 
 	void setValue(int i, int j, int k);
+	
+	BitSet getCandidates(int row, int col);
 
 	String getGridString();
 

@@ -6,6 +6,7 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
+import java.util.BitSet;
 
 import javax.swing.undo.UndoManager;
 
@@ -113,6 +114,12 @@ public class SudokuController extends Observable implements ISudokuController {
 
 	public Object getValue(int i, int j) {
 		return grid.getICell(0, 0).getValue();
+	}
+	
+	public BitSet getCandidates(int row, int col) {
+		BitSet set = grid.candidates(row,col);
+		statusLine = "Candidates at ("+row+","+col+") are"+set.toString();
+		return set;
 	}
 
 	@Override
