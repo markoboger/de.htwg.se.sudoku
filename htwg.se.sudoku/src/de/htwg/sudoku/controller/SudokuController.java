@@ -122,7 +122,7 @@ public class SudokuController extends Observable implements ISudokuController {
 		return set;
 	}
 
-	@Override
+	//@Override
 	public void reset(IGrid grid) {
 		this.grid = grid;
 		reset();

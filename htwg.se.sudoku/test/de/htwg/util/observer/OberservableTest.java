@@ -11,7 +11,7 @@ public class OberservableTest {
 	private Observable testObservable;
 	
 	class TestObserver implements IObserver {
-		@Override
+		//@Override
 		public void update() {
 			ping=true;
 		}
