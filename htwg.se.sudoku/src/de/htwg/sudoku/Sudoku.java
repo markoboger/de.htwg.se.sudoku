@@ -2,10 +2,10 @@ package de.htwg.sudoku;
 
 import java.util.Scanner;
 
-import de.htwg.sudoku.controller.SudokuController;
-import de.htwg.sudoku.entities.Grid;
-import de.htwg.sudoku.gui.SudokuFrame;
-import de.htwg.sudoku.tui.TextUI;
+import de.htwg.sudoku.controller.impl.SudokuController;
+import de.htwg.sudoku.aview.gui.SudokuFrame;
+import de.htwg.sudoku.model.impl.Grid;
+import de.htwg.sudoku.aview.tui.TextUI;
 
 public class Sudoku {
 
