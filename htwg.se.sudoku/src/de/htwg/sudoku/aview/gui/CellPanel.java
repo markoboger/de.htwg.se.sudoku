@@ -8,23 +8,25 @@ import java.awt.geom.Rectangle2D;
 
 import javax.swing.JPanel;
 
+import de.htwg.sudoku.controller.ISudokuControllerGui;
+
 public class CellPanel extends JPanel {
 
 	private int row;
 	private int column;
-	private ISudokuController controller;
+	private ISudokuControllerGui controller;
 	private static final long serialVersionUID = 1L;
 
-	public CellPanel(int row, int column, ISudokuController controller) {
+	public CellPanel(int row, int column, ISudokuControllerGui controller) {
 		this.row = row;
 		this.column = column;
 		this.controller = controller;
-		int gridSize = controller.getGridSize();
+		int cellsPerEdge = controller.getCellsPerEdge();
 		int blockSize = controller.getBlockSize();
 		setLayout(new GridLayout(blockSize, blockSize));
-		CandidatePanel[] candidate = new CandidatePanel[gridSize + 1];
+		CandidatePanel[] candidate = new CandidatePanel[cellsPerEdge + 1];
 		
-		for (int value = 1; value <= gridSize; value++) {
+		for (int value = 1; value <= cellsPerEdge; value++) {
 			candidate[value] = new CandidatePanel(row, column, value, controller);
 			add(candidate[value]);
 		}

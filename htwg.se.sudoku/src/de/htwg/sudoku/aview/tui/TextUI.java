@@ -4,6 +4,7 @@ package de.htwg.sudoku.aview.tui;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import de.htwg.sudoku.controller.ISudokuController;
 import de.htwg.sudoku.model.IGrid;
 import de.htwg.sudoku.model.impl.Grid;
 import de.htwg.util.observer.IObserver;

@@ -76,7 +76,7 @@ public class Grid implements IGrid{
 		return (ICell) getCell(row, column);
 	}
 
-	protected int getCellsPerEdge() {
+	public int getCellsPerEdge() {
 		return cellsPerEdge;
 	}
 
@@ -87,9 +87,6 @@ public class Grid implements IGrid{
 		cells[row][column].setValue(value);
 	}
 
-	public int getGridSize() {
-		return cellsPerEdge;
-	}
 	
 	public int getBlockSize() {
 		return blockSize;

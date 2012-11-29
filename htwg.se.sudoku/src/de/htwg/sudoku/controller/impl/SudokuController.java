@@ -21,9 +21,10 @@ import javax.swing.undo.UndoManager;
 import de.htwg.sudoku.model.ICell;
 import de.htwg.sudoku.model.IGrid;
 import de.htwg.sudoku.controller.ISudokuController;
+import de.htwg.sudoku.controller.ISudokuControllerGui;
 import de.htwg.util.observer.Observable;
 
-public class SudokuController extends Observable implements ISudokuController {
+public class SudokuController extends Observable implements ISudokuController, ISudokuControllerGui {
 	
 	private String statusLine = "Welcome to HTWG Sudoku!";
 	private IGrid grid;
@@ -66,6 +67,7 @@ public class SudokuController extends Observable implements ISudokuController {
 	
 	public void create() {
 		grid.create();
+		highlighted=0;
 		statusLine= "New Sudoku Puzzle created";
 		notifyObservers();
 	}
@@ -147,8 +149,8 @@ public class SudokuController extends Observable implements ISudokuController {
 		notifyObservers();
 	}
 
-	public int getGridSize() {
-		return grid.getGridSize();
+	public int getCellsPerEdge() {
+		return grid.getCellsPerEdge();
 	}
 
 	public int getBlockSize() {
@@ -164,8 +166,8 @@ public class SudokuController extends Observable implements ISudokuController {
 	}
 
 	public void showAllCandidates() {
-		for (int row = 0; row < grid.getGridSize(); row++) {
-			for (int col = 0; col < grid.getGridSize(); col++) {
+		for (int row = 0; row < grid.getCellsPerEdge(); row++) {
+			for (int col = 0; col < grid.getCellsPerEdge(); col++) {
 				showCandidates(row, col);
 			}	
 		}

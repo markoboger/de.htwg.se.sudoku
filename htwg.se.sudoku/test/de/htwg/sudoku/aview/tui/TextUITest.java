@@ -74,19 +74,19 @@ public class TextUITest {
 	
 	@Test
 	public void testStatus1() {
-		tui1.processInputLine("1");
+		tui1.processInputLine(".");
 		assertEquals("Sudoku was reset", controller1.getStatus());
 }
 	
 	@Test
 	public void testStatus4() {
-		tui1.processInputLine("4");
+		tui1.processInputLine("+");
 		assertEquals("Sudoku was reset", controller1.getStatus());
 }
 	
 	@Test
 	public void testStatus9() {
-		tui1.processInputLine("9");
+		tui1.processInputLine("#");
 		assertEquals("Sudoku was reset", controller1.getStatus());
 	}
 

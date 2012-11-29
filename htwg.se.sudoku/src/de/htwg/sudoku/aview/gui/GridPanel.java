@@ -8,27 +8,29 @@ import java.awt.RenderingHints;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import de.htwg.sudoku.controller.ISudokuControllerGui;
+
 public class GridPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public GridPanel( ISudokuController controller) {
+	public GridPanel( ISudokuControllerGui controller) {
 
-		int gridSize = controller.getGridSize();
+		int cellsPerEdge = controller.getCellsPerEdge();
 		int blockSize = controller.getBlockSize();
 		setLayout(new GridLayout(blockSize, blockSize, 2, 2));
 		setBorder(BorderFactory.createLoweredBevelBorder());
 		
-		BlockPanel[] block = new BlockPanel[gridSize];
+		BlockPanel[] block = new BlockPanel[cellsPerEdge];
 
-		for (int index = 0; index < gridSize; index++) {
+		for (int index = 0; index < cellsPerEdge; index++) {
 			block[index] = new BlockPanel(blockSize);
 			add(block[index]);
 		}
 
 		// Draw each cell.
-		for (int row = 0; row < gridSize; row++) {
-			for (int column = 0; column < gridSize; column++) {
+		for (int row = 0; row < cellsPerEdge; row++) {
+			for (int column = 0; column < cellsPerEdge; column++) {
 				CellPanel cellPanel = new CellPanel(row, column, controller);
 				block[controller.blockAt(row, column)].add(cellPanel);
 			}

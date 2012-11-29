@@ -15,6 +15,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import de.htwg.sudoku.controller.ISudokuControllerGui;
 import de.htwg.util.observer.IObserver;
 
 public class SudokuFrame extends JFrame implements IObserver {
@@ -25,11 +26,11 @@ public class SudokuFrame extends JFrame implements IObserver {
 	private GridPanel gridPanel;
 	private HighlightButtonPanel digitPanel;
 	private StatusPanel statusPanel;
-	private ISudokuController controller;
+	private ISudokuControllerGui controller;
 
 	private static final long serialVersionUID = 1L;
 
-	public SudokuFrame(final ISudokuController controller) {
+	public SudokuFrame(final ISudokuControllerGui controller) {
 		this.controller = controller;
 		controller.addObserver(this);
 		
@@ -223,7 +224,7 @@ public class SudokuFrame extends JFrame implements IObserver {
 				KeyEvent.VK_3, KeyEvent.VK_4, KeyEvent.VK_5, KeyEvent.VK_6,
 				KeyEvent.VK_7, KeyEvent.VK_8, KeyEvent.VK_9 };
 
-		for (int digit = 1; digit <= controller.getGridSize(); digit++) {
+		for (int digit = 1; digit <= controller.getCellsPerEdge(); digit++) {
 			final int fixdigit = digit;
 			digitMenuItem = new JMenuItem(Integer.toString(digit));
 			digitMenuItem.setMnemonic(dkey[digit]);
@@ -264,7 +265,7 @@ public class SudokuFrame extends JFrame implements IObserver {
 		constructSudokuPane(controller);
 	}
 
-	public void constructSudokuPane(ISudokuController controller) {
+	public void constructSudokuPane(ISudokuControllerGui controller) {
 		if (digitPanel != null){
 			pane.remove(digitPanel);
 		}

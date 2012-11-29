@@ -6,6 +6,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JToggleButton;
 
+import de.htwg.sudoku.controller.ISudokuController;
+
 public class HighlightButton extends JToggleButton {
 
 	private String label;

@@ -42,13 +42,6 @@ public class GridTest {
 	}
 	
 	@Test
-	public void testGridSize()  {
-		assertEquals(1, grid1.getGridSize());
-		assertEquals(16, grid2.getGridSize());
-		assertEquals(81, grid3.getGridSize());
-	}
-	
-	@Test
 	public void testGetCell() {
 		for (int size = 1; size < 4; size++) {
 			Grid grid = new Grid(size);

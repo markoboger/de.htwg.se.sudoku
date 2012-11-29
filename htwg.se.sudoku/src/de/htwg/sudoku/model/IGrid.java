@@ -7,7 +7,7 @@ public interface IGrid {
 
 	boolean solve();
 	
-    int getGridSize();
+    int getCellsPerEdge();
     
     int getBlockSize();
     int blockAt(int row, int column);

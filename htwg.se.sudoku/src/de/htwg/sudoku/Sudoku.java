@@ -16,6 +16,7 @@ public class Sudoku {
 		new SudokuFrame(controller);
 		TextUI tui = new TextUI(controller);
 		tui.printTUI();
+		controller.create();
 		// continue until the user decides to quit
 		boolean continu = true;
 		scanner = new Scanner(System.in);
