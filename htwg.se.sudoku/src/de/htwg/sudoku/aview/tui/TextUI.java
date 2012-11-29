@@ -30,11 +30,6 @@ public class TextUI implements IObserver {
 		if (line.equalsIgnoreCase("q")) {
 			continu = false;
 		}
-		if (line.equalsIgnoreCase("u")) {
-			// Do nothing, just redraw the updated grid
-			continu = true;
-		}
-
 		if (line.equalsIgnoreCase("r")) {
 			controller.reset();
 		}
@@ -77,7 +72,7 @@ public class TextUI implements IObserver {
 		if (line.matches("[0-9][0-9]")) {
 			int[] arg = readToArray(line);
 			controller.showCandidates(arg[0], arg[1]);
-		} else
+		} 
 		// if the command line has the form 1, highlight 1 
 		if (line.matches("[0-9]")) {
 			int[] arg = readToArray(line);

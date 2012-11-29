@@ -22,11 +22,26 @@ public class TextUITest {
 	}
 
 	@Test
-	public void testprocessInputLine() {
+	public void testprocessInputLine001() {
 		tui1.processInputLine("001");
 		assertEquals(1,grid1.getCell(0, 0).getValue());
 		
 		assertFalse(tui1.processInputLine("q"));
+	}
+	@Test
+	public void testprocessInputLine00() {
+		tui1.processInputLine("00");
+		assertEquals("Candidates at (0,0) are {1}", controller1.getStatus());
+	}
+	@Test
+	public void testprocessInputLine1() {
+		tui1.processInputLine("1");
+		assertTrue(controller1.isHighlighted(0,0));
+	}
+	@Test
+	public void testprocessInputLineS() {
+		tui1.processInputLine("s");
+		assertEquals(1,controller1.getValue(0, 0));
 	}
 	
 	@Test

@@ -140,7 +140,7 @@ public class SudokuController extends Observable implements ISudokuController, I
 	public void showCandidates(int row, int column) {
 		grid.getICell(row, column).toggleShowCandidates();
 		BitSet set = grid.candidates(row,column);
-		statusLine = "Candidates at ("+row+","+column+") are"+set.toString();
+		statusLine = "Candidates at ("+row+","+column+") are "+set.toString();
 		notifyObservers();
 	}
 

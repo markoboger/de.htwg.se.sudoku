@@ -56,5 +56,52 @@ public class ControllerTest {
 		controller1.redo();
 		assertEquals(1, controller1.getValue(0,0));
 	}
+	
+	@Test
+	public void testX() {
+		
+	}
+	@Test
+	public void testGetCellsPerEdge() {
+		assertEquals(1,controller1.getCellsPerEdge());
+	}
+	@Test
+	public void testGetBlockSize() {
+		assertEquals(1,controller1.getBlockSize());
+	}
+	@Test
+	public void testHighlight() {
+		controller1.highlight(1);
+		assertTrue(controller1.isHighlighted(0,0));
+	}
+	@Test
+	public void testBlockAt() {
+		assertEquals(0,controller1.blockAt(0, 0));
+	}
+	@Test
+	public void testShowCandidates() {
+		controller1.showCandidates(0, 0);
+		assertTrue(grid1.getICell(0, 0).isShowCandidates());
+	}
+	@Test
+	public void testShowAllCandidates() {
+		controller1.showAllCandidates();
+		assertTrue(grid1.getICell(0, 0).isShowCandidates());
+		assertTrue(controller1.isShowCandidates(0, 0));
+	}
+	@Test
+	public void testIsCandidate() {
+		assertTrue(controller1.isCandidate(0, 0, 1));	
+	}
+	@Test
+	public void testIsSet() {
+		controller1.setValue(0, 0, 1);
+		assertTrue(controller1.isSet(0, 0));	
+	}
+	@Test
+	public void testIsGiven() {
+		controller1.create();
+		assertTrue(controller1.isGiven(0, 0));	
+	}
 
 }
