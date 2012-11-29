@@ -7,6 +7,11 @@ public interface IGrid {
 	ICell getICell(int row, int column);
 
 	boolean solve();
+	
+    int getGridSize();
+    
+    int getBlockSize();
+    int blockAt(int row, int column);
 
 	int getSteps();
 

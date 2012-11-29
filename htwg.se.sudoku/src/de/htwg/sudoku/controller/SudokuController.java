@@ -17,6 +17,7 @@ public class SudokuController extends Observable implements ISudokuController {
 	private String statusLine = "Welcome to HTWG Sudoku!";
 	private IGrid grid;
 	private UndoManager undoManager;
+	private int highlighted=0;
 	
 	public SudokuController(IGrid grid) {
 		this.grid = grid;
@@ -112,8 +113,8 @@ public class SudokuController extends Observable implements ISudokuController {
 		notifyObservers();
 	}
 
-	public Object getValue(int i, int j) {
-		return grid.getICell(0, 0).getValue();
+	public int getValue(int row, int column) {
+		return grid.getICell(row, column).getValue();
 	}
 	
 	public BitSet getCandidates(int row, int col) {
@@ -126,7 +127,62 @@ public class SudokuController extends Observable implements ISudokuController {
 	public void reset(IGrid grid) {
 		this.grid = grid;
 		reset();
-		
+		notifyObservers();
+	}
+
+	public void showCandidates(int row, int column) {
+		grid.getICell(row, column).setShowCandidates(true);
+		notifyObservers();
+	}
+
+	public void highlight(int value) {
+		highlighted=value;
+		notifyObservers();
+	}
+
+	public int getGridSize() {
+		return grid.getGridSize();
+	}
+
+	public int getBlockSize() {
+		return grid.getBlockSize();
+	}
+
+	public int blockAt(int row, int column) {
+		return grid.blockAt(row, column);
+	}
+
+	public void exit() {
+		System.exit(0);
+	}
+
+	public void showAllCandidates() {
+		for (int row = 0; row < grid.getGridSize(); row++) {
+			for (int col = 0; col < grid.getGridSize(); col++) {
+				showCandidates(row, col);
+			}	
+		}
+		notifyObservers();
+	}
+
+	public boolean isGiven(int row, int column) {
+		return grid.getICell(row, column).isGiven();
+	}
+
+	public boolean isHighlighted(int row, int column) {
+		return grid.candidates(row, column).get(highlighted);
+	}
+
+	public boolean isSet(int row, int column) {
+		return grid.getICell(row, column).isSet();
+	}
+
+	public boolean isShowCandidates(int row, int column) {
+		return grid.getICell(row, column).isShowCandidates();
+	}
+
+	public boolean isCandidate(int row, int column, int candidate) {
+		return grid.candidates(row, column).get(candidate);
 	}
 
 }

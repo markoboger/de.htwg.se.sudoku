@@ -10,4 +10,12 @@ public interface ICell {
 
 	int getValue();
 
+	boolean isGiven();
+
+	boolean isSet();
+
+	void setShowCandidates(boolean b);
+
+	boolean isShowCandidates();
+
 }

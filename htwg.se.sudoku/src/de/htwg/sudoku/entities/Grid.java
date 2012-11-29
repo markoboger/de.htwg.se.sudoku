@@ -13,7 +13,6 @@ public class Grid implements IGrid{
 	House[] rows;
 	House[] columns;
 	House[] blocks;
-	private int gridSize;
 	private int blockSize;
 	private int solutionCounter;
 	private int steps;
@@ -28,7 +27,6 @@ public class Grid implements IGrid{
 		}
 		this.blockSize = blocksPerEdge;
 		this.cellsPerEdge = blocksPerEdge * blockSize;
-		this.gridSize = cellsPerEdge * cellsPerEdge;
 
 		// create Cell and Houses
 		cells = new Cell[cellsPerEdge][cellsPerEdge];
@@ -86,11 +84,11 @@ public class Grid implements IGrid{
 		cells[row][column].setValue(value);
 	}
 
-	protected int getGridSize() {
-		return gridSize;
+	public int getGridSize() {
+		return cellsPerEdge;
 	}
 	
-	int getBlockSize() {
+	public int getBlockSize() {
 		return blockSize;
 	}
 
