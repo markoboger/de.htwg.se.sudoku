@@ -4,6 +4,8 @@ package de.htwg.sudoku.aview.tui;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
+
 import de.htwg.sudoku.controller.ISudokuController;
 import de.htwg.sudoku.model.IGrid;
 import de.htwg.sudoku.model.impl.Grid;
@@ -11,14 +13,15 @@ import de.htwg.util.observer.IObserver;
 
 public class TextUI implements IObserver {
 	
-	private final int DOTSIZE=1;
-	private final int PLUSSIZE=2;
-	private final int HASHSIZE=3;
-			
+	private static final int DOTSIZE=1;
+	private static final int PLUSSIZE=2;
+	private static final int HASHSIZE=3;
+	String newLine = System.getProperty("line.separator");
 
 	private ISudokuController controller;
 	private IGrid grid;
-
+	
+	Logger logger = Logger.getLogger("de.htwg.sudoku.aview.tui");
 
 	public TextUI(ISudokuController controller) {
 		this.controller = controller;
@@ -98,9 +101,8 @@ public class TextUI implements IObserver {
 	}
 
 	public void printTUI() {
-		System.out.println(controller.getGridString());
-		System.out.println(controller.getStatus());
-		System.out
-				.println("Please enter a command( q-quit, n-new, s-solve, r-reset, z-undo, y-redo, c-copy, p-paste, .,+,#-size, x-highlight, xy-show (x,y), xyz-set (x,y) to z):");
+		logger.info(newLine + controller.getGridString());
+		logger.info(newLine + controller.getStatus());
+		logger.info(newLine + "Possible commands: q-quit, n-new, s-solve, r-reset, z-undo, y-redo, c-copy, p-paste, .,+,#-size, x-highlight, xy-show (x,y), xyz-set (x,y) to z");
 	}
 }
