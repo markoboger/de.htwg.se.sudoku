@@ -16,7 +16,7 @@ public final class Sudoku {
 	private Sudoku() {super();}
 	private static final int SIZE = 3;
 	
-	static Logger logger = Logger.getLogger(Sudoku.class);
+	private static Logger logger = Logger.getLogger(Sudoku.class);
 	 
 	public static void main(String[] args) {
 		PropertyConfigurator.configure("log4j.properties");

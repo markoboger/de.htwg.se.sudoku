@@ -16,7 +16,7 @@ public class TextUI implements IObserver {
 	private static final int DOTSIZE=1;
 	private static final int PLUSSIZE=2;
 	private static final int HASHSIZE=3;
-	String newLine = System.getProperty("line.separator");
+	private String newLine = System.getProperty("line.separator");
 
 	private ISudokuController controller;
 	private IGrid grid;

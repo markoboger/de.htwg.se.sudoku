@@ -20,7 +20,7 @@ public class Grid implements IGrid{
 	private int solutionCounter;
 	private int steps;
 	private List<Integer> permutation;
-	private final int MAXSIZE = 3;
+	private static final int MAXSIZE = 3;
 	private GridCreateStrategyTemplate createStrategy = AbstractGridCreateStrategyFactory.getFactory().getInstance();
 
 
