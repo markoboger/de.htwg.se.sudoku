@@ -2,7 +2,6 @@ package de.htwg.sudoku;
 
 import java.util.Scanner;
 
-import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 import de.htwg.sudoku.controller.impl.SudokuController;
@@ -15,8 +14,6 @@ public final class Sudoku {
 	private static Scanner scanner;
 	private Sudoku() {super();}
 	private static final int SIZE = 3;
-	
-	private static Logger logger = Logger.getLogger(Sudoku.class);
 	 
 	public static void main(String[] args) {
 		PropertyConfigurator.configure("log4j.properties");
