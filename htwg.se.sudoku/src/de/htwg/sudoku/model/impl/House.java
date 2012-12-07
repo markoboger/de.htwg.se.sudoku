@@ -42,7 +42,7 @@ public class House {
 	public String toString(String zero) {
 		String result = "|";
 		for (int index = 0; index < size; index++) {
-			result=" " + cells[index].toString(zero);
+			result+=" " + cells[index].toString(zero);
 			if (((index + 1) % blockSize) == 0) {
 				result+=" |";
 			}
