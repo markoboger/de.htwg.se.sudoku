@@ -1,7 +1,5 @@
 package de.htwg.sudoku.controller;
 
-import javax.swing.JFrame;
-
 import de.htwg.sudoku.model.IGrid;
 import de.htwg.util.observer.IObservable;
 
@@ -97,12 +95,6 @@ public interface ISudokuController extends IObservable {
 	boolean isShowCandidates(int row, int column);
 
 	/**
-	 * loads a file using a file dialog
-	 * @param sudokuFrame 
-	 */
-	void load(JFrame sudokuFrame);
-
-	/**
 	 * Take the content of the system clip board and try to parse a Sudoku
 	 * puzzle out of it.
 	 */
@@ -126,8 +118,6 @@ public interface ISudokuController extends IObservable {
 	 * @param grid
 	 */
 	void reset(IGrid grid);
-
-	void save(JFrame sudokuFrame);
 
 	/**
 	 * In the Sudoku puzzle, set a cell with coordinates (row, col) to the value
@@ -164,6 +154,17 @@ public interface ISudokuController extends IObservable {
 	 */
 	void undo();
 
+	/**
+	 * @param row
+	 * @param column
+	 * @return the id of the block at coordinates (row, column)
+	 */
 	int blockAt(int row, int column);
+
+	/**
+	 * Try to fill a grid with numbers read from a string.
+	 * @param gridString
+	 */
+	void parseStringToGrid(String gridString);
 
 }

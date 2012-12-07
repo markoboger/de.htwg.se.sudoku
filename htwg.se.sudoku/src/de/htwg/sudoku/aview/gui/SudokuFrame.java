@@ -8,11 +8,19 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import com.google.inject.Inject;
@@ -87,7 +95,7 @@ public class SudokuFrame extends JFrame implements IObserver {
 		saveMenuItem = new JMenuItem("Save");
 		saveMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				controller.save(SudokuFrame.this);
+				save(SudokuFrame.this);
 			}
 		});
 		saveMenuItem.setMnemonic(KeyEvent.VK_S);
@@ -98,7 +106,7 @@ public class SudokuFrame extends JFrame implements IObserver {
 		loadMenuItem = new JMenuItem("Load");
 		loadMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				controller.load(SudokuFrame.this);
+				load(SudokuFrame.this);
 			}
 		});
 		loadMenuItem.setMnemonic(KeyEvent.VK_L);
@@ -293,6 +301,54 @@ public class SudokuFrame extends JFrame implements IObserver {
 	public void update() {
 		statusPanel.setText(controller.getStatus());
 		repaint();
+	}
+	public void load(JFrame frame){
+		JFileChooser fileChooser = new JFileChooser(".");
+		int result = fileChooser.showOpenDialog(frame);
+		if (result == JFileChooser.APPROVE_OPTION) {
+			try {
+				FileInputStream fis = new FileInputStream(fileChooser
+						.getSelectedFile());
+				ObjectInputStream inStream = new ObjectInputStream(fis);
+				controller.parseStringToGrid((String) inStream.readObject());
+				inStream.close();
+			} catch (IOException ioe) {
+				JOptionPane.showMessageDialog(frame,
+						"IOException reading sudoku:\n"
+								+ ioe.getLocalizedMessage(), "Error",
+						JOptionPane.ERROR_MESSAGE);
+			} catch (ClassNotFoundException e) {
+				
+			}
+		}
+	}
+
+	public void save(JFrame frame) {
+		JFileChooser fileChooser = new JFileChooser(".");
+		int result = fileChooser.showSaveDialog(frame);
+		if (result == JFileChooser.APPROVE_OPTION) {
+			File file = fileChooser.getSelectedFile();
+			if (file.exists()
+					&& JOptionPane.showConfirmDialog(frame, "File \""
+							+ file.getName() + "\" already exists.\n"
+							+ "Would you like to replace it?", "Save",
+							JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+				return;
+			}
+			try {
+				FileOutputStream fos = new FileOutputStream(file);
+				ObjectOutputStream outStream = new ObjectOutputStream(fos);
+				outStream.writeObject(controller.getGridString());
+				outStream.flush();
+				outStream.close();
+
+			} catch (IOException ioe) {
+				JOptionPane.showMessageDialog(frame,
+						"IOException saving sudoku:\n"
+								+ ioe.getLocalizedMessage(), "Error",
+						JOptionPane.ERROR_MESSAGE);
+			}
+		}
 	}
 
 }

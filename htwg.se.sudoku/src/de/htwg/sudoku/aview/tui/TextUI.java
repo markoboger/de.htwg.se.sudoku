@@ -23,7 +23,7 @@ public class TextUI implements IObserver {
 	private ISudokuController controller;
 	private IGrid grid;
 	
-	Logger logger = Logger.getLogger("de.htwg.sudoku.aview.tui");
+	private Logger logger = Logger.getLogger("de.htwg.sudoku.aview.tui");
 
 	@Inject
 	public TextUI(ISudokuController controller) {

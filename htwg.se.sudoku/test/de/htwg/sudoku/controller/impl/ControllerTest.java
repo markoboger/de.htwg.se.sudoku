@@ -103,5 +103,13 @@ public class ControllerTest {
 		controller1.create();
 		assertTrue(controller1.isGiven(0, 0));	
 	}
+	@Test
+	public void testParseStringToGrid() {
+		controller1.parseStringToGrid("1");
+		assertTrue(controller1.isGiven(0, 0));	
+		assertEquals(1,controller1.getValue(0, 0));
+	}
+	
+	
 
 }

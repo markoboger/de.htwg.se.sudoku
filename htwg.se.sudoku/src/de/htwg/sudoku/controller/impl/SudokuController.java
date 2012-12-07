@@ -5,25 +5,17 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.BitSet;
 
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.undo.UndoManager;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import de.htwg.sudoku.controller.ISudokuController;
 import de.htwg.sudoku.model.ICell;
 import de.htwg.sudoku.model.IGrid;
-import de.htwg.sudoku.controller.ISudokuController;
 import de.htwg.util.observer.Observable;
 
 @Singleton
@@ -197,56 +189,12 @@ public class SudokuController extends Observable implements ISudokuController {
 	public boolean isCandidate(int row, int column, int candidate) {
 		return grid.candidates(row, column).get(candidate);
 	}
+
+	@Override
+	public void parseStringToGrid(String gridString) {
+		grid.parseStringToGrid(gridString);
+		notifyObservers();
+		
+	}
 	
-	public void load(JFrame frame){
-		JFileChooser fileChooser = new JFileChooser(".");
-		int result = fileChooser.showOpenDialog(frame);
-		if (result == JFileChooser.APPROVE_OPTION) {
-			try {
-				FileInputStream fis = new FileInputStream(fileChooser
-						.getSelectedFile());
-				ObjectInputStream inStream = new ObjectInputStream(fis);
-				grid.parseStringToGrid((String) inStream.readObject());
-				inStream.close();
-			} catch (IOException ioe) {
-				JOptionPane.showMessageDialog(frame,
-						"IOException reading sudoku:\n"
-								+ ioe.getLocalizedMessage(), "Error",
-						JOptionPane.ERROR_MESSAGE);
-			} catch (ClassNotFoundException e) {
-				statusLine="Can not load: Class not found";
-			}
-		}
-		notifyObservers();
-	}
-
-	public void save(JFrame frame) {
-		JFileChooser fileChooser = new JFileChooser(".");
-		int result = fileChooser.showSaveDialog(frame);
-		if (result == JFileChooser.APPROVE_OPTION) {
-			File file = fileChooser.getSelectedFile();
-			if (file.exists()
-					&& JOptionPane.showConfirmDialog(frame, "File \""
-							+ file.getName() + "\" already exists.\n"
-							+ "Would you like to replace it?", "Save",
-							JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
-				return;
-			}
-			try {
-				FileOutputStream fos = new FileOutputStream(file);
-				ObjectOutputStream outStream = new ObjectOutputStream(fos);
-				outStream.writeObject(grid.toString());
-				outStream.flush();
-				outStream.close();
-
-			} catch (IOException ioe) {
-				JOptionPane.showMessageDialog(frame,
-						"IOException saving sudoku:\n"
-								+ ioe.getLocalizedMessage(), "Error",
-						JOptionPane.ERROR_MESSAGE);
-			}
-		}
-		notifyObservers();
-	}
-
 }
