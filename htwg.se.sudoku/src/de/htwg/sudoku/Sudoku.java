@@ -10,7 +10,6 @@ import de.htwg.sudoku.aview.tui.TextUI;
 public class Sudoku {
 
 	private static Scanner scanner;
-	private String line = "";
 	public static void main(String[] args) {
 		SudokuController controller = new SudokuController(new Grid(3));
 		new SudokuFrame(controller);
