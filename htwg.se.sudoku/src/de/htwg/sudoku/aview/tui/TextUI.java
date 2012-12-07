@@ -12,7 +12,7 @@ import de.htwg.util.observer.IObserver;
 public class TextUI implements IObserver {
 
 	private ISudokuController controller;
-	IGrid grid;
+	private IGrid grid;
 
 
 	public TextUI(ISudokuController controller) {

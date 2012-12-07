@@ -5,9 +5,9 @@ import java.util.BitSet;
 
 public class House {
 
-	int size;
-	int blockSize;
-	Cell[] cells;
+	private int size;
+	private int blockSize;
+	private Cell[] cells;
 
 	public House(int size) {
 		this.size = size;

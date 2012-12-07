@@ -46,9 +46,9 @@ public class Grid implements IGrid{
 		for (int row = 0; row < cellsPerEdge; row++) {
 			for (int column = 0; column < cellsPerEdge; column++) {
 				cells[row][column] = new Cell(row, column);
-				rows[row].cells[column] = cells[row][column];
-				columns[column].cells[row] = cells[row][column];
-				blocks[blockAt(row, column)].cells[cellInBlockAt(row, column)] = cells[row][column];
+				rows[row].setCell(column, cells[row][column]);
+				columns[column].setCell(row, cells[row][column]);
+				blocks[blockAt(row, column)].setCell(cellInBlockAt(row, column), cells[row][column]);
 			}
 		}
 	}
