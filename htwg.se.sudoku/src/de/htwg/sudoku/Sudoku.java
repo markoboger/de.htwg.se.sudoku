@@ -2,8 +2,8 @@ package de.htwg.sudoku;
 
 import java.util.Scanner;
 
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import de.htwg.sudoku.controller.impl.SudokuController;
 import de.htwg.sudoku.aview.gui.SudokuFrame;
@@ -19,7 +19,7 @@ public final class Sudoku {
 	static Logger logger = Logger.getLogger(Sudoku.class);
 	 
 	public static void main(String[] args) {
-		BasicConfigurator.configure();
+		PropertyConfigurator.configure("log4j.properties");
 		SudokuController controller = new SudokuController(new Grid(SIZE));
 		new SudokuFrame(controller);
 		TextUI tui = new TextUI(controller);

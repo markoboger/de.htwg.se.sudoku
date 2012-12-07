@@ -2,6 +2,8 @@ package de.htwg.sudoku.aview.tui;
 
 import static org.junit.Assert.*;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,9 +15,12 @@ public class TextUITest {
 	private Grid grid1;
 	private SudokuController controller1;
 	private TextUI tui1;
+	
+	static Logger logger = Logger.getLogger(TextUITest.class);
 
 	@Before
 	public void setUp() throws Exception {
+		PropertyConfigurator.configure("log4j.properties");
 		grid1 = new Grid(1);
 		controller1 = new SudokuController(grid1);
 		tui1 = new TextUI(controller1);
