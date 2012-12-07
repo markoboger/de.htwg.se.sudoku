@@ -84,7 +84,7 @@ public class RemovePairsGridCreateStrategy extends GridCreateStrategyTemplate {
 	public int countSetCells() {
 		int count = 0;
 		for (int r = 0; r < grid.getCellsPerEdge(); r++) {
-			count += this.grid.rows[r].countSetCells();
+			count += this.grid.getRow(r).countSetCells();
 		}
 		return count;
 	}

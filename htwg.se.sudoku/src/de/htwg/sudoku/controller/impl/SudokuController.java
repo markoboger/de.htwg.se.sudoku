@@ -116,10 +116,10 @@ public class SudokuController extends Observable implements ISudokuController, I
 				grid.parseStringToGrid(input);
 			} catch (UnsupportedFlavorException e1) {
 
-				e1.printStackTrace();
+				statusLine = "Could not read from Clipboard";
 			} catch (IOException e1) {
 
-				e1.printStackTrace();
+				statusLine = "Could not read from Clipboard";
 			}
 		}
 		statusLine= "Pasted Sudoku";

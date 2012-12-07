@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Observable implements IObservable {
 
-	protected List<IObserver> subscribers = new ArrayList<IObserver>(2);
+	private List<IObserver> subscribers = new ArrayList<IObserver>(2);
 
 	public void addObserver(IObserver s) {
 		subscribers.add(s);

@@ -40,14 +40,14 @@ public class House {
 		return toString(" ");
 	}
 	public String toString(String zero) {
-		StringBuffer result = new StringBuffer("|");
+		String result = "|";
 		for (int index = 0; index < size; index++) {
-			result.append(" " + cells[index].toString(zero));
+			result=" " + cells[index].toString(zero);
 			if (((index + 1) % blockSize) == 0) {
-				result.append(" |");
+				result+=" |";
 			}
 		}
-		return result.toString();
+		return result;
 	}
 	
 	/**

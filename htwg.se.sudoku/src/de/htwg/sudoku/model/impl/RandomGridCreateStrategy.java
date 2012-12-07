@@ -53,7 +53,7 @@ public class RandomGridCreateStrategy extends GridCreateStrategyTemplate {
 	public int countUnsetCells() {
 		int count = 0;
 		for (int r = 0; r < grid.getCellsPerEdge(); r++) {
-			count += this.grid.rows[r].countUnsetCells();
+			count += this.grid.getRow(r).countUnsetCells();
 		}
 		return count;
 	}

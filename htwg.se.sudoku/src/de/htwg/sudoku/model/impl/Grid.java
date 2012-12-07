@@ -13,9 +13,9 @@ public class Grid implements IGrid{
 
 	private int cellsPerEdge;
 	private Cell[][] cells;
-	House[] rows;
-	House[] columns;
-	House[] blocks;
+	private House[] rows;
+	private House[] columns;
+	private House[] blocks;
 	private int blockSize;
 	private int solutionCounter;
 	private int steps;
@@ -23,7 +23,7 @@ public class Grid implements IGrid{
 	GridCreateStrategyTemplate createStrategy = AbstractGridCreateStrategyFactory.getFactory().getInstance();
 
 
-	public Grid(int blocksPerEdge) throws IllegalArgumentException {
+	public Grid(int blocksPerEdge) {
 		if (blocksPerEdge <= 0 || 4 <= blocksPerEdge){
 			throw new IllegalArgumentException(
 					"blocksPerEdge must be 1, 2 or 3");
@@ -65,7 +65,7 @@ public class Grid implements IGrid{
 	 * calculates the index within a block to identify the cell from the blocks
 	 * cell array at coordinate (row, column).
 	 */
-	int cellInBlockAt(int row, int column) {
+	private final int cellInBlockAt(int row, int column) {
 		return ((row % blockSize) + ((column % blockSize) * blockSize));
 	}
 
@@ -149,31 +149,33 @@ public class Grid implements IGrid{
 	 * 
 	 * @throws SolutionStepException
 	 */
-	boolean solve(int row_, int column, int numSolutions) {
+	boolean solve(int row, int column, int numSolutions) {
 		steps = steps + 1;
-		int col=column;
-		int row = row_;
-		if (col == cellsPerEdge) {
-			col = 0;
-			row++;
-			if (row == cellsPerEdge) {
+		int c=column;
+		int r = row;
+		if (c == cellsPerEdge) {
+			c = 0;
+			r++;
+			if (r == cellsPerEdge) {
 				solutionCounter++;
 				return (numSolutions == solutionCounter);
 			}
 		}
-		if (getCell(row, col).isSet()){ // skip filled cells
-			return solve(row, col + 1, numSolutions);
+		// skip filled cells
+		if (getCell(r, c).isSet()){ 
+			return solve(r, c + 1, numSolutions);
 		}
 		for (int index = 0 ; index < cellsPerEdge; index++) {
 			int value = permutation.get(index)+1;
-			if (candidates(row, col).get(value)) {
-				getCell(row, col).setValue(value);
-				if (solve(row, col + 1, numSolutions)){
+			if (candidates(r, c).get(value)) {
+				getCell(r, c).setValue(value);
+				if (solve(r, c + 1, numSolutions)){
 					return true;
 				}
 			}
 		}
-		getCell(row, col).setValue(0); // reset on backtrack
+		// reset on backtrack
+		getCell(r, c).setValue(0); 
 		return false;
 	}
 
@@ -299,8 +301,11 @@ public class Grid implements IGrid{
 			}
 
 		}
-		return result.toString();
+		return result;
 	}
 
+	protected House getRow(int index) {
+		return rows[index];
+	}
 
 }

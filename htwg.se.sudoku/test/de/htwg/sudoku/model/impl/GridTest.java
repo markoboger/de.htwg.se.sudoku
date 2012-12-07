@@ -51,8 +51,8 @@ public class GridTest {
 	
 	@Test
 	public void testRows() {
-		assertEquals(grid1.getCell(0, 0), grid1.rows[0].getCell(0));		
-		assertEquals(grid2.getCell(0, 0), grid2.rows[0].getCell(0));
+		assertEquals(grid1.getCell(0, 0), grid1.getRow(0).getCell(0));		
+		assertEquals(grid2.getCell(0, 0), grid2.getRow(0).getCell(0));
 		
 	}
 	
