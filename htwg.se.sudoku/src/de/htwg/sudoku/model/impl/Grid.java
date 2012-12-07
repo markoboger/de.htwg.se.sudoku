@@ -20,11 +20,12 @@ public class Grid implements IGrid{
 	private int solutionCounter;
 	private int steps;
 	private List<Integer> permutation;
-	GridCreateStrategyTemplate createStrategy = AbstractGridCreateStrategyFactory.getFactory().getInstance();
+	private final int MAXSIZE = 3;
+	private GridCreateStrategyTemplate createStrategy = AbstractGridCreateStrategyFactory.getFactory().getInstance();
 
 
 	public Grid(int blocksPerEdge) {
-		if (blocksPerEdge <= 0 || 4 <= blocksPerEdge){
+		if (blocksPerEdge <= 0 || MAXSIZE < blocksPerEdge){
 			throw new IllegalArgumentException(
 					"blocksPerEdge must be 1, 2 or 3");
 		}
@@ -65,7 +66,7 @@ public class Grid implements IGrid{
 	 * calculates the index within a block to identify the cell from the blocks
 	 * cell array at coordinate (row, column).
 	 */
-	private final int cellInBlockAt(int row, int column) {
+	private int cellInBlockAt(int row, int column) {
 		return ((row % blockSize) + ((column % blockSize) * blockSize));
 	}
 

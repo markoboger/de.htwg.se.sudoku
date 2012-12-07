@@ -265,7 +265,7 @@ public class SudokuFrame extends JFrame implements IObserver {
 		constructSudokuPane(controller);
 	}
 
-	public void constructSudokuPane(ISudokuControllerGui controller) {
+	public final void constructSudokuPane(ISudokuControllerGui controller) {
 		if (digitPanel != null){
 			pane.remove(digitPanel);
 		}

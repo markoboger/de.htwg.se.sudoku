@@ -10,6 +10,11 @@ import de.htwg.sudoku.model.impl.Grid;
 import de.htwg.util.observer.IObserver;
 
 public class TextUI implements IObserver {
+	
+	private final int DOTSIZE=1;
+	private final int PLUSSIZE=2;
+	private final int HASHSIZE=3;
+			
 
 	private ISudokuController controller;
 	private IGrid grid;
@@ -52,15 +57,15 @@ public class TextUI implements IObserver {
 			controller.paste();
 		}
 		if (line.equalsIgnoreCase(".")) {
-			grid = new Grid(1);
+			grid = new Grid(DOTSIZE);
 			controller.reset(grid);
 		}
 		if (line.equalsIgnoreCase("+")){
-			grid = new Grid(2);
+			grid = new Grid(PLUSSIZE);
 			controller.reset(grid);
 		}
 		if (line.equalsIgnoreCase("#")){
-			grid = new Grid(3);
+			grid = new Grid(HASHSIZE);
 			controller.reset(grid);
 		}
 		// if the command line has the form 123, set the cell (1,2) to value 3

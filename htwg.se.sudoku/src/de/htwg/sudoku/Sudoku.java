@@ -7,13 +7,13 @@ import de.htwg.sudoku.aview.gui.SudokuFrame;
 import de.htwg.sudoku.model.impl.Grid;
 import de.htwg.sudoku.aview.tui.TextUI;
 
-public class Sudoku {
+public final class Sudoku {
 
 	private static Scanner scanner;
 	private Sudoku() {super();}
-	private final static int size = 3;
+	private static final int SIZE = 3;
 	public static void main(String[] args) {
-		SudokuController controller = new SudokuController(new Grid(size));
+		SudokuController controller = new SudokuController(new Grid(SIZE));
 		new SudokuFrame(controller);
 		TextUI tui = new TextUI(controller);
 		tui.printTUI();
