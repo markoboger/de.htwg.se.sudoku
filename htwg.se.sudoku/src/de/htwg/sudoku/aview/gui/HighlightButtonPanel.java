@@ -7,16 +7,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
-import de.htwg.sudoku.controller.ISudokuControllerGui;
+import de.htwg.sudoku.controller.ISudokuController;
 
 public class HighlightButtonPanel extends JPanel {
 
 	private final ButtonGroup group = new ButtonGroup();
 	private static final long serialVersionUID = 1L;
 
-	public HighlightButtonPanel(final ISudokuControllerGui controller) {
+	public HighlightButtonPanel(final ISudokuController controller) {
 
-		int gridSize = controller.getCellsPerEdge();
+		int gridSize = controller.getCellsPerRow();
 		setLayout(new FlowLayout());
 
         add(new JLabel("Highlight:")); 

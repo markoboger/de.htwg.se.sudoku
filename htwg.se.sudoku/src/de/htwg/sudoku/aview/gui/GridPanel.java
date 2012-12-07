@@ -8,15 +8,15 @@ import java.awt.RenderingHints;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-import de.htwg.sudoku.controller.ISudokuControllerGui;
+import de.htwg.sudoku.controller.ISudokuController;
 
 public class GridPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public GridPanel( ISudokuControllerGui controller) {
+	public GridPanel( ISudokuController controller) {
 
-		int cellsPerEdge = controller.getCellsPerEdge();
+		int cellsPerEdge = controller.getCellsPerRow();
 		int blockSize = controller.getBlockSize();
 		setLayout(new GridLayout(blockSize, blockSize, 2, 2));
 		setBorder(BorderFactory.createLoweredBevelBorder());

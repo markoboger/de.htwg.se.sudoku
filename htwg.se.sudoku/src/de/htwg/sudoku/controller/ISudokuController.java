@@ -1,60 +1,37 @@
 package de.htwg.sudoku.controller;
 
+import javax.swing.JFrame;
+
 import de.htwg.sudoku.model.IGrid;
 import de.htwg.util.observer.IObservable;
 
-/**
- * @author mboger
- *
- */
-/**
- * @author mboger
- *
- */
 public interface ISudokuController extends IObservable {
 
 	/**
-	 * Sets the Sudoku game back to initial empty values. 
-	 */
-	void reset();
-
-	/**
-	 * Calculate a new Sudoku puzzle. 
-	 */
-	void create();
-
-	/**
-	 * Calculates a solution for a Sudoku puzzle.
-	 */
-	void solve();
-
-	/**
-	 * Undo the last undoable change to the puzzle. 
-	 */
-	void undo();	
-
-	/**
-	 * After the call to an undo, redo can re-do the undone change to the Sudoku puzzle
-	 */
-	void redo();
-
-	/**
-	 * Create a string representation of the Sudoku puzzle and put it into the system clip board
+	 * Create a string representation of the Sudoku puzzle and put it into the
+	 * system clip board
 	 */
 	void copy();
 
 	/**
-	 * Take the content of the system clip board and try to parse a Sudoku puzzle out of it. 
+	 * Calculate a new Sudoku puzzle.
 	 */
-	void paste();
+	void create();
 
 	/**
-	 * In the Sudoku puzzle, set a cell with coordinates (row, col) to the value val.
-	 * @param row - the row or vertical coordinate within the Sudoku puzzle.
-	 * @param col - the column or horizontal coordinate within the Sudoku puzzle.
-	 * @param val - the value to be assigned to the cell. 
+	 * Terminate the application.
 	 */
-	void setValue(int row, int col, int val);
+	void exit();
+
+	/**
+	 * @return the number of cells in a row of a block. A typcial value is 3.
+	 */
+	int getBlockSize();
+
+	/**
+	 * @return the number of cells per row of a Sudoku puzzle. Tyical value is 9.
+	 */
+	int getCellsPerRow();
 
 	/**
 	 * @return the textual representation of the Sudoku puzzle.
@@ -67,22 +44,126 @@ public interface ISudokuController extends IObservable {
 	String getStatus();
 
 	/**
-	 * Point the controller to a new grid and reset it. This version of reset should be called in connection with resize of the puzzle.
+	 * Get the value of the cell at coordinates (row, col).
+	 * @param row
+	 * @param column
+	 * @return
+	 */
+	int getValue(int row, int column);
+
+	/**
+	 * All cells that have the value index as a possible value (candidate)
+	 * should be highlighted in a graphical user interface.
+	 * 
+	 * @param index
+	 */
+	void highlight(int index);
+
+	/**
+	 * 
+	 * @param row
+	 * @param column
+	 * @param candidate
+	 * @return true if the value of candidate can still be set in accordance to the rules of Sudoko at the coordinates (row, col).
+	 */
+	boolean isCandidate(int row, int column, int candidate);
+
+	/**
+	 * @param row
+	 * @param column
+	 * @return true if the cell at (row, col) was part of the initial puzzle, false if the cell is unset or was set by the user.
+	 */
+	boolean isGiven(int row, int column);
+
+	/**
+	 * @param row
+	 * @param column
+	 * @return true if the cell at (row, col) should be highlighted in a gui, false if not.
+	 */
+	boolean isHighlighted(int row, int column);
+
+	/**
+	 * @param row
+	 * @param column
+	 * @return true if value of the cell at (row, col) is different from zero.
+	 */
+	boolean isSet(int row, int column);
+
+	/**
+	 * @param row
+	 * @param column
+	 * @return true if the value show candidates is set to true.
+	 */
+	boolean isShowCandidates(int row, int column);
+
+	/**
+	 * loads a file using a file dialog
+	 * @param sudokuFrame 
+	 */
+	void load(JFrame sudokuFrame);
+
+	/**
+	 * Take the content of the system clip board and try to parse a Sudoku
+	 * puzzle out of it.
+	 */
+	void paste();
+
+	/**
+	 * After the call to an undo, redo can re-do the undone change to the Sudoku
+	 * puzzle
+	 */
+	void redo();
+
+	/**
+	 * Sets the Sudoku game back to initial empty values.
+	 */
+	void reset();
+
+	/**
+	 * Point the controller to a new grid and reset it. This version of reset
+	 * should be called in connection with resize of the puzzle.
+	 * 
 	 * @param grid
 	 */
 	void reset(IGrid grid);
 
+	void save(JFrame sudokuFrame);
+
 	/**
-	 * The cell at (row, col) shall show the candidate values in a graphical user interface
+	 * In the Sudoku puzzle, set a cell with coordinates (row, col) to the value
+	 * val.
+	 * 
+	 * @param row
+	 *            - the row or vertical coordinate within the Sudoku puzzle.
+	 * @param col
+	 *            - the column or horizontal coordinate within the Sudoku
+	 *            puzzle.
+	 * @param val
+	 *            - the value to be assigned to the cell.
+	 */
+	void setValue(int row, int col, int val);
+
+	void showAllCandidates();
+
+	/**
+	 * The cell at (row, col) shall show the candidate values in a graphical
+	 * user interface
+	 * 
 	 * @param row
 	 * @param col
 	 */
 	void showCandidates(int row, int col);
 
 	/**
-	 * All cells that have the value index as a possible value (candidate) should be highlighted in a graphical user interface.
-	 * @param index
+	 * Calculates a solution for a Sudoku puzzle.
 	 */
-	void highlight(int index);
+	void solve();
+
+	/**
+	 * Undo the last undoable change to the puzzle.
+	 */
+	void undo();
+
+	int blockAt(int row, int column);
 
 }

@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
+import com.google.inject.Inject;
+
 import de.htwg.sudoku.controller.ISudokuController;
 import de.htwg.sudoku.model.IGrid;
 import de.htwg.sudoku.model.impl.Grid;
@@ -23,6 +25,7 @@ public class TextUI implements IObserver {
 	
 	Logger logger = Logger.getLogger("de.htwg.sudoku.aview.tui");
 
+	@Inject
 	public TextUI(ISudokuController controller) {
 		this.controller = controller;
 		controller.addObserver(this);

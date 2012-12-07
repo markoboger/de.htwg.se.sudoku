@@ -8,19 +8,19 @@ import java.awt.geom.Rectangle2D;
 
 import javax.swing.JPanel;
 
-import de.htwg.sudoku.controller.ISudokuControllerGui;
+import de.htwg.sudoku.controller.ISudokuController;
 
 public class CandidatePanel extends JPanel {
 
 	private int candidate;
-	private ISudokuControllerGui controller;
+	private ISudokuController controller;
 	private int row;
 	private int column;
 	private static final float SCALE_FACTOR = 0.75f;
 	private static final long serialVersionUID = 1L;
 
 	public CandidatePanel(final int row, final int column, int candidate,
-			final ISudokuControllerGui controller) {
+			final ISudokuController controller) {
 		this.row = row;
 		this.column = column;
 		this.controller = controller;

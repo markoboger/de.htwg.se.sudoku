@@ -18,19 +18,23 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.undo.UndoManager;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
 import de.htwg.sudoku.model.ICell;
 import de.htwg.sudoku.model.IGrid;
 import de.htwg.sudoku.controller.ISudokuController;
-import de.htwg.sudoku.controller.ISudokuControllerGui;
 import de.htwg.util.observer.Observable;
 
-public class SudokuController extends Observable implements ISudokuController, ISudokuControllerGui {
+@Singleton
+public class SudokuController extends Observable implements ISudokuController {
 	
 	private String statusLine = "Welcome to HTWG Sudoku!";
 	private IGrid grid;
 	private UndoManager undoManager;
 	private int highlighted=0;
-	
+
+	@Inject
 	public SudokuController(IGrid grid) {
 		this.grid = grid;
 		this.undoManager = new UndoManager();
@@ -149,7 +153,7 @@ public class SudokuController extends Observable implements ISudokuController, I
 		notifyObservers();
 	}
 
-	public int getCellsPerEdge() {
+	public int getCellsPerRow() {
 		return grid.getCellsPerEdge();
 	}
 

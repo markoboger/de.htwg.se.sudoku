@@ -63,7 +63,7 @@ public class ControllerTest {
 	}
 	@Test
 	public void testGetCellsPerEdge() {
-		assertEquals(1,controller1.getCellsPerEdge());
+		assertEquals(1,controller1.getCellsPerRow());
 	}
 	@Test
 	public void testGetBlockSize() {

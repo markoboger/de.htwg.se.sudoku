@@ -3,3 +3,4 @@
 .sonar*
 .settings*
 .DS*
+/sudoku.log

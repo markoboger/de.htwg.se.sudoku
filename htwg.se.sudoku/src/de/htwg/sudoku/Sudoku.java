@@ -4,24 +4,32 @@ import java.util.Scanner;
 
 import org.apache.log4j.PropertyConfigurator;
 
-import de.htwg.sudoku.controller.impl.SudokuController;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
 import de.htwg.sudoku.aview.gui.SudokuFrame;
-import de.htwg.sudoku.model.impl.Grid;
 import de.htwg.sudoku.aview.tui.TextUI;
+import de.htwg.sudoku.controller.ISudokuController;
 
 public final class Sudoku {
 
 	private static Scanner scanner;
-	private Sudoku() {super();}
-	private static final int SIZE = 3;
 	 
 	public static void main(String[] args) {
+		// Set up logging through log4j
 		PropertyConfigurator.configure("log4j.properties");
-		SudokuController controller = new SudokuController(new Grid(SIZE));
-		new SudokuFrame(controller);
-		TextUI tui = new TextUI(controller);
+		
+		// Set up Google Guice Dependency Injector
+		Injector injector = Guice.createInjector(new SudokuModule());
+		
+		// Build up the application, resolving dependencies automatically by Guice
+		ISudokuController controller = injector.getInstance(ISudokuController.class);
+		@SuppressWarnings("unused")
+		SudokuFrame gui = injector.getInstance(SudokuFrame.class);
+		TextUI tui = injector.getInstance(TextUI.class);
 		tui.printTUI();
 		controller.create();
+		
 		// continue until the user decides to quit
 		boolean continu = true;
 		scanner = new Scanner(System.in);

@@ -6,6 +6,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+
 import de.htwg.sudoku.model.ICell;
 import de.htwg.sudoku.model.IGrid;
 
@@ -23,8 +26,8 @@ public class Grid implements IGrid{
 	private static final int MAXSIZE = 3;
 	private GridCreateStrategyTemplate createStrategy = AbstractGridCreateStrategyFactory.getFactory().getInstance();
 
-
-	public Grid(int blocksPerEdge) {
+	@Inject
+	public Grid(@Named("gridSize")int blocksPerEdge) {
 		if (blocksPerEdge <= 0 || MAXSIZE < blocksPerEdge){
 			throw new IllegalArgumentException(
 					"blocksPerEdge must be 1, 2 or 3");
