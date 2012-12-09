@@ -6,4 +6,5 @@ public interface IObservable {
 	 void removeObserver(IObserver s);
 	 void removeAllObservers();
 	 void notifyObservers();
+	 void notifyObservers(Event e);
 }

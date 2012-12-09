@@ -2,6 +2,6 @@ package de.htwg.util.observer;
 
 
 public interface IObserver {
-	void update();
+	void update(Event e);
 
 }

@@ -14,8 +14,11 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import de.htwg.sudoku.controller.ISudokuController;
+import de.htwg.sudoku.controller.SizeChangedEvent;
 import de.htwg.sudoku.model.ICell;
 import de.htwg.sudoku.model.IGrid;
+import de.htwg.sudoku.model.impl.Grid;
+import de.htwg.util.observer.Event;
 import de.htwg.util.observer.Observable;
 
 @Singleton
@@ -126,13 +129,6 @@ public class SudokuController extends Observable implements ISudokuController {
 		return grid.getICell(row, column).getValue();
 	}
 
-	//@Override
-	public void reset(IGrid grid) {
-		this.grid = grid;
-		reset();
-		notifyObservers();
-	}
-
 	public void showCandidates(int row, int column) {
 		grid.getICell(row, column).toggleShowCandidates();
 		BitSet set = grid.candidates(row,column);
@@ -195,6 +191,14 @@ public class SudokuController extends Observable implements ISudokuController {
 		grid.parseStringToGrid(gridString);
 		notifyObservers();
 		
+	}
+
+	@Override
+	public void resetSize(int newSize) {
+		this.grid = new Grid(newSize);
+		reset();
+		Event event = new SizeChangedEvent(); 
+		notifyObservers(event);
 	}
 	
 }

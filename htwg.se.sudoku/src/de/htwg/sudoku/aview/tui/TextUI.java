@@ -9,8 +9,7 @@ import org.apache.log4j.Logger;
 import com.google.inject.Inject;
 
 import de.htwg.sudoku.controller.ISudokuController;
-import de.htwg.sudoku.model.IGrid;
-import de.htwg.sudoku.model.impl.Grid;
+import de.htwg.util.observer.Event;
 import de.htwg.util.observer.IObserver;
 
 public class TextUI implements IObserver {
@@ -21,7 +20,6 @@ public class TextUI implements IObserver {
 	private String newLine = System.getProperty("line.separator");
 
 	private ISudokuController controller;
-	private IGrid grid;
 	
 	private Logger logger = Logger.getLogger("de.htwg.sudoku.aview.tui");
 
@@ -32,7 +30,7 @@ public class TextUI implements IObserver {
 	}
 
 	//@Override
-	public void update() {
+	public void update(Event e) {
 		printTUI();
 	}
 
@@ -63,16 +61,13 @@ public class TextUI implements IObserver {
 			controller.paste();
 		}
 		if (line.equalsIgnoreCase(".")) {
-			grid = new Grid(DOTSIZE);
-			controller.reset(grid);
+			controller.resetSize(DOTSIZE);
 		}
 		if (line.equalsIgnoreCase("+")){
-			grid = new Grid(PLUSSIZE);
-			controller.reset(grid);
+			controller.resetSize(PLUSSIZE);
 		}
 		if (line.equalsIgnoreCase("#")){
-			grid = new Grid(HASHSIZE);
-			controller.reset(grid);
+			controller.resetSize(HASHSIZE);
 		}
 		// if the command line has the form 123, set the cell (1,2) to value 3
 		if (line.matches("[0-9][0-9][0-9]")) {

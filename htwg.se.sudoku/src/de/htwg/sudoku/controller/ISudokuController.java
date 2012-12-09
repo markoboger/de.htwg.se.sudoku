@@ -1,6 +1,5 @@
 package de.htwg.sudoku.controller;
 
-import de.htwg.sudoku.model.IGrid;
 import de.htwg.util.observer.IObservable;
 
 public interface ISudokuController extends IObservable {
@@ -112,14 +111,6 @@ public interface ISudokuController extends IObservable {
 	void reset();
 
 	/**
-	 * Point the controller to a new grid and reset it. This version of reset
-	 * should be called in connection with resize of the puzzle.
-	 * 
-	 * @param grid
-	 */
-	void reset(IGrid grid);
-
-	/**
 	 * In the Sudoku puzzle, set a cell with coordinates (row, col) to the value
 	 * val.
 	 * 
@@ -166,5 +157,11 @@ public interface ISudokuController extends IObservable {
 	 * @param gridString
 	 */
 	void parseStringToGrid(String gridString);
+
+	/**
+	 * Create a new puzzle with a size newSize
+	 * @param newSize
+	 */
+	void resetSize(int newSize);
 
 }

@@ -12,7 +12,7 @@ public class OberservableTest {
 	
 	class TestObserver implements IObserver {
 		//@Override
-		public void update() {
+		public void update(Event e) {
 			ping=true;
 		}
 		
