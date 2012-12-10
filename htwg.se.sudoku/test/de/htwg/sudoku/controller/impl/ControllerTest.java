@@ -8,17 +8,21 @@ import org.junit.Test;
 import de.htwg.sudoku.controller.impl.SudokuController;
 import de.htwg.sudoku.model.IGrid;
 import de.htwg.sudoku.model.impl.Grid;
+import de.htwg.sudoku.model.impl.GridFactory;
 
 public class ControllerTest {
 	String newLine = System.getProperty("line.separator");
 
 	private IGrid grid1;
 	SudokuController controller1;
+	GridFactory gridFactory;
 
 	@Before
 	public void setUp() throws Exception {
-		grid1=new Grid(1);
-		controller1 = new SudokuController(grid1);
+	    gridFactory = new GridFactory();
+		controller1 = new SudokuController(gridFactory);
+		controller1.resetSize(1);
+		grid1= controller1.getGrid();
 	}
 
 	@Test

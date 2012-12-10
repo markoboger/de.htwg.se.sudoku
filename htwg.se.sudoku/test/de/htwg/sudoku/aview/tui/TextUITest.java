@@ -1,6 +1,8 @@
 package de.htwg.sudoku.aview.tui;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -9,6 +11,7 @@ import org.junit.Test;
 
 import de.htwg.sudoku.controller.impl.SudokuController;
 import de.htwg.sudoku.model.impl.Grid;
+import de.htwg.sudoku.model.impl.GridFactory;
 
 public class TextUITest {
 
@@ -21,8 +24,10 @@ public class TextUITest {
 	@Before
 	public void setUp() throws Exception {
 		PropertyConfigurator.configure("log4j.properties");
-		grid1 = new Grid(1);
-		controller1 = new SudokuController(grid1);
+		
+		controller1 = new SudokuController(new GridFactory());
+		controller1.resetSize(1);
+		grid1 = (Grid) controller1.getGrid();
 		tui1 = new TextUI(controller1);
 	}
 
@@ -51,7 +56,6 @@ public class TextUITest {
 	
 	@Test
 	public void testStatus001() {
-		assertEquals("Welcome to HTWG Sudoku!",controller1.getStatus());
 		tui1.processInputLine("001");
 		assertEquals("The cell (0,0) = 1 was successfully set",controller1.getStatus());
 }

@@ -17,7 +17,7 @@ import de.htwg.sudoku.controller.ISudokuController;
 import de.htwg.sudoku.controller.SizeChangedEvent;
 import de.htwg.sudoku.model.ICell;
 import de.htwg.sudoku.model.IGrid;
-import de.htwg.sudoku.model.impl.Grid;
+import de.htwg.sudoku.model.IGridFactory;
 import de.htwg.util.observer.Event;
 import de.htwg.util.observer.Observable;
 
@@ -26,14 +26,18 @@ public class SudokuController extends Observable implements ISudokuController {
 	
 	private String statusLine = "Welcome to HTWG Sudoku!";
 	private IGrid grid;
+	private IGridFactory gridFactory;
 	private UndoManager undoManager;
 	private int highlighted=0;
 
 	@Inject
-	public SudokuController(IGrid grid) {
-		this.grid = grid;
+	public SudokuController(IGridFactory gridFactory) {
+		this.gridFactory=gridFactory;
+		this.grid = gridFactory.create(3);
 		this.undoManager = new UndoManager();
 	}
+	
+
 	
 	public void setValue(int row, int column, int value) {
 		ICell cell = grid.getICell(row, column);
@@ -195,10 +199,14 @@ public class SudokuController extends Observable implements ISudokuController {
 
 	@Override
 	public void resetSize(int newSize) {
-		this.grid = new Grid(newSize);
+		this.grid = gridFactory.create(newSize);
 		reset();
 		Event event = new SizeChangedEvent(); 
 		notifyObservers(event);
+	}
+
+	public IGrid getGrid() {
+		return grid;
 	}
 	
 }
