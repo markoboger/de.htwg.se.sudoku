@@ -28,9 +28,11 @@ public final class Sudoku {
 		SudokuFrame gui = injector.getInstance(SudokuFrame.class);
 		TextUI tui = injector.getInstance(TextUI.class);
 		tui.printTUI();
+		
+		// Create an initial game
 		controller.create();
 		
-		// continue until the user decides to quit
+		// continue to read user input on the tui until the user decides to quit
 		boolean continu = true;
 		scanner = new Scanner(System.in);
 		while (continu) {

@@ -1,13 +1,12 @@
 package de.htwg.sudoku.controller.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import de.htwg.sudoku.controller.impl.SudokuController;
 import de.htwg.sudoku.model.IGrid;
-import de.htwg.sudoku.model.impl.Grid;
 import de.htwg.sudoku.model.impl.GridFactory;
 
 public class ControllerTest {
