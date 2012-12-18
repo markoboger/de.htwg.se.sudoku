@@ -1,5 +1,6 @@
 package de.htwg.sudoku.controller;
 
+import de.htwg.sudoku.model.IGrid;
 import de.htwg.util.observer.IObservable;
 
 public interface ISudokuController extends IObservable {
@@ -163,5 +164,7 @@ public interface ISudokuController extends IObservable {
 	 * @param newSize
 	 */
 	void resetSize(int newSize);
+
+	IGrid getGrid();
 
 }
