@@ -4,17 +4,23 @@ import java.util.BitSet;
 
 import de.htwg.sudoku.model.ICell;
 import de.htwg.sudoku.model.IGrid;
+import de.htwg.sudoku.model.impl.House;
 
 public class Grid implements IGrid{
 
 	private int cellsPerEdge;
 	private Cell[][] cells;
 	private int blockSize;
+	private House[] rows;
 
 	public Grid( int blocksPerEdge) {
 		
 		this.blockSize = blocksPerEdge;
 		this.cellsPerEdge = blocksPerEdge * blockSize;
+		rows = new House[cellsPerEdge];
+		for (int index = 0; index < cellsPerEdge; index++) {
+			rows[index] = new House(cellsPerEdge);
+		}
 
 	}
 
@@ -124,27 +130,7 @@ public class Grid implements IGrid{
 	 *         digits.
 	 */
 	public boolean parseStringToGrid(String input) {
-		int row = 0;
-		int column = 0;
-		String letter;
-		for (int i = 0; i < input.length(); i++) {
-			letter = input.substring(i, i + 1);
-			if (letter.matches("[0-9]")) {
-				Cell cell = getCell(row, column);
-				cell.setValue(Integer.parseInt(letter));
-				if (letter.matches("[1-9]")) {
-					cell.setGiven(true);
-				} else {
-					cell.setGiven(false);
-				}
-				column++;
-				if (column == cellsPerEdge) {
-					column = 0;
-					row++;
-				}
-			}
-		}
-		return (row == cellsPerEdge); 
+		return true; 
 	}
 	
 	/**
@@ -157,7 +143,7 @@ public class Grid implements IGrid{
 		String newLine = System.getProperty("line.separator");
 		String result = blockSeparator(blockSize) + newLine;
 		for (int row = 0; row < cellsPerEdge; row++) {
-			result= result + "|       |       |       |" + newLine;
+			result= result + rows[row].toString(zero) + newLine;
 			if ((row + 1) % blockSize == 0) {
 				result= result + blockSeparator(blockSize) + newLine;
 			}

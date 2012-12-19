@@ -13,6 +13,7 @@ public class House {
 		this.size = size;
 		blockSize = (int) Math.sqrt(size);
 		cells = new Cell[size];
+		init();
 	}
 
 	public void init() {

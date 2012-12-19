@@ -13,8 +13,8 @@ public class SudokuModule extends AbstractModule {
 	@Override
 	protected void configure() {
 
-		bind(IGridFactory.class).to(de.htwg.sudoku.model.mock.GridFactory.class);
-		bind(ISudokuController.class).to(de.htwg.sudoku.controller.logwrapper.SudokuController.class);
+		bind(IGridFactory.class).to(de.htwg.sudoku.model.impl.GridFactory.class);
+		bind(ISudokuController.class).to(de.htwg.sudoku.controller.impl.SudokuController.class);
 		
 		
 	}
