@@ -16,7 +16,7 @@ public class House {
 		init();
 	}
 
-	public void init() {
+	protected final void init() {
 		for (int index=0;index<size;index++) {
 			cells[index]= new Cell(0,index);
 		}

@@ -61,8 +61,7 @@ public class Grid extends AbstractGrid{
 	 *         is a valid candidate.
 	 */
 	public BitSet candidates(int row, int column) {
-		BitSet candidates = new BitSet(cellsPerEdge + 1);
-		return candidates;
+		return new BitSet(cellsPerEdge + 1);
 	}
 	
 	public int getCandidate(int row, int column) {
