@@ -14,6 +14,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import de.htwg.sudoku.controller.ISudokuController;
+import de.htwg.sudoku.controller.SetValueCommand;
 import de.htwg.sudoku.controller.SizeChangedEvent;
 import de.htwg.sudoku.model.ICell;
 import de.htwg.sudoku.model.IGrid;
