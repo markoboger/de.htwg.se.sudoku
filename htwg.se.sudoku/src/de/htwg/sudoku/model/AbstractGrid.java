@@ -46,5 +46,26 @@ public abstract class AbstractGrid implements IGrid {
 		}
 		return result.toString();
 	}
+	
+	/**
+	 * returns a String of the form (i.e for size = 1) +---+ |   | +---+
+	 */
+	public String toString() {
+		return toString(" ");
+	}
+	public String toString(String zero) {
+		String newLine = System.getProperty("line.separator");
+		String result = blockSeparator(blockSize) + newLine;
+		for (int row = 0; row < cellsPerEdge; row++) {
+			result= result + getRow(row).toString(zero) + newLine;
+			if ((row + 1) % blockSize == 0) {
+				result= result + blockSeparator(blockSize) + newLine;
+			}
+
+		}
+		return result;
+	}
+
+	protected abstract AbstractHouse getRow(int row); 
 
 }

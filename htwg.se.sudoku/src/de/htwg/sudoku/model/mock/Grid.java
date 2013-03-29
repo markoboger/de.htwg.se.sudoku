@@ -99,23 +99,8 @@ public class Grid extends AbstractGrid{
 		return true; 
 	}
 	
-	/**
-	 * returns a String of the form (i.e for size = 1) +---+ |   | +---+
-	 */
-	public String toString() {
-		return toString(" ");
-	}
-	public String toString(String zero) {
-		String newLine = System.getProperty("line.separator");
-		String result = blockSeparator(blockSize) + newLine;
-		for (int row = 0; row < cellsPerEdge; row++) {
-			result= result + rows[row].toString(zero) + newLine;
-			if ((row + 1) % blockSize == 0) {
-				result= result + blockSeparator(blockSize) + newLine;
-			}
-
-		}
-		return result;
+	protected House getRow(int index) {
+		return rows[index];
 	}
 
 	@Override
