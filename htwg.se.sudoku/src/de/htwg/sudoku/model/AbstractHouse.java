@@ -4,10 +4,25 @@ package de.htwg.sudoku.model;
 
 public abstract class AbstractHouse {
 
-	protected int size;
-	protected int blockSize;
-	protected AbstractCell[] cells;
+	private int size;
+	private int blockSize;
 
+
+	public int getSize() {
+		return size;
+	}
+	public void setSize(int size) {
+		this.size = size;
+	}
+	protected int getBlockSize() {
+		return blockSize;
+	}
+	protected void setBlockSize(int blockSize) {
+		this.blockSize = blockSize;
+	}
+	abstract protected AbstractCell[] getCells();
+	abstract protected void setCells(AbstractCell[] cells);
+	
 	/**
 	 * returns a String of the form | 1 2 3 | 4 5 6 | 7 8 9 |
 	 */
@@ -17,7 +32,7 @@ public abstract class AbstractHouse {
 	public String toString(String zero) {
 		String result = "|";
 		for (int index = 0; index < size; index++) {
-			result+=" " + cells[index].toString(zero);
+			result+=" " + getCells()[index].toString(zero);
 			if (((index + 1) % blockSize) == 0) {
 				result+=" |";
 			}

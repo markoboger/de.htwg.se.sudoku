@@ -28,23 +28,23 @@ public class Grid extends AbstractGrid{
 			throw new IllegalArgumentException(
 					"blocksPerEdge must be 1, 2 or 3");
 		}
-		this.blockSize = blocksPerEdge;
-		this.cellsPerEdge = blocksPerEdge * blockSize;
+		setBlockSize(blocksPerEdge);
+		setCellsPerEdge(blocksPerEdge * getBlockSize());
 
 		// create Cell and Houses
-		cells = new Cell[cellsPerEdge][cellsPerEdge];
-		rows = new House[cellsPerEdge];
-		columns = new House[cellsPerEdge];
-		blocks = new House[cellsPerEdge];
+		cells = new Cell[getCellsPerEdge()][getCellsPerEdge()];
+		rows = new House[getCellsPerEdge()];
+		columns = new House[getCellsPerEdge()];
+		blocks = new House[getCellsPerEdge()];
 		// initialize Houses, connect them to their cells.
-		for (int index = 0; index < cellsPerEdge; index++) {
-			rows[index] = new House(cellsPerEdge);
-			columns[index] = new House(cellsPerEdge);
-			blocks[index] = new House(cellsPerEdge);
+		for (int index = 0; index < getCellsPerEdge(); index++) {
+			rows[index] = new House(getCellsPerEdge());
+			columns[index] = new House(getCellsPerEdge());
+			blocks[index] = new House(getCellsPerEdge());
 		}
 
-		for (int row = 0; row < cellsPerEdge; row++) {
-			for (int column = 0; column < cellsPerEdge; column++) {
+		for (int row = 0; row < getCellsPerEdge(); row++) {
+			for (int column = 0; column < getCellsPerEdge(); column++) {
 				cells[row][column] = new Cell(row, column);
 				rows[row].setCell(column, cells[row][column]);
 				columns[column].setCell(row, cells[row][column]);
@@ -82,7 +82,7 @@ public class Grid extends AbstractGrid{
 		solutionCounter = 0;
 		steps = 0;
 		permutation = new ArrayList<Integer>();
-		for (int i = 0; i < cellsPerEdge; i++) {
+		for (int i = 0; i < getCellsPerEdge(); i++) {
 			permutation.add(i);
 		}
 		Collections.shuffle(permutation);
@@ -112,10 +112,10 @@ public class Grid extends AbstractGrid{
 		steps = steps + 1;
 		int c=column;
 		int r = row;
-		if (c == cellsPerEdge) {
+		if (c == getCellsPerEdge()) {
 			c = 0;
 			r++;
-			if (r == cellsPerEdge) {
+			if (r == getCellsPerEdge()) {
 				solutionCounter++;
 				return (numSolutions == solutionCounter);
 			}
@@ -124,7 +124,7 @@ public class Grid extends AbstractGrid{
 		if (getCell(r, c).isSet()){ 
 			return solve(r, c + 1, numSolutions);
 		}
-		for (int index = 0 ; index < cellsPerEdge; index++) {
+		for (int index = 0 ; index < getCellsPerEdge(); index++) {
 			int value = permutation.get(index)+1;
 			if (candidates(r, c).get(value)) {
 				getCell(r, c).setValue(value);
@@ -150,8 +150,8 @@ public class Grid extends AbstractGrid{
 	 *         is a valid candidate.
 	 */
 	public BitSet candidates(int row, int column) {
-		BitSet candidates = new BitSet(cellsPerEdge + 1);
-		candidates.set(1, cellsPerEdge + 1, true);
+		BitSet candidates = new BitSet(getCellsPerEdge() + 1);
+		candidates.set(1, getCellsPerEdge() + 1, true);
 		candidates.and(rows[row].candidates());
 		candidates.and(columns[column].candidates());
 		candidates.and(blocks[blockAt(row, column)].candidates());
@@ -173,8 +173,8 @@ public class Grid extends AbstractGrid{
 	 * a new game.
 	 */
 	public void reset() {
-		for (int row = 0; row < cellsPerEdge; row++) {
-			for (int column = 0; column < cellsPerEdge; column++) {
+		for (int row = 0; row < getCellsPerEdge(); row++) {
+			for (int column = 0; column < getCellsPerEdge(); column++) {
 				cells[row][column].setValue(0);
 				cells[row][column].setGiven(false);
 				cells[row][column].setShowCandidates(false);
@@ -187,8 +187,8 @@ public class Grid extends AbstractGrid{
 	}
 
 	public boolean isSolved() {
-		for (int row = 0; row < cellsPerEdge; row++) {
-			for (int column = 0; column < cellsPerEdge; column++) {
+		for (int row = 0; row < getCellsPerEdge(); row++) {
+			for (int column = 0; column < getCellsPerEdge(); column++) {
 				if (cells[row][column].isUnSet()) {
 					return false;
 				}
@@ -235,13 +235,13 @@ public class Grid extends AbstractGrid{
 					cell.setGiven(false);
 				}
 				column++;
-				if (column == cellsPerEdge) {
+				if (column == getCellsPerEdge()) {
 					column = 0;
 					row++;
 				}
 			}
 		}
-		return (row == cellsPerEdge); 
+		return (row == getCellsPerEdge()); 
 	}
 	
 	protected House getRow(int index) {

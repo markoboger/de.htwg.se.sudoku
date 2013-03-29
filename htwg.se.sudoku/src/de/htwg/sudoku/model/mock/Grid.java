@@ -12,11 +12,12 @@ public class Grid extends AbstractGrid{
 	private House[] rows;
 
 	public Grid( int blocksPerEdge) {		
-		this.blockSize = blocksPerEdge;
-		this.cellsPerEdge = blocksPerEdge * blockSize;
-		rows = new House[cellsPerEdge];
-		for (int index = 0; index < cellsPerEdge; index++) {
-			rows[index] = new House(cellsPerEdge);
+		setBlockSize(blocksPerEdge);
+		setCellsPerEdge(blocksPerEdge * getBlockSize());
+
+		rows = new House[getCellsPerEdge()];
+		for (int index = 0; index < getCellsPerEdge(); index++) {
+			rows[index] = new House(getCellsPerEdge());
 		}
 
 	}
@@ -37,9 +38,6 @@ public class Grid extends AbstractGrid{
 	}
 
 	
-	public int getBlockSize() {
-		return blockSize;
-	}
 
 	/**
 	 * solves the Sudoku with a brute force backtracking strategy.
@@ -61,7 +59,7 @@ public class Grid extends AbstractGrid{
 	 *         is a valid candidate.
 	 */
 	public BitSet candidates(int row, int column) {
-		return new BitSet(cellsPerEdge + 1);
+		return new BitSet(getCellsPerEdge() + 1);
 	}
 	
 	public int getCandidate(int row, int column) {

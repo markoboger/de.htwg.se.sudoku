@@ -3,11 +3,11 @@ package de.htwg.sudoku.model;
 import de.htwg.sudoku.model.ICell;
 
 public abstract class AbstractCell implements ICell{
-	protected int value;
-	protected int row;
-	protected int column;
-	protected boolean given;
-	protected boolean showCandidates;
+	private int value;
+	private int row;
+	private int column;
+	private boolean given;
+	private boolean showCandidates;
 
 	
 
@@ -22,9 +22,16 @@ public abstract class AbstractCell implements ICell{
 	public int getRow() {
 		return row;
 	}
+	
+	protected void setRow(int row) {
+		this.row=row;
+	}
 
 	public int getColumn() {
 		return column;
+	}
+	protected void setColumn(int column){
+		this.column=column;
 	}
 
 	public boolean isSet() {

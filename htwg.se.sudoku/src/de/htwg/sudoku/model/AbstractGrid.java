@@ -2,17 +2,25 @@ package de.htwg.sudoku.model;
 
 public abstract class AbstractGrid implements IGrid {
 
-	protected int cellsPerEdge;
-	protected int blockSize;
+	private int cellsPerEdge;
+	private int blockSize;
 
 	@Override
 	public int getCellsPerEdge() {
 		return cellsPerEdge;
 	}
+	
+	protected void setCellsPerEdge(int cellsPerEdge) {
+		this.cellsPerEdge = cellsPerEdge;
+	}
+	
 
 	@Override
 	public int getBlockSize() {
 		return blockSize;
+	}
+	protected void setBlockSize(int blockSize) {
+		this.blockSize = blockSize;
 	}
 
 	/**
