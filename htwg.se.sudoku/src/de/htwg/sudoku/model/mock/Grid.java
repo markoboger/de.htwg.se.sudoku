@@ -2,19 +2,16 @@ package de.htwg.sudoku.model.mock;
 
 import java.util.BitSet;
 
+import de.htwg.sudoku.model.AbstractGrid;
 import de.htwg.sudoku.model.ICell;
-import de.htwg.sudoku.model.IGrid;
 import de.htwg.sudoku.model.impl.House;
 
-public class Grid implements IGrid{
+public class Grid extends AbstractGrid{
 
-	private int cellsPerEdge;
 	private Cell[][] cells;
-	private int blockSize;
 	private House[] rows;
 
-	public Grid( int blocksPerEdge) {
-		
+	public Grid( int blocksPerEdge) {		
 		this.blockSize = blocksPerEdge;
 		this.cellsPerEdge = blocksPerEdge * blockSize;
 		rows = new House[cellsPerEdge];
@@ -24,14 +21,6 @@ public class Grid implements IGrid{
 
 	}
 
-	/**
-	 * calculates the index that should be used to identify the block in the
-	 * blocks array at coordinate (row, column).
-	 */
-	public final int blockAt(int row, int column) {
-		return column / blockSize + (blockSize * (row / blockSize));
-	}
-
 	public Cell getCell(int row, int column) {
 		return new Cell(row, column);
 	}
@@ -39,9 +28,6 @@ public class Grid implements IGrid{
 		return (ICell) getCell(row, column);
 	}
 
-	public int getCellsPerEdge() {
-		return cellsPerEdge;
-	}
 
 	/**
 	 * sets the value of cell at (row, column) to a new value
@@ -55,22 +41,6 @@ public class Grid implements IGrid{
 		return blockSize;
 	}
 
-
-
-	/**
-	 * returns a string of the form +---+ (i.e. in the case of blockSize = 1)
-	 */
-	String blockSeparator(int blockSize) {
-		StringBuffer result = new StringBuffer("+");
-		for (int i = 0; i < blockSize; i++) {
-			for (int j = 0; j < blockSize * 2 + 1; j++) {
-				result.append("-");
-			}
-			result.append("+");
-		}
-		return result.toString();
-	}
-
 	/**
 	 * solves the Sudoku with a brute force backtracking strategy.
 	 * 
@@ -80,8 +50,6 @@ public class Grid implements IGrid{
 	public boolean solve() {
 		return true;
 	}
-
-
 
 	/**
 	 * calculates all values that are still valid candidates at the coordinate
@@ -98,7 +66,6 @@ public class Grid implements IGrid{
 	}
 	
 	public int getCandidate(int row, int column) {
-
 		return 1;
 	}
 	

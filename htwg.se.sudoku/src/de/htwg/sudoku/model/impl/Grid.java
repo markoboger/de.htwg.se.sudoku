@@ -6,17 +6,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import de.htwg.sudoku.model.AbstractGrid;
 import de.htwg.sudoku.model.ICell;
-import de.htwg.sudoku.model.IGrid;
 
-public class Grid implements IGrid{
+public class Grid extends AbstractGrid{
 
-	private int cellsPerEdge;
+	
 	private Cell[][] cells;
 	private House[] rows;
 	private House[] columns;
 	private House[] blocks;
-	private int blockSize;
+
 	private int solutionCounter;
 	private int steps;
 	private List<Integer> permutation;
@@ -53,22 +53,6 @@ public class Grid implements IGrid{
 		}
 	}
 
-	/**
-	 * calculates the index that should be used to identify the block in the
-	 * blocks array at coordinate (row, column).
-	 */
-	public final int blockAt(int row, int column) {
-		return column / blockSize + (blockSize * (row / blockSize));
-	}
-
-	/**
-	 * calculates the index within a block to identify the cell from the blocks
-	 * cell array at coordinate (row, column).
-	 */
-	private int cellInBlockAt(int row, int column) {
-		return ((row % blockSize) + ((column % blockSize) * blockSize));
-	}
-
 	public Cell getCell(int row, int column) {
 		return cells[row][column];
 	}
@@ -76,36 +60,11 @@ public class Grid implements IGrid{
 		return (ICell) getCell(row, column);
 	}
 
-	public int getCellsPerEdge() {
-		return cellsPerEdge;
-	}
-
 	/**
 	 * sets the value of cell at (row, column) to a new value
 	 */
 	public void setCell(int row, int column, int value) {
 		cells[row][column].setValue(value);
-	}
-
-	
-	public int getBlockSize() {
-		return blockSize;
-	}
-
-
-
-	/**
-	 * returns a string of the form +---+ (i.e. in the case of blockSize = 1)
-	 */
-	String blockSeparator(int blockSize) {
-		StringBuffer result = new StringBuffer("+");
-		for (int i = 0; i < blockSize; i++) {
-			for (int j = 0; j < blockSize * 2 + 1; j++) {
-				result.append("-");
-			}
-			result.append("+");
-		}
-		return result.toString();
 	}
 
 	/**
