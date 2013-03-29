@@ -29,12 +29,12 @@ public class SudokuController extends Observable implements ISudokuController {
 	private IGridFactory gridFactory;
 	private UndoManager undoManager;
 	private int highlighted=0;
-	private final int NORMAL_GRID=3;
+	private final static int NORMALGRID=3;
 
 	@Inject
 	public SudokuController(IGridFactory gridFactory) {
 		this.gridFactory=gridFactory;
-		this.grid = gridFactory.create(NORMAL_GRID);
+		this.grid = gridFactory.create(NORMALGRID);
 		this.undoManager = new UndoManager();
 	}
 	

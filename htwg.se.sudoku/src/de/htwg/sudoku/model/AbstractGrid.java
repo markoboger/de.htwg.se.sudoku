@@ -1,22 +1,9 @@
 package de.htwg.sudoku.model;
 
-import java.util.BitSet;
-
 public abstract class AbstractGrid implements IGrid {
 
 	protected int cellsPerEdge;
 	protected int blockSize;
-	@Override
-	public ICell getICell(int row, int column) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean solve() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public int getCellsPerEdge() {
@@ -45,42 +32,6 @@ public abstract class AbstractGrid implements IGrid {
 		return ((row % blockSize) + ((column % blockSize) * blockSize));
 	}
 
-	@Override
-	public int getSteps() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void reset() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void create() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public String toString(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean parseStringToGrid(String input) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public BitSet candidates(int row, int col) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 
 	/**
 	 * returns a string of the form +---+ (i.e. in the case of blockSize = 1)
