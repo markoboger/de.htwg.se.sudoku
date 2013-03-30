@@ -21,7 +21,6 @@ public abstract class AbstractHouse {
 		this.blockSize = blockSize;
 	}
 	abstract protected AbstractCell[] getCells();
-	abstract protected void setCells(AbstractCell[] cells);
 	
 	/**
 	 * returns a String of the form | 1 2 3 | 4 5 6 | 7 8 9 |

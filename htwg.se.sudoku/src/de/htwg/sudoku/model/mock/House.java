@@ -11,17 +11,12 @@ public class House extends AbstractHouse{
 	public House(int size) {
 		setSize(size);
 		setBlockSize((int) Math.sqrt(size));
-		setCells(new Cell[size]);
+		cells = new Cell[size];
 	}
 
 	@Override
 	protected AbstractCell[] getCells() {
 		return cells;
-	}
-
-	@Override
-	protected void setCells(AbstractCell[] cells) {
-		this.cells=(Cell[]) cells;	
 	}
 
 }
