@@ -20,7 +20,7 @@ public abstract class AbstractHouse {
 	protected void setBlockSize(int blockSize) {
 		this.blockSize = blockSize;
 	}
-	abstract protected AbstractCell[] getCells();
+    protected abstract AbstractCell[] getCells();
 	
 	/**
 	 * returns a String of the form | 1 2 3 | 4 5 6 | 7 8 9 |

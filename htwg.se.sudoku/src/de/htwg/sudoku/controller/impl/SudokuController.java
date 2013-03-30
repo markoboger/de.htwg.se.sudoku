@@ -30,7 +30,7 @@ public class SudokuController extends Observable implements ISudokuController {
 	private IGridFactory gridFactory;
 	private UndoManager undoManager;
 	private int highlighted=0;
-	private final static int NORMALGRID=3;
+	private static final int NORMALGRID=3;
 
 	@Inject
 	public SudokuController(IGridFactory gridFactory) {
