@@ -63,7 +63,7 @@ public class SudokuFrame extends JFrame implements IObserver {
 		JMenuItem noneMenuItem, digitMenuItem;
 
 		JMenu optionsMenu;
-		JMenuItem showMenuItem;
+		JMenuItem showMenuItem, resize9MenuItem, resize4MenuItem, resize1MenuItem;
 
 		setTitle("HTWG Sudoku");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -271,9 +271,36 @@ public class SudokuFrame extends JFrame implements IObserver {
 				InputEvent.CTRL_DOWN_MASK));
 
 		optionsMenu.add(showMenuItem);
-		menuBar.add(optionsMenu);
 		
-
+		
+		resize9MenuItem = new JMenuItem("Resize to 9*9");
+		resize9MenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.resetSize(3);
+			}
+		});
+		resize9MenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_NUMBER_SIGN,0));
+		optionsMenu.add(resize9MenuItem);
+		
+		resize4MenuItem = new JMenuItem("Resize to 4*4");
+		resize4MenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.resetSize(2);
+			}
+		});
+		resize4MenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_PLUS,0));
+		optionsMenu.add(resize4MenuItem);
+		
+		resize1MenuItem = new JMenuItem("Resize to 1*1");
+		resize1MenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.resetSize(1);
+			}
+		});
+		resize1MenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_PERIOD,0));
+		optionsMenu.add(resize1MenuItem);
+		
+		menuBar.add(optionsMenu);
 		setJMenuBar(menuBar);
 		constructSudokuPane(controller);
 	}
