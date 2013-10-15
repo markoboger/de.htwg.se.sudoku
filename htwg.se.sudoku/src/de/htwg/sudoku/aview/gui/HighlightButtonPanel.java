@@ -1,5 +1,6 @@
 package de.htwg.sudoku.aview.gui;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.ButtonGroup;
@@ -21,14 +22,14 @@ public class HighlightButtonPanel extends JPanel {
 
         add(new JLabel("Highlight:")); 
 
-        // Selection of this button removes all highlighting.
-        JToggleButton button = new HighlightButton(" ", controller, 0);
-        group.add(button);
-        add(button);
+        JToggleButton button;
 
         // Construct the buttons used to select values to highlight.
         for (int digit = 1;digit <= gridSize ; digit++) {
-            button = new HighlightButton(String.valueOf(digit), controller, digit);
+        	String buttontext = String.valueOf(digit);
+        	if (digit == 0) {buttontext = " ";} 
+            button = new HighlightButton(buttontext, controller, digit);
+            button.setPreferredSize(new Dimension(20, 20));
             group.add(button);
             add(button);
         }
