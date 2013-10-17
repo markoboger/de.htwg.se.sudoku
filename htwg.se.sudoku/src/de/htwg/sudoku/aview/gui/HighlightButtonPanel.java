@@ -29,7 +29,7 @@ public class HighlightButtonPanel extends JPanel {
         	String buttontext = String.valueOf(digit);
         	if (digit == 0) {buttontext = " ";} 
             button = new HighlightButton(buttontext, controller, digit);
-            button.setPreferredSize(new Dimension(20, 20));
+            button.setPreferredSize(new Dimension(25, 25));
             group.add(button);
             add(button);
         }
