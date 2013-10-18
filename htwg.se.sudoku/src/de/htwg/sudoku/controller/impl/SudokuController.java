@@ -19,8 +19,8 @@ import de.htwg.sudoku.controller.SizeChangedEvent;
 import de.htwg.sudoku.model.ICell;
 import de.htwg.sudoku.model.IGrid;
 import de.htwg.sudoku.model.IGridFactory;
-import de.htwg.util.observer.Event;
-import de.htwg.util.observer.Observable;
+import de.htwg.sudoku.util.observer.Event;
+import de.htwg.sudoku.util.observer.Observable;
 
 @Singleton
 public class SudokuController extends Observable implements ISudokuController {

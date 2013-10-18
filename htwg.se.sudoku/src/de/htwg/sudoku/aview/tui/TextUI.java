@@ -9,8 +9,8 @@ import org.apache.log4j.Logger;
 import com.google.inject.Inject;
 
 import de.htwg.sudoku.controller.ISudokuController;
-import de.htwg.util.observer.Event;
-import de.htwg.util.observer.IObserver;
+import de.htwg.sudoku.util.observer.Event;
+import de.htwg.sudoku.util.observer.IObserver;
 
 public class TextUI implements IObserver {
 	
