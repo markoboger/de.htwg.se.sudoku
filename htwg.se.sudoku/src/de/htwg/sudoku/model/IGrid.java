@@ -55,6 +55,8 @@ public interface IGrid {
 	 * @return a textual representation of the Sudoku puzzle following a pattern.
 	 */
 	String toString(String string);
+	
+	String toJson();
 
 	/**
 	 * Fill the cells of a grid with values parsed from the input string.
