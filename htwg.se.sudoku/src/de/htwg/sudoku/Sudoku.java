@@ -7,7 +7,6 @@ import org.apache.log4j.PropertyConfigurator;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import de.htwg.sudoku.aview.gui.SudokuFrame;
 import de.htwg.sudoku.aview.tui.TextUI;
 import de.htwg.sudoku.controller.ISudokuController;
 
@@ -33,8 +32,8 @@ public final class Sudoku {
 		// Build up the application, resolving dependencies automatically by
 		// Guice
 		controller = injector.getInstance(ISudokuController.class);
-		@SuppressWarnings("unused")
-		SudokuFrame gui = injector.getInstance(SudokuFrame.class);
+//		@SuppressWarnings("unused")
+//		SudokuFrame gui = injector.getInstance(SudokuFrame.class);
 		tui = injector.getInstance(TextUI.class);
 		tui.printTUI();
 
