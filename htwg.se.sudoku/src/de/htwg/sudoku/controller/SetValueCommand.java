@@ -1,4 +1,4 @@
-package de.htwg.sudoku.controller.logwrapper;
+package de.htwg.sudoku.controller;
 
 
 import javax.swing.undo.AbstractUndoableEdit;

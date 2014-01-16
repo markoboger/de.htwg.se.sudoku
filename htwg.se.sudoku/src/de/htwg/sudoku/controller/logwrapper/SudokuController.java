@@ -8,9 +8,9 @@ import com.google.inject.Singleton;
 import de.htwg.sudoku.controller.ISudokuController;
 import de.htwg.sudoku.model.IGrid;
 import de.htwg.sudoku.model.IGridFactory;
-import de.htwg.util.observer.Event;
-import de.htwg.util.observer.IObservable;
-import de.htwg.util.observer.IObserver;
+import de.htwg.sudoku.util.observer.Event;
+import de.htwg.sudoku.util.observer.IObservable;
+import de.htwg.sudoku.util.observer.IObserver;
 
 @Singleton
 public class SudokuController implements IObservable, ISudokuController {

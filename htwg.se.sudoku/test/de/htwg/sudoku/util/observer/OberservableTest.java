@@ -1,9 +1,13 @@
-package de.htwg.util.observer;
+package de.htwg.sudoku.util.observer;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import de.htwg.sudoku.util.observer.Event;
+import de.htwg.sudoku.util.observer.IObserver;
+import de.htwg.sudoku.util.observer.Observable;
 
 public class OberservableTest {
 	private boolean ping=false;

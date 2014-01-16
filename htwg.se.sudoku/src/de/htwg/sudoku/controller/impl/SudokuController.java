@@ -14,12 +14,13 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import de.htwg.sudoku.controller.ISudokuController;
+import de.htwg.sudoku.controller.SetValueCommand;
 import de.htwg.sudoku.controller.SizeChangedEvent;
 import de.htwg.sudoku.model.ICell;
 import de.htwg.sudoku.model.IGrid;
 import de.htwg.sudoku.model.IGridFactory;
-import de.htwg.util.observer.Event;
-import de.htwg.util.observer.Observable;
+import de.htwg.sudoku.util.observer.Event;
+import de.htwg.sudoku.util.observer.Observable;
 
 @Singleton
 public class SudokuController extends Observable implements ISudokuController {
@@ -29,11 +30,12 @@ public class SudokuController extends Observable implements ISudokuController {
 	private IGridFactory gridFactory;
 	private UndoManager undoManager;
 	private int highlighted=0;
+	private static final int NORMALGRID=3;
 
 	@Inject
 	public SudokuController(IGridFactory gridFactory) {
 		this.gridFactory=gridFactory;
-		this.grid = gridFactory.create(3);
+		this.grid = gridFactory.create(NORMALGRID);
 		this.undoManager = new UndoManager();
 	}
 	

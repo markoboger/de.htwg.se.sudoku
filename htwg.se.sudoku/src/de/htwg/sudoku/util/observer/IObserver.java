@@ -1,4 +1,4 @@
-package de.htwg.util.observer;
+package de.htwg.sudoku.util.observer;
 
 
 public interface IObserver {

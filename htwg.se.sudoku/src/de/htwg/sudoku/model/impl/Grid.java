@@ -3,20 +3,25 @@ package de.htwg.sudoku.model.impl;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import de.htwg.sudoku.model.AbstractGrid;
 import de.htwg.sudoku.model.ICell;
-import de.htwg.sudoku.model.IGrid;
 
-public class Grid implements IGrid{
+public class Grid extends AbstractGrid{
 
-	private int cellsPerEdge;
+	
 	private Cell[][] cells;
 	private House[] rows;
 	private House[] columns;
 	private House[] blocks;
-	private int blockSize;
+
 	private int solutionCounter;
 	private int steps;
 	private List<Integer> permutation;
@@ -28,45 +33,29 @@ public class Grid implements IGrid{
 			throw new IllegalArgumentException(
 					"blocksPerEdge must be 1, 2 or 3");
 		}
-		this.blockSize = blocksPerEdge;
-		this.cellsPerEdge = blocksPerEdge * blockSize;
+		setBlockSize(blocksPerEdge);
+		setCellsPerEdge(blocksPerEdge * getBlockSize());
 
 		// create Cell and Houses
-		cells = new Cell[cellsPerEdge][cellsPerEdge];
-		rows = new House[cellsPerEdge];
-		columns = new House[cellsPerEdge];
-		blocks = new House[cellsPerEdge];
+		cells = new Cell[getCellsPerEdge()][getCellsPerEdge()];
+		rows = new House[getCellsPerEdge()];
+		columns = new House[getCellsPerEdge()];
+		blocks = new House[getCellsPerEdge()];
 		// initialize Houses, connect them to their cells.
-		for (int index = 0; index < cellsPerEdge; index++) {
-			rows[index] = new House(cellsPerEdge);
-			columns[index] = new House(cellsPerEdge);
-			blocks[index] = new House(cellsPerEdge);
+		for (int index = 0; index < getCellsPerEdge(); index++) {
+			rows[index] = new House(getCellsPerEdge());
+			columns[index] = new House(getCellsPerEdge());
+			blocks[index] = new House(getCellsPerEdge());
 		}
 
-		for (int row = 0; row < cellsPerEdge; row++) {
-			for (int column = 0; column < cellsPerEdge; column++) {
+		for (int row = 0; row < getCellsPerEdge(); row++) {
+			for (int column = 0; column < getCellsPerEdge(); column++) {
 				cells[row][column] = new Cell(row, column);
 				rows[row].setCell(column, cells[row][column]);
 				columns[column].setCell(row, cells[row][column]);
 				blocks[blockAt(row, column)].setCell(cellInBlockAt(row, column), cells[row][column]);
 			}
 		}
-	}
-
-	/**
-	 * calculates the index that should be used to identify the block in the
-	 * blocks array at coordinate (row, column).
-	 */
-	public final int blockAt(int row, int column) {
-		return column / blockSize + (blockSize * (row / blockSize));
-	}
-
-	/**
-	 * calculates the index within a block to identify the cell from the blocks
-	 * cell array at coordinate (row, column).
-	 */
-	private int cellInBlockAt(int row, int column) {
-		return ((row % blockSize) + ((column % blockSize) * blockSize));
 	}
 
 	public Cell getCell(int row, int column) {
@@ -76,36 +65,11 @@ public class Grid implements IGrid{
 		return (ICell) getCell(row, column);
 	}
 
-	public int getCellsPerEdge() {
-		return cellsPerEdge;
-	}
-
 	/**
 	 * sets the value of cell at (row, column) to a new value
 	 */
 	public void setCell(int row, int column, int value) {
 		cells[row][column].setValue(value);
-	}
-
-	
-	public int getBlockSize() {
-		return blockSize;
-	}
-
-
-
-	/**
-	 * returns a string of the form +---+ (i.e. in the case of blockSize = 1)
-	 */
-	String blockSeparator(int blockSize) {
-		StringBuffer result = new StringBuffer("+");
-		for (int i = 0; i < blockSize; i++) {
-			for (int j = 0; j < blockSize * 2 + 1; j++) {
-				result.append("-");
-			}
-			result.append("+");
-		}
-		return result.toString();
 	}
 
 	/**
@@ -123,7 +87,7 @@ public class Grid implements IGrid{
 		solutionCounter = 0;
 		steps = 0;
 		permutation = new ArrayList<Integer>();
-		for (int i = 0; i < cellsPerEdge; i++) {
+		for (int i = 0; i < getCellsPerEdge(); i++) {
 			permutation.add(i);
 		}
 		Collections.shuffle(permutation);
@@ -153,10 +117,10 @@ public class Grid implements IGrid{
 		steps = steps + 1;
 		int c=column;
 		int r = row;
-		if (c == cellsPerEdge) {
+		if (c == getCellsPerEdge()) {
 			c = 0;
 			r++;
-			if (r == cellsPerEdge) {
+			if (r == getCellsPerEdge()) {
 				solutionCounter++;
 				return (numSolutions == solutionCounter);
 			}
@@ -165,7 +129,7 @@ public class Grid implements IGrid{
 		if (getCell(r, c).isSet()){ 
 			return solve(r, c + 1, numSolutions);
 		}
-		for (int index = 0 ; index < cellsPerEdge; index++) {
+		for (int index = 0 ; index < getCellsPerEdge(); index++) {
 			int value = permutation.get(index)+1;
 			if (candidates(r, c).get(value)) {
 				getCell(r, c).setValue(value);
@@ -191,8 +155,8 @@ public class Grid implements IGrid{
 	 *         is a valid candidate.
 	 */
 	public BitSet candidates(int row, int column) {
-		BitSet candidates = new BitSet(cellsPerEdge + 1);
-		candidates.set(1, cellsPerEdge + 1, true);
+		BitSet candidates = new BitSet(getCellsPerEdge() + 1);
+		candidates.set(1, getCellsPerEdge() + 1, true);
 		candidates.and(rows[row].candidates());
 		candidates.and(columns[column].candidates());
 		candidates.and(blocks[blockAt(row, column)].candidates());
@@ -214,8 +178,8 @@ public class Grid implements IGrid{
 	 * a new game.
 	 */
 	public void reset() {
-		for (int row = 0; row < cellsPerEdge; row++) {
-			for (int column = 0; column < cellsPerEdge; column++) {
+		for (int row = 0; row < getCellsPerEdge(); row++) {
+			for (int column = 0; column < getCellsPerEdge(); column++) {
 				cells[row][column].setValue(0);
 				cells[row][column].setGiven(false);
 				cells[row][column].setShowCandidates(false);
@@ -228,8 +192,8 @@ public class Grid implements IGrid{
 	}
 
 	public boolean isSolved() {
-		for (int row = 0; row < cellsPerEdge; row++) {
-			for (int column = 0; column < cellsPerEdge; column++) {
+		for (int row = 0; row < getCellsPerEdge(); row++) {
+			for (int column = 0; column < getCellsPerEdge(); column++) {
 				if (cells[row][column].isUnSet()) {
 					return false;
 				}
@@ -276,32 +240,48 @@ public class Grid implements IGrid{
 					cell.setGiven(false);
 				}
 				column++;
-				if (column == cellsPerEdge) {
+				if (column == getCellsPerEdge()) {
 					column = 0;
 					row++;
 				}
 			}
 		}
-		return (row == cellsPerEdge); 
+		return (row == getCellsPerEdge()); 
 	}
 	
-	/**
-	 * returns a String of the form (i.e for size = 1) +---+ |   | +---+
-	 */
-	public String toString() {
-		return toString(" ");
-	}
-	public String toString(String zero) {
-		String newLine = System.getProperty("line.separator");
-		String result = blockSeparator(blockSize) + newLine;
-		for (int row = 0; row < cellsPerEdge; row++) {
-			result= result + rows[row].toString(zero) + newLine;
-			if ((row + 1) % blockSize == 0) {
-				result= result + blockSeparator(blockSize) + newLine;
+	public String toJson() {
+		String result = "";
+		try {
+			int size = getCellsPerEdge();
+			@SuppressWarnings("unchecked")
+			Map<String, Object> mapMatrix[][] = new HashMap[size][size];
+			for (int row = 0; row < size; row++) {
+				for (int col= 0; col < size; col++) {
+					mapMatrix[row][col] = new HashMap<String, Object>();
+					mapMatrix[row][col].put("cell", getICell(row,col));
+					boolean[] candidates = new boolean[size];
+					for (int candidate = 0; candidate < size; candidate++) {
+						candidates[candidate] = isCandidate(row, col, candidate + 1);
+					}
+					mapMatrix[row][col].put("candidates", candidates);
+				}
 			}
 
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("meta", this);
+			map.put("grid", mapMatrix);
+			ObjectMapper mapper = new ObjectMapper();
+
+			result = mapper.writeValueAsString(map);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	private boolean isCandidate(int row, int column, int candidate) {	
+		return candidates(row,column).get(candidate);
 	}
 
 	protected House getRow(int index) {

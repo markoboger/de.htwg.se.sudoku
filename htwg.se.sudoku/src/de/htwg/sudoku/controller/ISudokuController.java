@@ -1,7 +1,7 @@
 package de.htwg.sudoku.controller;
 
 import de.htwg.sudoku.model.IGrid;
-import de.htwg.util.observer.IObservable;
+import de.htwg.sudoku.util.observer.IObservable;
 
 public interface ISudokuController extends IObservable {
 

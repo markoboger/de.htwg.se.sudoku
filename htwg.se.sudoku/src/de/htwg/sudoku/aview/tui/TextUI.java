@@ -9,8 +9,8 @@ import org.apache.log4j.Logger;
 import com.google.inject.Inject;
 
 import de.htwg.sudoku.controller.ISudokuController;
-import de.htwg.util.observer.Event;
-import de.htwg.util.observer.IObserver;
+import de.htwg.sudoku.util.observer.Event;
+import de.htwg.sudoku.util.observer.IObserver;
 
 public class TextUI implements IObserver {
 	
@@ -36,38 +36,39 @@ public class TextUI implements IObserver {
 
 	public boolean processInputLine(String line) {
 		boolean continu = true;
-		if (line.equalsIgnoreCase("q")) {
+		switch (line) { 
+		case "q" : 
 			continu = false;
-		}
-		if (line.equalsIgnoreCase("r")) {
+			break;
+		case "r" :
 			controller.reset();
-		}
-		if (line.equalsIgnoreCase("n")) {
+			break;
+		case "n" : 
 			controller.create();
-		}
-		if (line.equalsIgnoreCase("s")) {
+			break;
+		case "s" :
 			controller.solve();
-		}
-		if (line.equalsIgnoreCase("z")) {
+			break;
+		case "z" :
 			controller.undo();
-		}
-		if (line.equalsIgnoreCase("y")) {
+			break;
+		case "y" :
 			controller.redo();
-		}
-		if (line.equalsIgnoreCase("c")) {
+			break;
+		case "c" :
 			controller.copy();
-		}
-		if (line.equalsIgnoreCase("p")) {
+			break;
+		case "p" :
 			controller.paste();
-		}
-		if (line.equalsIgnoreCase("-")) {
+		case "-" :
 			controller.resetSize(DOTSIZE);
-		}
-		if (line.equalsIgnoreCase("+")){
+			break;
+		case "+" :
 			controller.resetSize(PLUSSIZE);
-		}
-		if (line.equalsIgnoreCase("*")){
+			break;
+		case "*" :
 			controller.resetSize(HASHSIZE);
+			break;
 		}
 		// if the command line has the form 123, set the cell (1,2) to value 3
 		if (line.matches("[0-9][0-9][0-9]")) {
@@ -101,6 +102,6 @@ public class TextUI implements IObserver {
 	public void printTUI() {
 		logger.info(newLine + controller.getGridString());
 		logger.info(newLine + controller.getStatus());
-		logger.info(newLine + "Possible commands: q-quit, n-new, s-solve, r-reset, z-undo, y-redo, c-copy, p-paste, .,+,#-size, x-highlight, xy-show (x,y), xyz-set (x,y) to z");
+		logger.info(newLine + "Possible commands: q-quit, n-new, s-solve, r-reset, z-undo, y-redo, c-copy, p-paste, -,+,*-size, x-highlight, xy-show (x,y), xyz-set (x,y) to z");
 	}
 }
