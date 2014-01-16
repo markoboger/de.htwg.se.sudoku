@@ -60,13 +60,13 @@ public class TextUI implements IObserver {
 		if (line.equalsIgnoreCase("p")) {
 			controller.paste();
 		}
-		if (line.equalsIgnoreCase(".")) {
+		if (line.equalsIgnoreCase("-")) {
 			controller.resetSize(DOTSIZE);
 		}
 		if (line.equalsIgnoreCase("+")){
 			controller.resetSize(PLUSSIZE);
 		}
-		if (line.equalsIgnoreCase("#")){
+		if (line.equalsIgnoreCase("*")){
 			controller.resetSize(HASHSIZE);
 		}
 		// if the command line has the form 123, set the cell (1,2) to value 3
