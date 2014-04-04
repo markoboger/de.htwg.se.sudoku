@@ -33,7 +33,7 @@ public final class Sudoku {
 		// Build up the application, resolving dependencies automatically by
 		// Guice
 		controller = injector.getInstance(ISudokuController.class);
-//		@SuppressWarnings("unused")
+		@SuppressWarnings("unused")
 		SudokuFrame gui = injector.getInstance(SudokuFrame.class);
 		tui = injector.getInstance(TextUI.class);
 		tui.printTUI();
