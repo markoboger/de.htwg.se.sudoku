@@ -27,7 +27,8 @@ public interface ISudokuController extends IObservable {
 	int getBlockSize();
 
 	/**
-	 * @return the number of cells per row of a Sudoku puzzle. Tyical value is 9.
+	 * @return the number of cells per row of a Sudoku puzzle. Tyical value is
+	 *         9.
 	 */
 	int getCellsPerRow();
 
@@ -43,6 +44,7 @@ public interface ISudokuController extends IObservable {
 
 	/**
 	 * Get the value of the cell at coordinates (row, col).
+	 * 
 	 * @param row
 	 * @param column
 	 * @return
@@ -62,21 +64,24 @@ public interface ISudokuController extends IObservable {
 	 * @param row
 	 * @param column
 	 * @param candidate
-	 * @return true if the value of candidate can still be set in accordance to the rules of Sudoko at the coordinates (row, col).
+	 * @return true if the value of candidate can still be set in accordance to
+	 *         the rules of Sudoko at the coordinates (row, col).
 	 */
 	boolean isCandidate(int row, int column, int candidate);
 
 	/**
 	 * @param row
 	 * @param column
-	 * @return true if the cell at (row, col) was part of the initial puzzle, false if the cell is unset or was set by the user.
+	 * @return true if the cell at (row, col) was part of the initial puzzle,
+	 *         false if the cell is unset or was set by the user.
 	 */
 	boolean isGiven(int row, int column);
 
 	/**
 	 * @param row
 	 * @param column
-	 * @return true if the cell at (row, col) should be highlighted in a gui, false if not.
+	 * @return true if the cell at (row, col) should be highlighted in a gui,
+	 *         false if not.
 	 */
 	boolean isHighlighted(int row, int column);
 
@@ -155,12 +160,14 @@ public interface ISudokuController extends IObservable {
 
 	/**
 	 * Try to fill a grid with numbers read from a string.
+	 * 
 	 * @param gridString
 	 */
 	void parseStringToGrid(String gridString);
 
 	/**
 	 * Create a new puzzle with a size newSize
+	 * 
 	 * @param newSize
 	 */
 	void resetSize(int newSize);

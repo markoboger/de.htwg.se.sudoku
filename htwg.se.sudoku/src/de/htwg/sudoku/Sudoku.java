@@ -19,10 +19,11 @@ public final class Sudoku {
 	private static Sudoku instance = null;
 
 	public static Sudoku getInstance() {
-		if (instance == null) instance = new Sudoku();
+		if (instance == null)
+			instance = new Sudoku();
 		return instance;
 	}
-	
+
 	private Sudoku() {
 		// Set up logging through log4j
 		PropertyConfigurator.configure("log4j.properties");
@@ -41,17 +42,17 @@ public final class Sudoku {
 		// Create an initial game
 		controller.create();
 	}
-	
-	public ISudokuController getController(){
+
+	public ISudokuController getController() {
 		return controller;
 	}
-	
-	public TextUI getTUI(){
+
+	public TextUI getTUI() {
 		return tui;
 	}
 
 	public static void main(String[] args) {
-		
+
 		Sudoku.getInstance();
 
 		// continue to read user input on the tui until the user decides to quit

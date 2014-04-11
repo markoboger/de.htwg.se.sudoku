@@ -34,7 +34,8 @@ public class SudokuController implements IObservable, ISudokuController {
 	private void post() {
 		long endTime = System.nanoTime();
 		long duration = endTime - startTime;
-		logger.debug("Controller method " + getMethodName(1) + " was finished in " + duration + " nanoSeconds.");
+		logger.debug("Controller method " + getMethodName(1)
+				+ " was finished in " + duration + " nanoSeconds.");
 	}
 
 	private static String getMethodName(final int depth) {

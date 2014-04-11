@@ -24,56 +24,56 @@ import de.htwg.sudoku.util.observer.Observable;
 
 @Singleton
 public class SudokuController extends Observable implements ISudokuController {
-	
+
 	private String statusLine = "Welcome to HTWG Sudoku!";
 	private IGrid grid;
 	private IGridFactory gridFactory;
 	private UndoManager undoManager;
-	private int highlighted=0;
-	private static final int NORMALGRID=3;
+	private int highlighted = 0;
+	private static final int NORMALGRID = 3;
 
 	@Inject
 	public SudokuController(IGridFactory gridFactory) {
-		this.gridFactory=gridFactory;
+		this.gridFactory = gridFactory;
 		this.grid = gridFactory.create(NORMALGRID);
 		this.undoManager = new UndoManager();
 	}
-	
 
-	
 	public void setValue(int row, int column, int value) {
 		ICell cell = grid.getICell(row, column);
 		if (cell.isUnSet()) {
 			cell.setValue(value);
 			undoManager.addEdit(new SetValueCommand(cell));
-			statusLine = "The cell " + cell.mkString() + " was successfully set";
+			statusLine = "The cell " + cell.mkString()
+					+ " was successfully set";
 		} else {
-			statusLine="The cell " + cell.mkString() + " is already set";
+			statusLine = "The cell " + cell.mkString() + " is already set";
 		}
 		notifyObservers();
 	}
-	
+
 	public void solve() {
 		boolean result;
-		result = grid.solve();		
+		result = grid.solve();
 		if (result) {
-			statusLine="The Sudoku was solved successfully";
+			statusLine = "The Sudoku was solved successfully";
 		} else {
-			statusLine="Can not solve this Sudoku within "
-					+ grid.getSteps() + " steps";
+			statusLine = "Can not solve this Sudoku within " + grid.getSteps()
+					+ " steps";
 		}
 		notifyObservers();
 	}
+
 	public void reset() {
 		grid.reset();
 		statusLine = "Sudoku was reset";
 		notifyObservers();
 	}
-	
+
 	public void create() {
 		grid.create();
-		highlighted=0;
-		statusLine= "New Sudoku Puzzle created";
+		highlighted = 0;
+		statusLine = "New Sudoku Puzzle created";
 		notifyObservers();
 	}
 
@@ -84,9 +84,9 @@ public class SudokuController extends Observable implements ISudokuController {
 	public String getGridString() {
 		return grid.toString();
 	}
-	
+
 	public void undo() {
-		if (undoManager.canUndo()){
+		if (undoManager.canUndo()) {
 			undoManager.undo();
 		}
 		statusLine = "Undo";
@@ -94,18 +94,18 @@ public class SudokuController extends Observable implements ISudokuController {
 	}
 
 	public void redo() {
-		if (undoManager.canRedo()){
+		if (undoManager.canRedo()) {
 			undoManager.redo();
 		}
-		statusLine= "Redo";
+		statusLine = "Redo";
 		notifyObservers();
 	}
-	
+
 	public void copy() {
 		StringSelection gridString = new StringSelection(grid.toString("0"));
-		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(
-				gridString, null);
-		statusLine= "Copied Sudoku";
+		Toolkit.getDefaultToolkit().getSystemClipboard()
+				.setContents(gridString, null);
+		statusLine = "Copied Sudoku";
 		notifyObservers();
 	}
 
@@ -127,7 +127,7 @@ public class SudokuController extends Observable implements ISudokuController {
 				statusLine = "Could not read from Clipboard";
 			}
 		}
-		statusLine= "Pasted Sudoku";
+		statusLine = "Pasted Sudoku";
 		notifyObservers();
 	}
 
@@ -137,13 +137,14 @@ public class SudokuController extends Observable implements ISudokuController {
 
 	public void showCandidates(int row, int column) {
 		grid.getICell(row, column).toggleShowCandidates();
-		BitSet set = grid.candidates(row,column);
-		statusLine = "Candidates at ("+row+","+column+") are "+set.toString();
+		BitSet set = grid.candidates(row, column);
+		statusLine = "Candidates at (" + row + "," + column + ") are "
+				+ set.toString();
 		notifyObservers();
 	}
 
 	public void highlight(int value) {
-		highlighted=value;
+		highlighted = value;
 		notifyObservers();
 	}
 
@@ -167,7 +168,7 @@ public class SudokuController extends Observable implements ISudokuController {
 		for (int row = 0; row < grid.getCellsPerEdge(); row++) {
 			for (int col = 0; col < grid.getCellsPerEdge(); col++) {
 				showCandidates(row, col);
-			}	
+			}
 		}
 		notifyObservers();
 	}
@@ -196,19 +197,19 @@ public class SudokuController extends Observable implements ISudokuController {
 	public void parseStringToGrid(String gridString) {
 		grid.parseStringToGrid(gridString);
 		notifyObservers();
-		
+
 	}
 
 	@Override
 	public void resetSize(int newSize) {
 		this.grid = gridFactory.create(newSize);
 		reset();
-		Event event = new SizeChangedEvent(); 
+		Event event = new SizeChangedEvent();
 		notifyObservers(event);
 	}
 
 	public IGrid getGrid() {
 		return grid;
 	}
-	
+
 }

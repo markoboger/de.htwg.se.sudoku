@@ -1,6 +1,5 @@
 package de.htwg.sudoku.controller;
 
-
 import javax.swing.undo.AbstractUndoableEdit;
 
 import de.htwg.sudoku.model.ICell;
