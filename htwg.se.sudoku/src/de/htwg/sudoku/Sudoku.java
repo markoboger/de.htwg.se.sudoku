@@ -13,54 +13,55 @@ import de.htwg.sudoku.controller.ISudokuController;
 
 public final class Sudoku {
 
-	private static Scanner scanner;
-	private static TextUI tui;
-	private ISudokuController controller;
-	private static Sudoku instance = null;
+    private static Scanner scanner;
+    private static TextUI tui;
+    private ISudokuController controller;
+    private static Sudoku instance = null;
 
-	public static Sudoku getInstance() {
-		if (instance == null)
-			instance = new Sudoku();
-		return instance;
-	}
+    public static Sudoku getInstance() {
+        if (instance == null) {
+            instance = new Sudoku();
+        }
+        return instance;
+    }
 
-	private Sudoku() {
-		// Set up logging through log4j
-		PropertyConfigurator.configure("log4j.properties");
+    private Sudoku() {
+        // Set up logging through log4j
+        PropertyConfigurator.configure("log4j.properties");
 
-		// Set up Google Guice Dependency Injector
-		Injector injector = Guice.createInjector(new SudokuModule());
+        // Set up Google Guice Dependency Injector
+        Injector injector = Guice.createInjector(new SudokuModule());
 
-		// Build up the application, resolving dependencies automatically by
-		// Guice
-		controller = injector.getInstance(ISudokuController.class);
-		@SuppressWarnings("unused")
-		SudokuFrame gui = injector.getInstance(SudokuFrame.class);
-		tui = injector.getInstance(TextUI.class);
-		tui.printTUI();
+        // Build up the application, resolving dependencies automatically by
+        // Guice
+        controller = injector.getInstance(ISudokuController.class);
+        @SuppressWarnings("unused")
+        SudokuFrame gui = injector.getInstance(SudokuFrame.class);
+        tui = injector.getInstance(TextUI.class);
+        tui.printTUI();
 
-		// Create an initial game
-		controller.create();
-	}
+        // Create an initial game
+        controller.create();
+    }
 
-	public ISudokuController getController() {
-		return controller;
-	}
+    public ISudokuController getController() {
+        return controller;
+    }
 
-	public TextUI getTUI() {
-		return tui;
-	}
+    public TextUI getTUI() {
+        return tui;
+    }
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		Sudoku.getInstance();
+        Sudoku.getInstance();
 
-		// continue to read user input on the tui until the user decides to quit
-		boolean continu = true;
-		scanner = new Scanner(System.in);
-		while (continu) {
-			continu = tui.processInputLine(scanner.next());
-		}
-	}
+        // continue to read user input on the tui until the user decides to quit
+        boolean continu = true;
+        scanner = new Scanner(System.in);
+        while (continu) {
+            continu = tui.processInputLine(scanner.next());
+        }
+    }
 
 }

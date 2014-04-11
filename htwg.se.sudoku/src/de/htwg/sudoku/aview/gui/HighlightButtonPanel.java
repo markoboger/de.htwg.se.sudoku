@@ -12,26 +12,29 @@ import de.htwg.sudoku.controller.ISudokuController;
 
 public class HighlightButtonPanel extends JPanel {
 
-	private final ButtonGroup group = new ButtonGroup();
-	private static final long serialVersionUID = 1L;
+    private final ButtonGroup group = new ButtonGroup();
+    private static final long serialVersionUID = 1L;
+    private static final int BUTTONSIZE=25; 
 
-	public HighlightButtonPanel(final ISudokuController controller) {
+    public HighlightButtonPanel(final ISudokuController controller) {
 
-		int gridSize = controller.getCellsPerRow();
-		setLayout(new FlowLayout());
+        int gridSize = controller.getCellsPerRow();
+        setLayout(new FlowLayout());
 
-        add(new JLabel("Highlight:")); 
+        add(new JLabel("Highlight:"));
 
         JToggleButton button;
 
         // Construct the buttons used to select values to highlight.
-        for (int digit = 1;digit <= gridSize ; digit++) {
-        	String buttontext = String.valueOf(digit);
-        	if (digit == 0) {buttontext = " ";} 
+        for (int digit = 1; digit <= gridSize; digit++) {
+            String buttontext = String.valueOf(digit);
+            if (digit == 0) {
+                buttontext = " ";
+            }
             button = new HighlightButton(buttontext, controller, digit);
-            button.setPreferredSize(new Dimension(25, 25));
+            button.setPreferredSize(new Dimension(BUTTONSIZE, BUTTONSIZE));
             group.add(button);
             add(button);
         }
-	}
+    }
 }

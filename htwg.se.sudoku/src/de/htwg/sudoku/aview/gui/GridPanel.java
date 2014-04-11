@@ -12,40 +12,40 @@ import de.htwg.sudoku.controller.ISudokuController;
 
 public class GridPanel extends JPanel {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public GridPanel( ISudokuController controller) {
+    public GridPanel(ISudokuController controller) {
 
-		int cellsPerEdge = controller.getCellsPerRow();
-		int blockSize = controller.getBlockSize();
-		setLayout(new GridLayout(blockSize, blockSize, 2, 2));
-		setBorder(BorderFactory.createLoweredBevelBorder());
-		
-		BlockPanel[] block = new BlockPanel[cellsPerEdge];
+        int cellsPerEdge = controller.getCellsPerRow();
+        int blockSize = controller.getBlockSize();
+        setLayout(new GridLayout(blockSize, blockSize, 2, 2));
+        setBorder(BorderFactory.createLoweredBevelBorder());
 
-		for (int index = 0; index < cellsPerEdge; index++) {
-			block[index] = new BlockPanel(blockSize);
-			add(block[index]);
-		}
+        BlockPanel[] block = new BlockPanel[cellsPerEdge];
 
-		// Draw each cell.
-		for (int row = 0; row < cellsPerEdge; row++) {
-			for (int column = 0; column < cellsPerEdge; column++) {
-				CellPanel cellPanel = new CellPanel(row, column, controller);
-				block[controller.blockAt(row, column)].add(cellPanel);
-			}
-		}
-	}
+        for (int index = 0; index < cellsPerEdge; index++) {
+            block[index] = new BlockPanel(blockSize);
+            add(block[index]);
+        }
 
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+        // Draw each cell.
+        for (int row = 0; row < cellsPerEdge; row++) {
+            for (int column = 0; column < cellsPerEdge; column++) {
+                CellPanel cellPanel = new CellPanel(row, column, controller);
+                block[controller.blockAt(row, column)].add(cellPanel);
+            }
+        }
+    }
 
-		// Paint the background.
-		g.setColor(Constances.GRID_BACKGROUND_COLOR);
-		g.fillRect(0, 0, getSize().width, getSize().height);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
 
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
-	}
+        // Paint the background.
+        g.setColor(Constances.GRID_BACKGROUND_COLOR);
+        g.fillRect(0, 0, getSize().width, getSize().height);
+
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+    }
 }
