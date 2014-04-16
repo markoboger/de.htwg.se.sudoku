@@ -78,11 +78,11 @@ public class TextUITest {
 		assertEquals("Copied Sudoku", controller1.getStatus());
 }
 	
-	@Test
-	public void testStatusp() {
-		tui1.processInputLine("p");
-		assertEquals("Pasted Sudoku", controller1.getStatus());
-}
+//	@Test
+//	public void testStatusp() {
+//		tui1.processInputLine("p");
+//		assertEquals("Pasted Sudoku", controller1.getStatus());
+//}
 	
 	@Test
 	public void testStatusz() {

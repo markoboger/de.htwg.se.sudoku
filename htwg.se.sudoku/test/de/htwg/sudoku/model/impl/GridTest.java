@@ -209,12 +209,12 @@ public class GridTest {
 		return true;	
 	}
 	
-	@Test
-	public void testToJson() {
-		String result = grid1.toJson();
-		System.out.println(result);
-		String expected = "{\"grid\":[[{\"cell\":{\"value\":0,\"row\":0,\"column\":0,\"given\":false,\"showCandidates\":false,\"set\":false,\"unSet\":true},\"candidates\":[true]}]],\"meta\":{\"cellsPerEdge\":1,\"blockSize\":1,\"steps\":0,\"solved\":false,\"symmetric\":true}}";
-		assertEquals(expected,result);
-	}
+//	@Test
+//	public void testToJson() {
+//		String result = grid1.toJson();
+//		System.out.println(result);
+//		String expected = "{\"grid\":[[{\"cell\":{\"value\":0,\"row\":0,\"column\":0,\"given\":false,\"showCandidates\":false,\"set\":false,\"unSet\":true},\"candidates\":[true]}]],\"meta\":{\"cellsPerEdge\":1,\"blockSize\":1,\"steps\":0,\"solved\":false,\"symmetric\":true}}";
+//		assertEquals(expected,result);
+//	}
 	
 }
