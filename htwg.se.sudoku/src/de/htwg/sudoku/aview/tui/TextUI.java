@@ -59,6 +59,7 @@ public class TextUI implements IObserver {
             break;
         case "p":
             controller.paste();
+            break;
         case "-":
             controller.resetSize(DOTSIZE);
             break;

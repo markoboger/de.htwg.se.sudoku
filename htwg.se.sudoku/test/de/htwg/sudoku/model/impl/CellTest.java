@@ -64,5 +64,12 @@ public class CellTest {
 		assertFalse( cell.isShowCandidates());
 	}
 	
+	@Test
+	public void testToggleShowCandidates() {
+		cell.toggleShowCandidates();
+		assertTrue(cell.isShowCandidates() );
+		cell.toggleShowCandidates();
+		assertFalse(cell.isShowCandidates() );
+	}
 
 }

@@ -78,11 +78,11 @@ public class TextUITest {
 		assertEquals("Copied Sudoku", controller1.getStatus());
 }
 	
-//	@Test
-//	public void testStatusp() {
-//		tui1.processInputLine("p");
-//		assertEquals("Pasted Sudoku", controller1.getStatus());
-//}
+	@Test
+	public void testStatusp() {
+		tui1.processInputLine("p");
+		assertEquals("Pasted Sudoku", controller1.getStatus());
+}
 	
 	@Test
 	public void testStatusz() {
@@ -98,7 +98,7 @@ public class TextUITest {
 	
 	@Test
 	public void testStatus1() {
-		tui1.processInputLine(".");
+		tui1.processInputLine("-");
 		assertEquals("Sudoku was reset", controller1.getStatus());
 }
 	
@@ -110,7 +110,7 @@ public class TextUITest {
 	
 	@Test
 	public void testStatus9() {
-		tui1.processInputLine("#");
+		tui1.processInputLine("*");
 		assertEquals("Sudoku was reset", controller1.getStatus());
 	}
 

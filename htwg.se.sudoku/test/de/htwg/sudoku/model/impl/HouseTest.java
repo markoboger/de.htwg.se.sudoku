@@ -69,6 +69,13 @@ public class HouseTest {
 
 		//		assertEquals("| 0 0 0 | 0 0 0 | 0 0 0 |",house9.toString());
 	}
+	
+	@Test
+	public void testGetBlockSize() {
+		assertEquals(1,house1.getBlockSize());
+		assertEquals(2,house4.getBlockSize());
+		assertEquals(3,house9.getBlockSize());
+	}
 
 
 }

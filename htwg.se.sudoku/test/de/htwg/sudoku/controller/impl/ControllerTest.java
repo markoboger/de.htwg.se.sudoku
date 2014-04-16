@@ -12,8 +12,8 @@ import de.htwg.sudoku.model.impl.GridFactory;
 public class ControllerTest {
 	String newLine = System.getProperty("line.separator");
 
-	private IGrid grid1;
-	SudokuController controller1;
+	private IGrid grid1, grid2;
+	SudokuController controller1, controller2;
 	GridFactory gridFactory;
 
 	@Before
@@ -22,6 +22,12 @@ public class ControllerTest {
 		controller1 = new SudokuController(gridFactory);
 		controller1.resetSize(1);
 		grid1= controller1.getGrid();
+		
+		controller2 = new SudokuController(gridFactory);
+		controller2.resetSize(2);
+		grid2= controller2.getGrid();
+		
+		
 	}
 
 	@Test
@@ -112,7 +118,16 @@ public class ControllerTest {
 		assertTrue(controller1.isGiven(0, 0));	
 		assertEquals(1,controller1.getValue(0, 0));
 	}
-	
+	@Test
+	public void testSolveFails() {
+		controller2.create();
+		controller2.setValue(0, 0, 1);
+		controller2.setValue(1, 0, 1);
+		controller2.setValue(1, 1, 1);
+		controller2.solve();
+		
+		assertEquals("Can not solve this Sudoku within",controller2.getStatus().substring(0, 32));	
+	}
 	
 
 }

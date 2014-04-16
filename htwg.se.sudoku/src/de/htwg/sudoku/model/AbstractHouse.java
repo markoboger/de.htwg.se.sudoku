@@ -13,7 +13,7 @@ public abstract class AbstractHouse {
         this.size = size;
     }
 
-    protected int getBlockSize() {
+    public int getBlockSize() {
         return blockSize;
     }
 
