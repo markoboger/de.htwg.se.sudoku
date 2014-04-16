@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>htwg.se.sudoku</groupId>
-  <artifactId>htwg.se.sudoku</artifactId>
+  <groupId>de.htwg.se.sudoku</groupId>
+  <artifactId>de.htwg.se.sudoku</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>Sudoku</name>
-  <description>A Sudoku in Java</description>
+  <name>Sudoku SE</name>
+  <description>A Sudoku in Java for the lecture Software Engineering at HTWG Konstanz</description>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <testSourceDirectory>test</testSourceDirectory>
