@@ -114,4 +114,10 @@ public class TextUITest {
 		assertEquals("Sudoku was reset", controller1.getStatus());
 	}
 
+	@Test
+	public void testStatusIllegal() {
+        tui1.processInputLine("illegal");
+        assertEquals("Sudoku was reset", controller1.getStatus());
+	}
+
 }

@@ -16,7 +16,7 @@ public class TextUI implements IObserver {
     private static final int DOTSIZE = 1;
     private static final int PLUSSIZE = 2;
     private static final int HASHSIZE = 3;
-    private String newLine = System.getProperty("line.separator");
+    private static final String NEWLINE = System.getProperty("line.separator");
 
     private ISudokuController controller;
 
@@ -74,16 +74,18 @@ public class TextUI implements IObserver {
         if (line.matches("[0-9][0-9][0-9]")) {
             int[] arg = readToArray(line);
             controller.setValue(arg[0], arg[1], arg[2]);
-        }
+        } else
         // if the command line has the form 12, get the candidates of cell (1,2)
         if (line.matches("[0-9][0-9]")) {
             int[] arg = readToArray(line);
             controller.showCandidates(arg[0], arg[1]);
-        }
+        } else
         // if the command line has the form 1, highlight 1
         if (line.matches("[0-9]")) {
             int[] arg = readToArray(line);
             controller.highlight(arg[0]);
+        } else {
+            logger.info("Illegal command");
         }
         return continu;
     }
@@ -100,9 +102,9 @@ public class TextUI implements IObserver {
     }
 
     public void printTUI() {
-        logger.info(newLine + controller.getGridString());
-        logger.info(newLine + controller.getStatus());
-        logger.info(newLine
+        logger.info(NEWLINE + controller.getGridString());
+        logger.info(NEWLINE + controller.getStatus());
+        logger.info(NEWLINE
                 + "Possible commands: q-quit, n-new, s-solve, r-reset, z-undo, y-redo, c-copy, p-paste, -,+,*-size, x-highlight, xy-show (x,y), xyz-set (x,y) to z");
     }
 }

@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.apache.log4j.Logger;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -15,6 +17,9 @@ import de.htwg.sudoku.model.AbstractGrid;
 import de.htwg.sudoku.model.ICell;
 
 public class Grid extends AbstractGrid {
+    
+    private Logger logger = Logger
+            .getLogger("de.htwg.sudoku.model.impl");
 
     private Cell[][] cells;
     private House[] rows;
@@ -275,8 +280,8 @@ public class Grid extends AbstractGrid {
 
             result = mapper.writeValueAsString(map);
         } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.debug( e.toString());
+           
         }
         return result;
     }

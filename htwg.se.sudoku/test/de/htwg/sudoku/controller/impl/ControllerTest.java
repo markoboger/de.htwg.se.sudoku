@@ -12,7 +12,7 @@ import de.htwg.sudoku.model.impl.GridFactory;
 public class ControllerTest {
 	String newLine = System.getProperty("line.separator");
 
-	private IGrid grid1, grid2;
+	private IGrid grid1;
 	SudokuController controller1, controller2;
 	GridFactory gridFactory;
 
@@ -25,7 +25,7 @@ public class ControllerTest {
 		
 		controller2 = new SudokuController(gridFactory);
 		controller2.resetSize(2);
-		grid2= controller2.getGrid();
+		controller2.getGrid();
 		
 		
 	}
@@ -66,10 +66,6 @@ public class ControllerTest {
 		assertEquals(1, controller1.getValue(0,0));
 	}
 	
-	@Test
-	public void testX() {
-		
-	}
 	@Test
 	public void testGetCellsPerEdge() {
 		assertEquals(1,controller1.getCellsPerRow());
