@@ -23,6 +23,7 @@ public final class Sudoku {
             instance = new Sudoku();
         }
         return instance;
+        
     }
 
     private Sudoku() {
