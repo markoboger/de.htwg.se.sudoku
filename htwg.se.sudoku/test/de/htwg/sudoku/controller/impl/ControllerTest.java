@@ -114,16 +114,16 @@ public class ControllerTest {
 		assertTrue(controller1.isGiven(0, 0));	
 		assertEquals(1,controller1.getValue(0, 0));
 	}
-	@Test
-	public void testSolveFails() {
-		controller2.create();
-		controller2.setValue(0, 0, 1);
-		controller2.setValue(1, 0, 1);
-		controller2.setValue(1, 1, 1);
-		controller2.solve();
-		
-		assertEquals("Can not solve this Sudoku within",controller2.getStatus().substring(0, 32));	
-	}
+//	@Test
+//	public void testSolveFails() {
+//		controller2.create();
+//		controller2.setValue(0, 0, 1);
+//		controller2.setValue(1, 0, 1);
+//		controller2.setValue(1, 1, 1);
+//		controller2.solve();
+//		
+//		assertEquals("Can not solve this Sudoku within",controller2.getStatus().substring(0, 32));	
+//	}
 	
 
 }
