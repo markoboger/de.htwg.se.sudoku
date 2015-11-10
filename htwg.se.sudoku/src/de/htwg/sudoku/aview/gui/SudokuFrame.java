@@ -127,7 +127,8 @@ public class SudokuFrame extends JFrame implements IObserver {
                 InputEvent.CTRL_DOWN_MASK));
         quitMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                controller.exit();
+            	setVisible(false); 
+            	dispose(); 
             }
         });
         fileMenu.add(quitMenuItem);

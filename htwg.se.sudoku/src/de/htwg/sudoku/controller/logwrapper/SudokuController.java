@@ -131,12 +131,6 @@ public class SudokuController implements IObservable, ISudokuController {
         return realController.blockAt(row, column);
     }
 
-    public void exit() {
-        pre();
-        System.exit(0);
-        post();
-    }
-
     public void showAllCandidates() {
         pre();
         realController.showAllCandidates();

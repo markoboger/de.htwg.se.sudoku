@@ -17,11 +17,6 @@ public interface ISudokuController extends IObservable {
     void create();
 
     /**
-     * Terminate the application.
-     */
-    void exit();
-
-    /**
      * @return the number of cells in a row of a block. A typcial value is 3.
      */
     int getBlockSize();

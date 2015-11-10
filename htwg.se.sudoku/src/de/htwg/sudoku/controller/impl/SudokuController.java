@@ -160,10 +160,6 @@ public class SudokuController extends Observable implements ISudokuController {
         return grid.blockAt(row, column);
     }
 
-    public void exit() {
-        System.exit(0);
-    }
-
     public void showAllCandidates() {
         for (int row = 0; row < grid.getCellsPerEdge(); row++) {
             for (int col = 0; col < grid.getCellsPerEdge(); col++) {
